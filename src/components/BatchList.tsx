@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
+import { StatusBadge } from "./StatusBadge";
 
 interface Batch {
   id: string;
@@ -21,6 +21,7 @@ interface Variation {
   status: string;
   live_url: string | null;
   github_repo_url: string | null;
+  error_message: string | null;
 }
 
 export const BatchList = () => {
@@ -73,17 +74,16 @@ export const BatchList = () => {
   };
 
   const getStatusColor = (status: string) => {
-    switch (status) {
-      case "success":
-        return "default";
-      case "pending":
-      case "generating":
-        return "secondary";
-      case "failed":
-        return "destructive";
-      default:
-        return "outline";
+    // This function is deprecated, using StatusBadge component instead
+    return "default";
+  };
+
+  const handleRefresh = () => {
+    fetchBatches();
+    if (selectedBatch) {
+      fetchVariations(selectedBatch);
     }
+    toast.success("Refreshed!");
   };
 
   if (loading) {
@@ -106,6 +106,14 @@ export const BatchList = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold">Your Batches</h2>
+        <Button variant="outline" size="sm" onClick={handleRefresh}>
+          <RefreshCw className="h-4 w-4 mr-2" />
+          Refresh
+        </Button>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {batches.map((batch) => (
           <Card
@@ -123,9 +131,7 @@ export const BatchList = () => {
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
-                <Badge variant={getStatusColor(batch.status)}>
-                  {batch.status}
-                </Badge>
+                <StatusBadge status={batch.status} />
                 <span className="text-xs text-muted-foreground">
                   {new Date(batch.created_at).toLocaleDateString()}
                 </span>
@@ -153,9 +159,10 @@ export const BatchList = () => {
                   <div className="flex-1">
                     <h4 className="font-medium">{variation.heading}</h4>
                     <div className="flex items-center gap-2 mt-1">
-                      <Badge variant={getStatusColor(variation.status)} className="text-xs">
-                        {variation.status}
-                      </Badge>
+                      <StatusBadge status={variation.status} />
+                      {variation.error_message && (
+                        <span className="text-xs text-destructive">{variation.error_message}</span>
+                      )}
                     </div>
                   </div>
                   {variation.live_url && (

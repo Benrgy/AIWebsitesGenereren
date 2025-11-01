@@ -8,6 +8,7 @@ import { LogOut, Plus, Settings } from "lucide-react";
 import { GenerateForm } from "@/components/GenerateForm";
 import { BatchList } from "@/components/BatchList";
 import { ProfileSettings } from "@/components/ProfileSettings";
+import { SubmissionScheduler } from "@/components/SubmissionScheduler";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Dashboard = () => {
@@ -52,6 +53,8 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
+      {/* Automated submission scheduler */}
+      <SubmissionScheduler />
       <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">

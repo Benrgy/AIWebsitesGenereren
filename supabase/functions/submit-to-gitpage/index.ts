@@ -18,16 +18,10 @@ serve(async (req) => {
 
     console.log("Checking for pending variations to submit...");
 
-    // Get all pending variations with their user's API key
+    // Get pending variation
     const { data: variations, error: fetchError } = await supabase
       .from("website_variations")
-      .select(`
-        *,
-        website_batch!inner(
-          user_id,
-          profiles!inner(gitpage_api_key)
-        )
-      `)
+      .select("*, batch_id")
       .eq("status", "pending")
       .limit(1);
 
@@ -45,7 +39,29 @@ serve(async (req) => {
     }
 
     const variation = variations[0];
-    const apiKey = variation.website_batch.profiles.gitpage_api_key;
+
+    // Get user's API key
+    const { data: batch, error: batchError } = await supabase
+      .from("website_batch")
+      .select("user_id")
+      .eq("id", variation.batch_id)
+      .single();
+
+    if (batchError || !batch) {
+      throw new Error("Batch not found");
+    }
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("gitpage_api_key")
+      .eq("id", batch.user_id)
+      .single();
+
+    if (profileError || !profile) {
+      throw new Error("Profile not found");
+    }
+
+    const apiKey = profile.gitpage_api_key;
 
     if (!apiKey) {
       console.error("No GitPage API key configured for user");
