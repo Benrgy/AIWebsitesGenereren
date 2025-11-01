@@ -94,24 +94,23 @@ serve(async (req) => {
       .eq("id", variation.id);
 
     // Submit to GitPage API
+    const requestBody = {
+      heading: variation.heading,
+      heroStatement: variation.hero_statement,
+      features: variation.features,
+      contactEmail: variation.contact_email,
+      style: variation.style,
+    };
+
+    console.log("Submitting to GitPage with body:", JSON.stringify(requestBody));
+
     const gitpageResponse = await fetch("https://www.gitpage.site/api/generate-landing-page", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        heading: variation.heading,
-        heroStatement: variation.hero_statement,
-        features: variation.features,
-        benefits: variation.benefits,
-        style: variation.style,
-        colorScheme: variation.color_scheme,
-        language: variation.language,
-        includeFaq: variation.include_faq,
-        contactEmail: variation.contact_email,
-        ctaLink: variation.cta_link,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!gitpageResponse.ok) {
