@@ -97,7 +97,7 @@ serve(async (req) => {
     const gitpageResponse = await fetch("https://www.gitpage.site/api/generate-landing-page", {
       method: "POST",
       headers: {
-        "x-api-key": apiKey,
+        "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
