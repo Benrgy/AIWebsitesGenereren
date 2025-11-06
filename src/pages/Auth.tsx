@@ -70,28 +70,34 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-hero p-4">
-      <Card className="w-full max-w-md shadow-card">
-        <CardHeader className="text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/20 to-background p-4 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-glow" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
+      
+      <Card className="w-full max-w-md shadow-glow border-border/50 backdrop-blur-sm bg-card/95 relative z-10 animate-fade-in">
+        <CardHeader className="text-center space-y-3">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Sparkles className="h-8 w-8 text-primary" />
-            <CardTitle className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              GitPage Builder
-            </CardTitle>
+            <div className="p-2 bg-gradient-primary rounded-lg">
+              <Sparkles className="h-6 w-6 text-primary-foreground" />
+            </div>
           </div>
-          <CardDescription>
-            Bulk AI Website Generator - Create dozens of sites in minutes
+          <CardTitle className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            GitPage Builder
+          </CardTitle>
+          <CardDescription className="text-base">
+            Generate dozens of AI-powered landing pages in minutes
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-muted/50">
+              <TabsTrigger value="signin" className="data-[state=active]:bg-background">Sign In</TabsTrigger>
+              <TabsTrigger value="signup" className="data-[state=active]:bg-background">Sign Up</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="signin">
-              <form onSubmit={handleSignIn} className="space-y-4 mt-4">
+            <TabsContent value="signin" className="mt-6">
+              <form onSubmit={handleSignIn} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="signin-email">Email</Label>
                   <Input
@@ -101,6 +107,7 @@ const Auth = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="h-11"
                   />
                 </div>
                 <div className="space-y-2">
@@ -112,23 +119,23 @@ const Auth = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="h-11"
                   />
                 </div>
                 <Button
                   type="submit"
-                  variant="hero"
                   size="lg"
-                  className="w-full"
+                  className="w-full bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
                   disabled={loading}
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Sign In
+                  {loading ? "Signing in..." : "Sign In"}
                 </Button>
               </form>
             </TabsContent>
 
-            <TabsContent value="signup">
-              <form onSubmit={handleSignUp} className="space-y-4 mt-4">
+            <TabsContent value="signup" className="mt-6">
+              <form onSubmit={handleSignUp} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="signup-email">Email</Label>
                   <Input
@@ -138,6 +145,7 @@ const Auth = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="h-11"
                   />
                 </div>
                 <div className="space-y-2">
@@ -150,19 +158,26 @@ const Auth = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength={6}
+                    className="h-11"
                   />
+                  <p className="text-xs text-muted-foreground">
+                    Minimum 6 characters
+                  </p>
                 </div>
                 <Button
                   type="submit"
-                  variant="hero"
                   size="lg"
-                  className="w-full"
+                  className="w-full bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
                   disabled={loading}
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Create Account
+                  {loading ? "Creating account..." : "Create Account"}
                 </Button>
               </form>
+              
+              <p className="text-xs text-center text-muted-foreground mt-4">
+                By signing up, you agree to our Terms of Service
+              </p>
             </TabsContent>
           </Tabs>
         </CardContent>

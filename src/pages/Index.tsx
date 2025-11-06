@@ -29,18 +29,17 @@ const Index = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                variant="hero"
                 size="xl"
                 onClick={() => navigate("/auth")}
-                className="text-lg"
+                className="text-lg bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
                 Get Started Free
               </Button>
               <Button
-                variant="glass"
+                variant="outline"
                 size="xl"
                 onClick={() => navigate("/auth")}
-                className="text-lg"
+                className="text-lg backdrop-blur-sm hover:bg-accent/50 transition-all duration-300"
               >
                 View Demo
               </Button>
@@ -104,10 +103,9 @@ const Index = () => {
             Join hundreds of marketers and developers using GitPage Builder to launch faster.
           </p>
           <Button
-            variant="hero"
             size="xl"
             onClick={() => navigate("/auth")}
-            className="text-lg shadow-glow"
+            className="text-lg shadow-glow bg-gradient-primary text-primary-foreground hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
             Start Building Now
           </Button>

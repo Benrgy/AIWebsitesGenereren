@@ -52,45 +52,57 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Automated submission scheduler */}
       <SubmissionScheduler />
-      <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-10">
+      
+      <header className="border-b bg-card/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            GitPage Builder
-          </h1>
-          <Button variant="ghost" size="icon" onClick={handleSignOut}>
-            <LogOut className="h-5 w-5" />
+          <div>
+            <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              GitPage Builder
+            </h1>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              {user?.email}
+            </p>
+          </div>
+          <Button 
+            variant="ghost" 
+            size="sm"
+            onClick={handleSignOut}
+            className="gap-2"
+          >
+            <LogOut className="h-4 w-4" />
+            Sign Out
           </Button>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="generate" className="w-full">
-          <TabsList className="mb-8">
-            <TabsTrigger value="generate" className="gap-2">
+          <TabsList className="mb-8 bg-card shadow-sm">
+            <TabsTrigger value="generate" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Plus className="h-4 w-4" />
               Generate
             </TabsTrigger>
-            <TabsTrigger value="batches" className="gap-2">
+            <TabsTrigger value="batches" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               My Batches
             </TabsTrigger>
-            <TabsTrigger value="settings" className="gap-2">
+            <TabsTrigger value="settings" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Settings className="h-4 w-4" />
               Settings
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="generate">
+          <TabsContent value="generate" className="mt-0">
             <GenerateForm />
           </TabsContent>
 
-          <TabsContent value="batches">
+          <TabsContent value="batches" className="mt-0">
             <BatchList />
           </TabsContent>
 
-          <TabsContent value="settings">
+          <TabsContent value="settings" className="mt-0">
             <ProfileSettings />
           </TabsContent>
         </Tabs>

@@ -171,14 +171,17 @@ export const GenerateForm = () => {
 
           <Button
             type="submit"
-            variant="hero"
+            className="w-full bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
             size="lg"
-            className="w-full"
             disabled={loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading ? "Generating..." : "Generate Websites"}
           </Button>
+          
+          <p className="text-xs text-center text-muted-foreground mt-2">
+            Your websites will be generated and queued for automatic deployment
+          </p>
         </form>
       </CardContent>
     </Card>

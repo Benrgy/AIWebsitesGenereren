@@ -72,11 +72,11 @@ export const ProfileSettings = () => {
           API Settings
         </CardTitle>
         <CardDescription>
-          Configure your GitPage API key to enable website deployment
+          Configure your GitPage API key to enable automatic website deployment
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSave} className="space-y-4">
+        <form onSubmit={handleSave} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="apiKey">GitPage API Key</Label>
             <Input
@@ -85,6 +85,7 @@ export const ProfileSettings = () => {
               placeholder="gp_..."
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
+              className="font-mono"
             />
             <p className="text-xs text-muted-foreground">
               Get your API key from{" "}
@@ -92,22 +93,31 @@ export const ProfileSettings = () => {
                 href="https://www.gitpage.site"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline"
+                className="text-primary hover:underline font-medium"
               >
                 gitpage.site
               </a>
             </p>
           </div>
 
+          <div className="p-4 bg-muted/50 rounded-lg border border-border">
+            <h4 className="text-sm font-medium mb-2">How it works:</h4>
+            <ul className="text-xs text-muted-foreground space-y-1 list-disc list-inside">
+              <li>Your API key is stored securely and encrypted</li>
+              <li>It's used only for automated deployments</li>
+              <li>Each variation is submitted every 5 minutes</li>
+              <li>Maximum 30 deployments per hour (GitPage limit)</li>
+            </ul>
+          </div>
+
           <Button
             type="submit"
-            variant="hero"
             size="lg"
-            className="w-full"
+            className="w-full bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
             disabled={loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Save Settings
+            {loading ? "Saving..." : "Save Settings"}
           </Button>
         </form>
       </CardContent>

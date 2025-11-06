@@ -73,10 +73,6 @@ export const BatchList = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    // This function is deprecated, using StatusBadge component instead
-    return "default";
-  };
 
   const handleRefresh = () => {
     fetchBatches();
@@ -118,13 +114,13 @@ export const BatchList = () => {
         {batches.map((batch) => (
           <Card
             key={batch.id}
-            className={`cursor-pointer transition-all hover:shadow-lg ${
-              selectedBatch === batch.id ? "ring-2 ring-primary" : ""
+            className={`cursor-pointer transition-all duration-300 hover:shadow-card hover:-translate-y-1 ${
+              selectedBatch === batch.id ? "ring-2 ring-primary shadow-glow" : ""
             }`}
             onClick={() => setSelectedBatch(batch.id)}
           >
             <CardHeader>
-              <CardTitle className="text-lg">{batch.keyword}</CardTitle>
+              <CardTitle className="text-lg truncate">{batch.keyword}</CardTitle>
               <CardDescription>
                 {batch.num_variations} variations · {batch.language}
               </CardDescription>
@@ -142,11 +138,11 @@ export const BatchList = () => {
       </div>
 
       {selectedBatch && variations.length > 0 && (
-        <Card className="animate-fade-in">
+        <Card className="animate-fade-in shadow-card">
           <CardHeader>
             <CardTitle>Variations</CardTitle>
             <CardDescription>
-              Click on a website to open it in a new tab
+              {variations.length} variation{variations.length !== 1 ? 's' : ''} • Click on a website to open it
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -154,14 +150,25 @@ export const BatchList = () => {
               {variations.map((variation) => (
                 <div
                   key={variation.id}
-                  className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+                  className="group flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 hover:border-primary/50 transition-all duration-300"
                 >
-                  <div className="flex-1">
-                    <h4 className="font-medium">{variation.heading}</h4>
-                    <div className="flex items-center gap-2 mt-1">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-medium truncate group-hover:text-primary transition-colors">{variation.heading}</h4>
+                    <div className="flex items-center gap-2 mt-1 flex-wrap">
                       <StatusBadge status={variation.status} />
                       {variation.error_message && (
-                        <span className="text-xs text-destructive">{variation.error_message}</span>
+                        <span className="text-xs text-destructive bg-destructive/10 px-2 py-1 rounded">{variation.error_message}</span>
+                      )}
+                      {variation.github_repo_url && (
+                        <a 
+                          href={variation.github_repo_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-xs text-muted-foreground hover:text-primary transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          View Repo
+                        </a>
                       )}
                     </div>
                   </div>
@@ -169,9 +176,11 @@ export const BatchList = () => {
                     <Button
                       variant="ghost"
                       size="sm"
+                      className="ml-2 shrink-0 hover:bg-primary/10 hover:text-primary"
                       onClick={() => window.open(variation.live_url!, "_blank")}
                     >
                       <ExternalLink className="h-4 w-4" />
+                      <span className="ml-1 hidden sm:inline">Visit</span>
                     </Button>
                   )}
                 </div>
