@@ -2,15 +2,29 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, RefreshCw } from "lucide-react";
+import { ExternalLink, RefreshCw, Download, FileJson, FileSpreadsheet } from "lucide-react";
 import { toast } from "sonner";
 import { StatusBadge } from "./StatusBadge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  exportVariationsToCSV,
+  exportVariationsToJSON,
+  downloadFile,
+  generateExportFilename,
+} from "@/lib/export";
 
 interface Batch {
   id: string;
   keyword: string;
   num_variations: number;
   language: string;
+  contact_email: string;
+  cta_link: string;
   status: string;
   created_at: string;
 }
@@ -18,10 +32,21 @@ interface Batch {
 interface Variation {
   id: string;
   heading: string;
+  hero_statement: string;
+  features: string;
+  benefits: string;
+  style: string;
+  color_scheme: string;
+  language: string;
+  contact_email: string;
+  cta_link: string;
   status: string;
   live_url: string | null;
   github_repo_url: string | null;
   error_message: string | null;
+  created_at: string;
+  submitted_at: string | null;
+  completed_at: string | null;
 }
 
 export const BatchList = () => {
@@ -82,6 +107,36 @@ export const BatchList = () => {
     toast.success("Refreshed!");
   };
 
+  const handleExportCSV = () => {
+    if (!selectedBatch || variations.length === 0) {
+      toast.error("No variations to export");
+      return;
+    }
+
+    const batch = batches.find(b => b.id === selectedBatch);
+    if (!batch) return;
+
+    const csvContent = exportVariationsToCSV(variations, batch);
+    const filename = generateExportFilename(batch.keyword, 'csv');
+    downloadFile(csvContent, filename, 'text/csv;charset=utf-8;');
+    toast.success(`Exported ${variations.length} variations to CSV`);
+  };
+
+  const handleExportJSON = () => {
+    if (!selectedBatch || variations.length === 0) {
+      toast.error("No variations to export");
+      return;
+    }
+
+    const batch = batches.find(b => b.id === selectedBatch);
+    if (!batch) return;
+
+    const jsonContent = exportVariationsToJSON(variations, batch);
+    const filename = generateExportFilename(batch.keyword, 'json');
+    downloadFile(jsonContent, filename, 'application/json;charset=utf-8;');
+    toast.success(`Exported ${variations.length} variations to JSON`);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -102,12 +157,34 @@ export const BatchList = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-4">
         <h2 className="text-2xl font-bold">Your Batches</h2>
-        <Button variant="outline" size="sm" onClick={handleRefresh}>
-          <RefreshCw className="h-4 w-4 mr-2" />
-          Refresh
-        </Button>
+        <div className="flex gap-2">
+          {selectedBatch && variations.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Download className="h-4 w-4" />
+                  Export
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={handleExportCSV} className="gap-2">
+                  <FileSpreadsheet className="h-4 w-4" />
+                  Export as CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleExportJSON} className="gap-2">
+                  <FileJson className="h-4 w-4" />
+                  Export as JSON
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+          <Button variant="outline" size="sm" onClick={handleRefresh} className="gap-2">
+            <RefreshCw className="h-4 w-4" />
+            Refresh
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -140,10 +217,14 @@ export const BatchList = () => {
       {selectedBatch && variations.length > 0 && (
         <Card className="animate-fade-in shadow-card">
           <CardHeader>
-            <CardTitle>Variations</CardTitle>
-            <CardDescription>
-              {variations.length} variation{variations.length !== 1 ? 's' : ''} • Click on a website to open it
-            </CardDescription>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle>Variations</CardTitle>
+                <CardDescription>
+                  {variations.length} variation{variations.length !== 1 ? 's' : ''} • Click on a website to open it
+                </CardDescription>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
