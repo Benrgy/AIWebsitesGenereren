@@ -38,11 +38,11 @@ const Auth = () => {
 
       if (error) throw error;
 
-      toast.success("Account created successfully! Please check your email.");
+      toast.success("Account succesvol aangemaakt! Controleer je e-mail.");
       setEmail("");
       setPassword("");
     } catch (error: any) {
-      toast.error(error.message || "Failed to sign up");
+      toast.error(error.message || "Aanmelden mislukt");
     } finally {
       setLoading(false);
     }
@@ -60,10 +60,10 @@ const Auth = () => {
 
       if (error) throw error;
 
-      toast.success("Signed in successfully!");
+      toast.success("Succesvol ingelogd!");
       navigate("/dashboard");
     } catch (error: any) {
-      toast.error(error.message || "Failed to sign in");
+      toast.error(error.message || "Inloggen mislukt");
     } finally {
       setLoading(false);
     }
@@ -83,27 +83,27 @@ const Auth = () => {
             </div>
           </div>
           <CardTitle className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            GitPage Builder
+            Website Generator
           </CardTitle>
           <CardDescription className="text-base">
-            Generate dozens of AI-powered landing pages in minutes
+            Genereer tientallen AI-gestuurde landingspagina's in minuten
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2 bg-muted/50">
-              <TabsTrigger value="signin" className="data-[state=active]:bg-background">Sign In</TabsTrigger>
-              <TabsTrigger value="signup" className="data-[state=active]:bg-background">Sign Up</TabsTrigger>
+              <TabsTrigger value="signin" className="data-[state=active]:bg-background">Inloggen</TabsTrigger>
+              <TabsTrigger value="signup" className="data-[state=active]:bg-background">Registreren</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signin" className="mt-6">
               <form onSubmit={handleSignIn} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
+                  <Label htmlFor="signin-email">E-mailadres</Label>
                   <Input
                     id="signin-email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="jij@voorbeeld.nl"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -111,7 +111,7 @@ const Auth = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password">Password</Label>
+                  <Label htmlFor="signin-password">Wachtwoord</Label>
                   <Input
                     id="signin-password"
                     type="password"
@@ -129,7 +129,7 @@ const Auth = () => {
                   disabled={loading}
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  {loading ? "Signing in..." : "Sign In"}
+                  {loading ? "Bezig met inloggen..." : "Inloggen"}
                 </Button>
               </form>
             </TabsContent>
@@ -137,11 +137,11 @@ const Auth = () => {
             <TabsContent value="signup" className="mt-6">
               <form onSubmit={handleSignUp} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email">E-mailadres</Label>
                   <Input
                     id="signup-email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="jij@voorbeeld.nl"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -149,7 +149,7 @@ const Auth = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="signup-password">Wachtwoord</Label>
                   <Input
                     id="signup-password"
                     type="password"
@@ -161,7 +161,7 @@ const Auth = () => {
                     className="h-11"
                   />
                   <p className="text-xs text-muted-foreground">
-                    Minimum 6 characters
+                    Minimaal 6 tekens
                   </p>
                 </div>
                 <Button
@@ -171,12 +171,12 @@ const Auth = () => {
                   disabled={loading}
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  {loading ? "Creating account..." : "Create Account"}
+                  {loading ? "Account aanmaken..." : "Account Aanmaken"}
                 </Button>
               </form>
               
               <p className="text-xs text-center text-muted-foreground mt-4">
-                By signing up, you agree to our Terms of Service
+                Door te registreren ga je akkoord met onze Algemene Voorwaarden
               </p>
             </TabsContent>
           </Tabs>

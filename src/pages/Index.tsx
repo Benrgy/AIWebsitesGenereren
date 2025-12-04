@@ -13,18 +13,18 @@ const Index = () => {
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-background/80 backdrop-blur-sm rounded-full border">
               <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Powered by AI & GitPage</span>
+              <span className="text-sm font-medium">AI-Powered Website Generator</span>
             </div>
             
             <h1 className="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Generate Dozens of
+              Genereer Tientallen
               <br />
-              Landing Pages Instantly
+              Websites Direct
             </h1>
             
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Create 5 to 100 AI-powered websites with one click. Perfect for testing ideas,
-              SEO campaigns, and rapid deployment.
+              Creëer 5 tot 100 AI-gegenereerde landingspagina's met één klik. Ideaal voor 
+              het testen van ideeën, SEO-campagnes en snelle uitrol.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -33,7 +33,7 @@ const Index = () => {
                 onClick={() => navigate("/auth")}
                 className="text-lg bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
-                Get Started Free
+                Gratis Starten
               </Button>
               <Button
                 variant="outline"
@@ -41,7 +41,7 @@ const Index = () => {
                 onClick={() => navigate("/auth")}
                 className="text-lg backdrop-blur-sm hover:bg-accent/50 transition-all duration-300"
               >
-                View Demo
+                Bekijk Demo
               </Button>
             </div>
           </div>
@@ -56,7 +56,7 @@ const Index = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
-            Why GitPage Builder?
+            Waarom Website Generator?
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -64,9 +64,9 @@ const Index = () => {
               <div className="h-12 w-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
                 <Zap className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
+              <h3 className="text-xl font-semibold mb-2">Razendsnel</h3>
               <p className="text-muted-foreground">
-                Generate up to 100 unique landing pages in minutes. AI creates diverse content for each site.
+                Genereer tot 100 unieke landingspagina's in enkele minuten. AI creëert diverse content voor elke site.
               </p>
             </div>
 
@@ -74,9 +74,9 @@ const Index = () => {
               <div className="h-12 w-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
                 <Globe className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Auto-Deploy</h3>
+              <h3 className="text-xl font-semibold mb-2">Automatisch Online</h3>
               <p className="text-muted-foreground">
-                Automatically deployed to GitHub Pages. Live sites with custom domains in seconds.
+                Automatische deployment naar het web. Live websites met eigen domeinen in seconden.
               </p>
             </div>
 
@@ -84,9 +84,9 @@ const Index = () => {
               <div className="h-12 w-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
                 <Rocket className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Scale Effortlessly</h3>
+              <h3 className="text-xl font-semibold mb-2">Schaal Moeiteloos</h3>
               <p className="text-muted-foreground">
-                Perfect for SEO campaigns, A/B testing, and rapid market validation at scale.
+                Perfect voor SEO-campagnes, A/B-testen en snelle marktvalidatie op grote schaal.
               </p>
             </div>
           </div>
@@ -97,17 +97,17 @@ const Index = () => {
       <section className="py-20 bg-gradient-hero">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Ready to Scale Your Web Presence?
+            Klaar om te Schalen?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join hundreds of marketers and developers using GitPage Builder to launch faster.
+            Sluit je aan bij honderden marketeers en ondernemers die sneller lanceren met onze website generator.
           </p>
           <Button
             size="xl"
             onClick={() => navigate("/auth")}
             className="text-lg shadow-glow bg-gradient-primary text-primary-foreground hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
-            Start Building Now
+            Nu Beginnen
           </Button>
         </div>
       </section>

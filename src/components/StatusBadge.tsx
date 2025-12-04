@@ -13,37 +13,37 @@ export const StatusBadge = ({ status, showIcon = true }: StatusBadgeProps) => {
         return {
           variant: "default" as const,
           icon: <CheckCircle2 className="h-3 w-3" />,
-          label: "Success",
+          label: "Succesvol",
         };
       case "pending":
         return {
           variant: "secondary" as const,
           icon: <Clock className="h-3 w-3" />,
-          label: "Pending",
+          label: "Wachtend",
         };
       case "generating":
         return {
           variant: "secondary" as const,
           icon: <Loader2 className="h-3 w-3 animate-spin" />,
-          label: "Generating",
+          label: "Genereren",
         };
       case "ready":
         return {
           variant: "secondary" as const,
           icon: <Clock className="h-3 w-3" />,
-          label: "Ready",
+          label: "Klaar",
         };
       case "submitted":
         return {
           variant: "secondary" as const,
           icon: <Loader2 className="h-3 w-3 animate-spin" />,
-          label: "Building",
+          label: "Bouwen",
         };
       case "failed":
         return {
           variant: "destructive" as const,
           icon: <XCircle className="h-3 w-3" />,
-          label: "Failed",
+          label: "Mislukt",
         };
       default:
         return {
