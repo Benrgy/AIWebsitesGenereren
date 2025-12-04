@@ -15,7 +15,7 @@ export const GenerateForm = () => {
   const [formData, setFormData] = useState({
     keyword: "",
     numVariations: "5",
-    language: "English",
+    language: "Dutch",
     contactEmail: "",
     ctaLink: "",
   });
@@ -26,7 +26,7 @@ export const GenerateForm = () => {
 
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("Not authenticated");
+      if (!user) throw new Error("Niet ingelogd");
 
       // Create batch record
       const { data: batch, error: batchError } = await supabase
@@ -59,13 +59,13 @@ export const GenerateForm = () => {
 
       if (functionError) throw functionError;
 
-      toast.success("Generation started! Your websites are being created.");
+      toast.success("Generatie gestart! Je websites worden aangemaakt.");
       
       // Reset form
       setFormData({
         keyword: "",
         numVariations: "5",
-        language: "English",
+        language: "Dutch",
         contactEmail: "",
         ctaLink: "",
       });
@@ -76,7 +76,7 @@ export const GenerateForm = () => {
       }, 1000);
     } catch (error: any) {
       console.error("Generation error:", error);
-      toast.error(error.message || "Failed to start generation");
+      toast.error(error.message || "Generatie starten mislukt");
     } finally {
       setLoading(false);
     }
@@ -87,19 +87,19 @@ export const GenerateForm = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Sparkles className="h-6 w-6 text-primary" />
-          Generate Websites
+          Websites Genereren
         </CardTitle>
         <CardDescription>
-          Create multiple AI-powered landing pages in one go
+          Creëer meerdere AI-gestuurde landingspagina's in één keer
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="keyword">Keyword or Topic</Label>
+            <Label htmlFor="keyword">Trefwoord of Onderwerp</Label>
             <Input
               id="keyword"
-              placeholder="e.g., AI Automation Agency"
+              placeholder="bijv. AI Automatisering Bureau"
               value={formData.keyword}
               onChange={(e) => setFormData({ ...formData, keyword: e.target.value })}
               required
@@ -107,7 +107,7 @@ export const GenerateForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="variations">Number of Variations</Label>
+            <Label htmlFor="variations">Aantal Variaties</Label>
             <Select
               value={formData.numVariations}
               onValueChange={(value) => setFormData({ ...formData, numVariations: value })}
@@ -126,7 +126,7 @@ export const GenerateForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="language">Language</Label>
+            <Label htmlFor="language">Taal</Label>
             <Select
               value={formData.language}
               onValueChange={(value) => setFormData({ ...formData, language: value })}
@@ -135,22 +135,22 @@ export const GenerateForm = () => {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="English">English</SelectItem>
-                <SelectItem value="Spanish">Spanish</SelectItem>
-                <SelectItem value="French">French</SelectItem>
-                <SelectItem value="German">German</SelectItem>
-                <SelectItem value="Portuguese">Portuguese</SelectItem>
-                <SelectItem value="Chinese">Chinese</SelectItem>
+                <SelectItem value="Dutch">Nederlands</SelectItem>
+                <SelectItem value="English">Engels</SelectItem>
+                <SelectItem value="German">Duits</SelectItem>
+                <SelectItem value="French">Frans</SelectItem>
+                <SelectItem value="Spanish">Spaans</SelectItem>
+                <SelectItem value="Portuguese">Portugees</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Contact Email</Label>
+            <Label htmlFor="email">Contact E-mail</Label>
             <Input
               id="email"
               type="email"
-              placeholder="contact@example.com"
+              placeholder="contact@voorbeeld.nl"
               value={formData.contactEmail}
               onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
               required
@@ -162,7 +162,7 @@ export const GenerateForm = () => {
             <Input
               id="cta"
               type="url"
-              placeholder="https://example.com/book-demo"
+              placeholder="https://voorbeeld.nl/boek-demo"
               value={formData.ctaLink}
               onChange={(e) => setFormData({ ...formData, ctaLink: e.target.value })}
               required
@@ -176,11 +176,11 @@ export const GenerateForm = () => {
             disabled={loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {loading ? "Generating..." : "Generate Websites"}
+            {loading ? "Bezig met genereren..." : "Websites Genereren"}
           </Button>
           
           <p className="text-xs text-center text-muted-foreground mt-2">
-            Your websites will be generated and queued for automatic deployment
+            Je websites worden gegenereerd en automatisch online gezet
           </p>
         </form>
       </CardContent>

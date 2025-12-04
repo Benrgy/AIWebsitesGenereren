@@ -75,7 +75,7 @@ export const BatchList = () => {
       if (error) throw error;
       setBatches(data || []);
     } catch (error: any) {
-      toast.error("Failed to load batches");
+      toast.error("Batches laden mislukt");
       console.error(error);
     } finally {
       setLoading(false);
@@ -93,7 +93,7 @@ export const BatchList = () => {
       if (error) throw error;
       setVariations(data || []);
     } catch (error: any) {
-      toast.error("Failed to load variations");
+      toast.error("Variaties laden mislukt");
       console.error(error);
     }
   };
@@ -104,12 +104,12 @@ export const BatchList = () => {
     if (selectedBatch) {
       fetchVariations(selectedBatch);
     }
-    toast.success("Refreshed!");
+    toast.success("Vernieuwd!");
   };
 
   const handleExportCSV = () => {
     if (!selectedBatch || variations.length === 0) {
-      toast.error("No variations to export");
+      toast.error("Geen variaties om te exporteren");
       return;
     }
 
@@ -119,12 +119,12 @@ export const BatchList = () => {
     const csvContent = exportVariationsToCSV(variations, batch);
     const filename = generateExportFilename(batch.keyword, 'csv');
     downloadFile(csvContent, filename, 'text/csv;charset=utf-8;');
-    toast.success(`Exported ${variations.length} variations to CSV`);
+    toast.success(`${variations.length} variaties geëxporteerd naar CSV`);
   };
 
   const handleExportJSON = () => {
     if (!selectedBatch || variations.length === 0) {
-      toast.error("No variations to export");
+      toast.error("Geen variaties om te exporteren");
       return;
     }
 
@@ -134,13 +134,13 @@ export const BatchList = () => {
     const jsonContent = exportVariationsToJSON(variations, batch);
     const filename = generateExportFilename(batch.keyword, 'json');
     downloadFile(jsonContent, filename, 'application/json;charset=utf-8;');
-    toast.success(`Exported ${variations.length} variations to JSON`);
+    toast.success(`${variations.length} variaties geëxporteerd naar JSON`);
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="animate-pulse text-muted-foreground">Loading batches...</div>
+        <div className="animate-pulse text-muted-foreground">Batches laden...</div>
       </div>
     );
   }
@@ -149,7 +149,7 @@ export const BatchList = () => {
     return (
       <Card className="max-w-2xl mx-auto">
         <CardContent className="pt-6 text-center">
-          <p className="text-muted-foreground">No batches yet. Start by generating your first websites!</p>
+          <p className="text-muted-foreground">Nog geen batches. Begin met het genereren van je eerste websites!</p>
         </CardContent>
       </Card>
     );
@@ -158,31 +158,31 @@ export const BatchList = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between flex-wrap gap-4">
-        <h2 className="text-2xl font-bold">Your Batches</h2>
+        <h2 className="text-2xl font-bold">Jouw Batches</h2>
         <div className="flex gap-2">
           {selectedBatch && variations.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="gap-2">
                   <Download className="h-4 w-4" />
-                  Export
+                  Exporteren
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={handleExportCSV} className="gap-2">
                   <FileSpreadsheet className="h-4 w-4" />
-                  Export as CSV
+                  Exporteren als CSV
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleExportJSON} className="gap-2">
                   <FileJson className="h-4 w-4" />
-                  Export as JSON
+                  Exporteren als JSON
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           )}
           <Button variant="outline" size="sm" onClick={handleRefresh} className="gap-2">
             <RefreshCw className="h-4 w-4" />
-            Refresh
+            Vernieuwen
           </Button>
         </div>
       </div>
@@ -199,14 +199,14 @@ export const BatchList = () => {
             <CardHeader>
               <CardTitle className="text-lg truncate">{batch.keyword}</CardTitle>
               <CardDescription>
-                {batch.num_variations} variations · {batch.language}
+                {batch.num_variations} variaties · {batch.language === "Dutch" ? "Nederlands" : batch.language}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
                 <StatusBadge status={batch.status} />
                 <span className="text-xs text-muted-foreground">
-                  {new Date(batch.created_at).toLocaleDateString()}
+                  {new Date(batch.created_at).toLocaleDateString('nl-NL')}
                 </span>
               </div>
             </CardContent>
@@ -219,9 +219,9 @@ export const BatchList = () => {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Variations</CardTitle>
+                <CardTitle>Variaties</CardTitle>
                 <CardDescription>
-                  {variations.length} variation{variations.length !== 1 ? 's' : ''} • Click on a website to open it
+                  {variations.length} variatie{variations.length !== 1 ? 's' : ''} • Klik op een website om te openen
                 </CardDescription>
               </div>
             </div>
@@ -248,7 +248,7 @@ export const BatchList = () => {
                           className="text-xs text-muted-foreground hover:text-primary transition-colors"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          View Repo
+                          Bekijk Repo
                         </a>
                       )}
                     </div>
@@ -261,7 +261,7 @@ export const BatchList = () => {
                       onClick={() => window.open(variation.live_url!, "_blank")}
                     >
                       <ExternalLink className="h-4 w-4" />
-                      <span className="ml-1 hidden sm:inline">Visit</span>
+                      <span className="ml-1 hidden sm:inline">Bezoeken</span>
                     </Button>
                   )}
                 </div>

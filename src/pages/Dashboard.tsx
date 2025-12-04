@@ -39,14 +39,14 @@ const Dashboard = () => {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    toast.success("Signed out successfully");
+    toast.success("Succesvol uitgelogd");
     navigate("/");
   };
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-lg text-muted-foreground">Loading...</div>
+        <div className="animate-pulse text-lg text-muted-foreground">Laden...</div>
       </div>
     );
   }
@@ -60,7 +60,7 @@ const Dashboard = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              GitPage Builder
+              Website Generator
             </h1>
             <p className="text-xs text-muted-foreground mt-0.5">
               {user?.email}
@@ -73,7 +73,7 @@ const Dashboard = () => {
             className="gap-2"
           >
             <LogOut className="h-4 w-4" />
-            Sign Out
+            Uitloggen
           </Button>
         </div>
       </header>
@@ -83,14 +83,14 @@ const Dashboard = () => {
           <TabsList className="mb-8 bg-card shadow-sm">
             <TabsTrigger value="generate" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Plus className="h-4 w-4" />
-              Generate
+              Genereren
             </TabsTrigger>
             <TabsTrigger value="batches" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
-              My Batches
+              Mijn Batches
             </TabsTrigger>
             <TabsTrigger value="settings" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Settings className="h-4 w-4" />
-              Settings
+              Instellingen
             </TabsTrigger>
           </TabsList>
 

@@ -55,10 +55,10 @@ export const ProfileSettings = () => {
 
       if (error) throw error;
 
-      toast.success("Settings saved successfully!");
+      toast.success("Instellingen succesvol opgeslagen!");
     } catch (error: any) {
       console.error("Save error:", error);
-      toast.error(error.message || "Failed to save settings");
+      toast.error(error.message || "Instellingen opslaan mislukt");
     } finally {
       setLoading(false);
     }
@@ -69,16 +69,16 @@ export const ProfileSettings = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Key className="h-6 w-6 text-primary" />
-          API Settings
+          API Instellingen
         </CardTitle>
         <CardDescription>
-          Configure your GitPage API key to enable automatic website deployment
+          Configureer je API-sleutel om automatische website deployment mogelijk te maken
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSave} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="apiKey">GitPage API Key</Label>
+            <Label htmlFor="apiKey">API Sleutel</Label>
             <Input
               id="apiKey"
               type="password"
@@ -88,7 +88,7 @@ export const ProfileSettings = () => {
               className="font-mono"
             />
             <p className="text-xs text-muted-foreground">
-              Get your API key from{" "}
+              Verkrijg je API-sleutel via{" "}
               <a
                 href="https://www.gitpage.site"
                 target="_blank"
@@ -101,12 +101,12 @@ export const ProfileSettings = () => {
           </div>
 
           <div className="p-4 bg-muted/50 rounded-lg border border-border">
-            <h4 className="text-sm font-medium mb-2">How it works:</h4>
+            <h4 className="text-sm font-medium mb-2">Hoe het werkt:</h4>
             <ul className="text-xs text-muted-foreground space-y-1 list-disc list-inside">
-              <li>Your API key is stored securely and encrypted</li>
-              <li>It's used only for automated deployments</li>
-              <li>Each variation is submitted every 5 minutes</li>
-              <li>Maximum 30 deployments per hour (GitPage limit)</li>
+              <li>Je API-sleutel wordt veilig en versleuteld opgeslagen</li>
+              <li>Wordt alleen gebruikt voor automatische deployments</li>
+              <li>Elke variatie wordt om de 5 minuten ingediend</li>
+              <li>Maximaal 30 deployments per uur (API limiet)</li>
             </ul>
           </div>
 
@@ -117,7 +117,7 @@ export const ProfileSettings = () => {
             disabled={loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {loading ? "Saving..." : "Save Settings"}
+            {loading ? "Opslaan..." : "Instellingen Opslaan"}
           </Button>
         </form>
       </CardContent>
