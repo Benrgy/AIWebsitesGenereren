@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { ProcessDemo } from "@/components/ProcessDemo";
 import { 
   Sparkles, 
   Zap, 
@@ -26,7 +27,8 @@ import {
   Palette,
   FileCode,
   Bot,
-  HelpCircle
+  HelpCircle,
+  Play
 } from "lucide-react";
 
 const Index = () => {
@@ -146,59 +148,24 @@ const Index = () => {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
       </section>
 
-      {/* Simple Process Section */}
+      {/* Interactive Demo Section */}
       <section className="py-20 bg-background border-t border-border/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <span className="text-primary text-sm font-medium">Eenvoudig Proces</span>
+            <div className="inline-flex items-center gap-2 mb-4">
+              <Play className="h-4 w-4 text-primary" />
+              <span className="text-primary text-sm font-medium">Interactieve Demo</span>
+            </div>
             <h2 className="text-3xl sm:text-4xl font-bold mt-2">
               Van Idee naar Live Website in Minuten
             </h2>
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Beantwoord een paar vragen en kijk hoe AI jouw complete website bouwt
+              Bekijk stap voor stap hoe onze AI jouw complete website bouwt
             </p>
           </div>
           
-          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            <div className="p-6 rounded-lg border bg-card shadow-card hover:shadow-glow transition-all animate-fade-in text-center">
-              <div className="h-12 w-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <FileText className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Vul Formulier In</h3>
-              <p className="text-muted-foreground text-sm">
-                Vul ons intuïtieve formulier in met jouw website vereisten en content details
-              </p>
-            </div>
-
-            <div className="p-6 rounded-lg border bg-card shadow-card hover:shadow-glow transition-all animate-fade-in text-center" style={{ animationDelay: "0.1s" }}>
-              <div className="h-12 w-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Bot className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">AI Generatie</h3>
-              <p className="text-muted-foreground text-sm">
-                Onze AI Agent maakt jouw website, inclusief tekst, design, beleidspagina's en SEO blog
-              </p>
-            </div>
-
-            <div className="p-6 rounded-lg border bg-card shadow-card hover:shadow-glow transition-all animate-fade-in text-center" style={{ animationDelay: "0.2s" }}>
-              <div className="h-12 w-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Rocket className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Auto Deploy</h3>
-              <p className="text-muted-foreground text-sm">
-                Jouw site wordt automatisch gedeployed naar GitHub Pages met SSL en CDN inbegrepen
-              </p>
-            </div>
-
-            <div className="p-6 rounded-lg border bg-card shadow-card hover:shadow-glow transition-all animate-fade-in text-center" style={{ animationDelay: "0.3s" }}>
-              <div className="h-12 w-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Globe className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Live Website</h3>
-              <p className="text-muted-foreground text-sm">
-                Je professionele website is direct live. Voeg je eigen domein toe of gebruik de gratis URL
-              </p>
-            </div>
+          <div className="max-w-6xl mx-auto">
+            <ProcessDemo />
           </div>
 
           <div className="mt-12 text-center">
