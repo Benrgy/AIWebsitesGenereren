@@ -1,6 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { 
   Sparkles, 
   Zap, 
   Globe, 
@@ -19,7 +25,8 @@ import {
   Building2,
   Palette,
   FileCode,
-  Bot
+  Bot,
+  HelpCircle
 } from "lucide-react";
 
 const Index = () => {
@@ -560,6 +567,118 @@ const Index = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-background border-t border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <HelpCircle className="h-5 w-5 text-primary" />
+              <span className="text-primary text-sm font-medium">Veelgestelde Vragen</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold">
+              Alles Wat Je Wilt Weten
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Antwoorden op de meest gestelde vragen over onze AI website generator
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              <AccordionItem value="item-1" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Wat is het verschil met andere AI website builders?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Het belangrijkste verschil is dat wij pure statische HTML genereren in plaats van React of JavaScript-gebaseerde websites. Dit betekent dat zoekmachines je content direct kunnen indexeren zonder JavaScript uit te voeren. Daarnaast heb je volledige eigendom over je code en zijn er geen maandelijkse abonnementskosten.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-2" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Hoeveel kost het om een website te maken?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Je betaalt alleen per website die je genereert, gemiddeld rond €0,50 per site. Er zijn geen abonnementen, geen verborgen kosten en geen maandelijkse fees. Je krijgt ook gratis hosting via GitHub Pages met SSL en CDN inbegrepen.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-3" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Heb ik technische kennis nodig?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Nee, je hebt geen programmeerkennis nodig. Je vult simpelweg een formulier in met je wensen (keyword, taal, contactgegevens) en onze AI genereert automatisch een complete, professionele website. Het hele proces duurt gemiddeld slechts 4 minuten.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-4" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Waarom is statische HTML beter voor SEO?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Zoekmachines zoals Google kunnen statische HTML direct lezen en indexeren. Bij JavaScript-gebaseerde websites (zoals React/Vue) moet de zoekmachine eerst de JavaScript uitvoeren om de content te zien, wat kan leiden tot vertraagde of incomplete indexering. Statische HTML laadt ook sneller, wat positief is voor Core Web Vitals en rankings.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-5" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Kan ik meerdere websites tegelijk genereren?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Ja! Je kunt tot 100 website variaties per batch genereren. Dit is ideaal voor SEO-bureaus die A/B tests willen uitvoeren, meerdere landingspagina's voor campagnes nodig hebben, of verschillende invalshoeken voor hetzelfde keyword willen testen.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-6" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Wat zit er allemaal in een gegenereerde website?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Elke website bevat: een professionele landingspagina met hero sectie, features, benefits en call-to-action, volledige SEO meta tags en Open Graph data, schema markup voor zoekmachines, privacybeleid en algemene voorwaarden, een contactformulier, en optioneel een SEO-geoptimaliseerde blog sectie.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-7" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Kan ik mijn eigen domein gebruiken?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Ja, je kunt je eigen domein koppelen aan je gegenereerde website. Standaard krijg je een gratis URL via GitHub Pages, maar je kunt eenvoudig je eigen domein instellen. Aangezien je volledige toegang hebt tot de broncode, kun je de site ook naar elke andere hosting provider verplaatsen.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-8" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">In welke talen kan ik websites genereren?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  We ondersteunen momenteel Nederlands, Engels, Duits, Frans, Spaans en Portugees. De AI genereert alle content, meta tags en beleidspagina's in de door jou gekozen taal. Perfect voor internationale campagnes of lokale SEO in verschillende landen.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-9" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Hoe snel is mijn website live?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Gemiddeld is je website binnen 4 minuten live na het invullen van het formulier. De AI genereert de content, het design systeem wordt toegepast, en de site wordt automatisch gedeployed naar GitHub Pages met SSL certificaat en CDN. Je ontvangt direct een werkende URL.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-10" className="border rounded-lg px-6 bg-card">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="font-semibold">Heb ik volledige toegang tot de broncode?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Ja, je hebt 100% eigendom en toegang tot alle broncode. De website wordt opgeslagen in een GitHub repository waar je volledige controle over hebt. Je kunt de code aanpassen, uitbreiden, of verplaatsen naar een andere hosting provider wanneer je maar wilt. Geen vendor lock-in.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>
