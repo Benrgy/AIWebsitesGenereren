@@ -1,7 +1,11 @@
 project_id = "phqinbdqklgwoctsmigr"
 
+[api]
+enabled = true
+
 [functions.generate-content]
 verify_jwt = true
 
 [functions.submit-to-gitpage]
-verify_jwt = false
+verify_jwt = true
+enabled = true

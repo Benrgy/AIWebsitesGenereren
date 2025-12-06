@@ -1,10 +1,23 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+const validLanguages = ["Dutch", "English", "German", "French", "Spanish", "Portuguese"];
+
+// Input validation schema
+const requestSchema = z.object({
+  batchId: z.string().uuid({ message: "Invalid batch ID format" }),
+  keyword: z.string().min(1, "Keyword is required").max(200, "Keyword too long (max 200 characters)"),
+  numVariations: z.number().int().min(1, "Minimum 1 variation").max(100, "Maximum 100 variations"),
+  language: z.string().refine((val) => validLanguages.includes(val), { message: "Invalid language" }),
+  contactEmail: z.string().email("Invalid email format"),
+  ctaLink: z.string().url("Invalid URL format"),
+});
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -12,7 +25,19 @@ serve(async (req) => {
   }
 
   try {
-    const { batchId, keyword, numVariations, language, contactEmail, ctaLink } = await req.json();
+    const rawBody = await req.json();
+    
+    // Validate input
+    const validationResult = requestSchema.safeParse(rawBody);
+    if (!validationResult.success) {
+      console.error("Validation error:", validationResult.error.errors);
+      return new Response(
+        JSON.stringify({ error: "Validation failed", details: validationResult.error.errors }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    
+    const { batchId, keyword, numVariations, language, contactEmail, ctaLink } = validationResult.data;
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
