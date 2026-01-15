@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+
+const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 import { 
   Accordion,
   AccordionContent,
@@ -32,7 +34,6 @@ import {
 } from "lucide-react";
 
 const Index = () => {
-  const navigate = useNavigate();
 
   const websiteTypes = [
     "Portfolio Website",
@@ -126,18 +127,22 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="xl"
-                onClick={() => navigate("/auth")}
+                asChild
                 className="text-lg bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
-                Gratis Starten
+                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                  Bekijk de Demo
+                </a>
               </Button>
               <Button
                 variant="outline"
                 size="xl"
-                onClick={() => navigate("/auth")}
+                asChild
                 className="text-lg backdrop-blur-sm hover:bg-accent/50 transition-all duration-300"
               >
-                Bekijk Hoe Het Werkt
+                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                  Start Direct
+                </a>
               </Button>
             </div>
           </div>
@@ -657,20 +662,22 @@ const Index = () => {
             Klaar om te Beginnen?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Maak vandaag nog je eerste AI-gegenereerde website. Geen code, geen abonnement, volledige eigendom.
+            Ontdek waarom duizenden deze tool gebruiken voor professionele websites.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="xl"
-              onClick={() => navigate("/auth")}
+              asChild
               className="text-lg shadow-glow bg-gradient-primary text-primary-foreground hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
-              <Rocket className="mr-2 h-5 w-5" />
-              Start Gratis
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                <Rocket className="mr-2 h-5 w-5" />
+                Probeer Het Nu
+              </a>
             </Button>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
-            Geen creditcard nodig • Genereer je eerste website in ~4 minuten
+            Geen code nodig • Professionele websites in minuten
           </p>
         </div>
       </section>
@@ -682,10 +689,10 @@ const Index = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate("/blog")}
+              asChild
               className="text-muted-foreground hover:text-foreground"
             >
-              SEO Blog & Tutorials
+              <Link to="/blog">SEO Blog & Tutorials</Link>
             </Button>
           </div>
           <p className="text-sm text-muted-foreground">
