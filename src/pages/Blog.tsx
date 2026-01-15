@@ -161,7 +161,9 @@ const Blog = () => {
               </a>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/dashboard">Genereer Websites</Link>
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                Genereer Websites
+              </a>
             </Button>
           </div>
         </div>
@@ -291,9 +293,14 @@ const Blog = () => {
             <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Home
             </Link>
-            <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Dashboard
-            </Link>
+            <a 
+              href={AFFILIATE_LINK} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Website Generator
+            </a>
             <a 
               href={AFFILIATE_LINK} 
               target="_blank" 
