@@ -678,6 +678,16 @@ const Index = () => {
       {/* Footer Note */}
       <section className="py-8 bg-background border-t border-border/50">
         <div className="container mx-auto px-4 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/blog")}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              SEO Blog & Tutorials
+            </Button>
+          </div>
           <p className="text-sm text-muted-foreground">
             De industriestandaard voor AI website generatie in Nederland en België
           </p>
