@@ -17,7 +17,7 @@ const blogPosts = [
     content: [
       "Statische HTML-websites laden razendsnel omdat er geen database queries of server-side processing nodig is. Google's Core Web Vitals meten laadsnelheid, en snellere sites krijgen een hogere ranking.",
       "Zonder CMS overhead is je website niet alleen sneller, maar ook veiliger. Geen WordPress plugins die gehackt kunnen worden, geen database die kan crashen.",
-      "Met diensten zoals Gitpage.site kun je direct statische HTML deployen naar een wereldwijd CDN, waardoor je bezoekers altijd de snelste versie krijgen."
+      "Met de juiste diensten kun je direct statische HTML deployen naar een wereldwijd CDN, waardoor je bezoekers altijd de snelste versie krijgen."
     ],
     tips: [
       "Gebruik geen onnodige JavaScript libraries",
@@ -55,7 +55,7 @@ const blogPosts = [
     content: [
       "Affiliate marketing vereist vaak meerdere niche websites om verschillende markten te bedienen. Handmatig bouwen kost veel tijd, maar met de juiste tools kun je dit proces versnellen.",
       "Door AI te gebruiken voor content generatie en geautomatiseerde deployment, kun je in uren doen wat normaal weken zou kosten. Elke website kan worden geoptimaliseerd voor specifieke long-tail keywords.",
-      "Gitpage.site biedt een perfecte oplossing: deploy onbeperkt statische websites voor een vaste prijs, ideaal voor affiliate marketeers die willen schalen."
+      "Dit platform biedt een perfecte oplossing: deploy onbeperkt statische websites voor een vaste prijs, ideaal voor affiliate marketeers die willen schalen."
     ],
     tips: [
       "Focus op long-tail keywords met lage concurrentie",
@@ -74,7 +74,7 @@ const blogPosts = [
     content: [
       "Google's Core Web Vitals meten drie cruciale aspecten: Largest Contentful Paint (LCP), First Input Delay (FID), en Cumulative Layout Shift (CLS). Statische HTML websites scoren hier van nature uitstekend.",
       "Omdat er geen server-side rendering is, laadt de content direct. Geen JavaScript frameworks betekent snellere FID scores. Eenvoudige HTML/CSS layouts zorgen voor minimale CLS.",
-      "Door je websites te hosten op een modern CDN zoals Gitpage.site, profiteer je van edge caching en automatische optimalisaties die je scores nog verder verbeteren."
+      "Door je websites te hosten op een modern CDN, profiteer je van edge caching en automatische optimalisaties die je scores nog verder verbeteren."
     ],
     tips: [
       "Houd LCP onder 2.5 seconden",
@@ -104,14 +104,14 @@ const blogPosts = [
   },
   {
     id: 6,
-    title: "Gratis vs Betaald Hosting: Waarom Gitpage.site de Beste Keuze Is",
-    description: "Een eerlijke vergelijking van hosting opties voor statische websites en waarom professionals kiezen voor Gitpage.",
+    title: "Gratis vs Betaald Hosting: Waarom Dit Platform de Beste Keuze Is",
+    description: "Een eerlijke vergelijking van hosting opties voor statische websites en waarom professionals kiezen voor dit platform.",
     category: "Hosting",
     readTime: "6 min",
     icon: Globe,
     content: [
       "Gratis hosting klinkt aantrekkelijk, maar komt vaak met beperkingen: trage laadtijden, beperkte bandbreedte, en onprofessionele subdomeinen die je SEO schaden.",
-      "Premium hosting voor statische sites hoeft niet duur te zijn. Gitpage.site biedt onbeperkte websites, custom domains, en automatische SSL - alles wat je nodig hebt voor professionele websites.",
+      "Premium hosting voor statische sites hoeft niet duur te zijn. Dit platform biedt onbeperkte websites, custom domains, en automatische SSL - alles wat je nodig hebt voor professionele websites.",
       "De combinatie van GitHub-gebaseerde workflow en wereldwijd CDN maakt deployment eenvoudig en betrouwbaar. Perfect voor developers, marketeers, en agencies."
     ],
     tips: [
@@ -135,7 +135,7 @@ const Blog = () => {
           </Link>
           <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
             <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-              Probeer Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+              Probeer Het Platform <ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
@@ -157,7 +157,7 @@ const Blog = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
               <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Start met Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+                Start Direct <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
             <Button asChild variant="outline" size="lg">
@@ -182,7 +182,7 @@ const Blog = () => {
             </div>
             <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
               <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Bekijk Gitpage.site Plannen <ExternalLink className="ml-2 h-4 w-4" />
+                Bekijk Alle Plannen <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </div>
@@ -242,7 +242,7 @@ const Blog = () => {
       <section className="py-16 md:py-24 bg-gradient-to-r from-primary to-secondary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
-            Waarom Kiezen voor Gitpage.site?
+            Waarom Kiezen voor Dit Platform?
           </h2>
           <div className="grid md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
             <div className="text-center">
@@ -275,7 +275,7 @@ const Blog = () => {
           </div>
           <Button asChild size="lg" variant="secondary" className="text-foreground">
             <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-              Start Nu met Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+              Start Nu <ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
@@ -300,7 +300,7 @@ const Blog = () => {
               rel="noopener noreferrer"
               className="text-sm text-primary hover:text-primary/80 transition-colors"
             >
-              Gitpage.site
+              Officieel Platform
             </a>
           </div>
         </div>

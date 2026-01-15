@@ -90,12 +90,12 @@ export const ProfileSettings = () => {
             <p className="text-xs text-muted-foreground">
               Verkrijg je API-sleutel via{" "}
               <a
-                href="https://www.gitpage.site"
+                href="https://gitpage.site/?ref=WebsitesGenereren"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline font-medium"
               >
-                gitpage.site
+                het officiële platform
               </a>
             </p>
           </div>
