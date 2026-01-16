@@ -1,66 +1,102 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, ExternalLink, Search, Rocket, Globe, TrendingUp, Zap, Target, BookOpen, CheckCircle } from "lucide-react";
-const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
-const blogPosts = [{
-  id: 1,
-  title: "Waarom Statische HTML Websites Beter Ranken in Google",
-  description: "Ontdek waarom statische websites sneller laden en hoger scoren in zoekmachines dan dynamische alternatieven.",
-  category: "SEO Basics",
-  readTime: "5 min",
-  icon: Search,
-  content: ["Statische HTML-websites laden razendsnel omdat er geen database queries of server-side processing nodig is. Google's Core Web Vitals meten laadsnelheid, en snellere sites krijgen een hogere ranking.", "Zonder CMS overhead is je website niet alleen sneller, maar ook veiliger. Geen WordPress plugins die gehackt kunnen worden, geen database die kan crashen.", "Met diensten zoals Gitpage.site kun je direct statische HTML deployen naar een wereldwijd CDN, waardoor je bezoekers altijd de snelste versie krijgen."],
-  tips: ["Gebruik geen onnodige JavaScript libraries", "Optimaliseer afbeeldingen voor web (WebP formaat)", "Zorg voor proper caching headers", "Minimaliseer CSS en HTML bestanden"]
-}, {
-  id: 2,
-  title: "Lokale SEO: Zo Bereik je Klanten in Jouw Regio",
-  description: "Leer hoe je met gerichte landingspagina's lokale zoekresultaten domineert en meer leads genereert.",
-  category: "Lokale SEO",
-  readTime: "7 min",
-  icon: Target,
-  content: ["Lokale SEO is essentieel voor bedrijven die klanten in een specifiek gebied willen bereiken. Door unieke landingspagina's te maken voor elke stad of regio, vergroot je je zichtbaarheid aanzienlijk.", "De sleutel is het creëren van relevante, unieke content voor elke locatie. Kopieer niet simpelweg dezelfde tekst met een andere plaatsnaam - Google herkent dit en bestraft duplicate content.", "Met AI-gegenereerde variaties kun je snel tientallen unieke pagina's maken, elk geoptimaliseerd voor een specifieke zoekterm en locatie."],
-  tips: ["Gebruik '[dienst] + [plaatsnaam]' als primair keyword", "Voeg lokale bedrijfsgegevens toe (NAP consistency)", "Maak unieke meta descriptions per pagina", "Integreer Google Maps indien relevant"]
-}, {
-  id: 3,
-  title: "Bulk Website Generatie: De Toekomst van Affiliate Marketing",
-  description: "Hoe je met AI-tools snel meerdere niche websites kunt opzetten voor passief inkomen.",
-  category: "Affiliate Marketing",
-  readTime: "8 min",
-  icon: Rocket,
-  content: ["Affiliate marketing vereist vaak meerdere niche websites om verschillende markten te bedienen. Handmatig bouwen kost veel tijd, maar met de juiste tools kun je dit proces versnellen.", "Door AI te gebruiken voor content generatie en geautomatiseerde deployment, kun je in uren doen wat normaal weken zou kosten. Elke website kan worden geoptimaliseerd voor specifieke long-tail keywords.", "Gitpage.site biedt een perfecte oplossing: deploy onbeperkt statische websites voor een vaste prijs, ideaal voor affiliate marketeers die willen schalen."],
-  tips: ["Focus op long-tail keywords met lage concurrentie", "Creëer waardevolle content, niet alleen promotie", "Test verschillende call-to-actions per pagina", "Monitor je rankings en pas aan waar nodig"]
-}, {
-  id: 4,
-  title: "Core Web Vitals Optimaliseren voor Betere Rankings",
-  description: "Begrijp Google's ranking factoren en leer hoe statische sites automatisch hoge scores behalen.",
-  category: "Technische SEO",
-  readTime: "6 min",
-  icon: TrendingUp,
-  content: ["Google's Core Web Vitals meten drie cruciale aspecten: Largest Contentful Paint (LCP), First Input Delay (FID), en Cumulative Layout Shift (CLS). Statische HTML websites scoren hier van nature uitstekend.", "Omdat er geen server-side rendering is, laadt de content direct. Geen JavaScript frameworks betekent snellere FID scores. Eenvoudige HTML/CSS layouts zorgen voor minimale CLS.", "Door je websites te hosten op een modern CDN zoals Gitpage.site, profiteer je van edge caching en automatische optimalisaties die je scores nog verder verbeteren."],
-  tips: ["Houd LCP onder 2.5 seconden", "Minimaliseer third-party scripts", "Definieer afbeelding dimensies in HTML", "Gebruik system fonts waar mogelijk"]
-}, {
-  id: 5,
-  title: "Van Keyword Research naar Live Website in 10 Minuten",
-  description: "Een stapsgewijze handleiding om snel van idee naar gepubliceerde landingspagina te gaan.",
-  category: "Tutorial",
-  readTime: "10 min",
-  icon: Zap,
-  content: ["Effectieve keyword research is de basis van elke succesvolle SEO-campagne. Begin met tools zoals Google Keyword Planner, Ubersuggest, of Ahrefs om kansen te identificeren.", "Zoek naar keywords met decent zoekvolume maar lage concurrentie. Long-tail keywords zoals 'loodgieter amsterdam centrum' zijn vaak makkelijker te ranken dan generieke termen.", "Met onze bulk generator kun je direct meerdere variaties maken voor elk keyword. Koppel je Gitpage.site API key en je websites zijn binnen minuten live."],
-  tips: ["Gebruik Google Trends voor seizoensgebonden keywords", "Analyseer competitor websites voor content gaps", "Maak minimaal 5-10 variaties per keyword", "Track rankings vanaf dag 1 met Google Search Console"]
-}, {
-  id: 6,
-  title: "Gratis vs Betaald Hosting: Waarom Gitpage.site de Beste Keuze Is",
-  description: "Een eerlijke vergelijking van hosting opties voor statische websites en waarom professionals kiezen voor Gitpage.",
-  category: "Hosting",
-  readTime: "6 min",
-  icon: Globe,
-  content: ["Gratis hosting klinkt aantrekkelijk, maar komt vaak met beperkingen: trage laadtijden, beperkte bandbreedte, en onprofessionele subdomeinen die je SEO schaden.", "Premium hosting voor statische sites hoeft niet duur te zijn. Gitpage.site biedt onbeperkte websites, custom domains, en automatische SSL - alles wat je nodig hebt voor professionele websites.", "De combinatie van GitHub-gebaseerde workflow en wereldwijd CDN maakt deployment eenvoudig en betrouwbaar. Perfect voor developers, marketeers, en agencies."],
-  tips: ["Custom domains verbeteren merkherkenning en SEO", "SSL is verplicht voor Google rankings", "CDN zorgt voor consistente laadtijden wereldwijd", "Git-based workflow maakt versioning eenvoudig"]
-}];
+import { ArrowLeft, ExternalLink, Rocket, Globe, Zap, Target, BookOpen, Clock, ArrowRight } from "lucide-react";
+import { blogArticles, AFFILIATE_LINK } from "@/data/blogArticles";
+
 const Blog = () => {
-  return <div className="min-h-screen bg-background">
+  // Group articles by category
+  const categories = [...new Set(blogArticles.map(article => article.category))];
+
+  // Schema.org markup for Blog
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "AI Website Generator Blog",
+    "description": "Praktische tips, tutorials en strategieën voor website generatie, SEO en online marketing in Nederland en België.",
+    "url": "https://site-wave-ai.lovable.app/blog",
+    "inLanguage": "nl",
+    "publisher": {
+      "@type": "Organization",
+      "name": "AI Website Generator Nederland",
+      "url": "https://site-wave-ai.lovable.app"
+    },
+    "blogPost": blogArticles.map(article => ({
+      "@type": "BlogPosting",
+      "headline": article.title,
+      "description": article.description,
+      "url": `https://site-wave-ai.lovable.app/blog/${article.slug}`,
+      "datePublished": article.datePublished,
+      "dateModified": article.dateModified,
+      "author": {
+        "@type": "Organization",
+        "name": "AI Website Generator Nederland"
+      }
+    }))
+  };
+
+  // FAQ Schema for common questions
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Hoe maak ik een website zonder technische kennis?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Met AI-tools zoals Gitpage.site typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Waarom laadt mijn website zo traag?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WordPress en andere CMS systemen zijn traag door plugins en databases. Statische HTML websites laden 10x sneller."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Hoeveel kost een website maken?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Met Gitpage.site betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
+        }
+      }
+    ]
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>SEO Blog & Tutorials | Gratis Website Tips | AI Website Generator</title>
+        <meta name="description" content="Leer hoe je gratis of goedkoop een professionele website maakt. Tips voor SEO, statische HTML, en website generatie met AI. Perfect voor beginners in Nederland en België." />
+        <meta name="keywords" content="website maken tips, gratis website, seo tips, statische html, website bouwen, ai website generator, website zonder code" />
+        <link rel="canonical" href="https://site-wave-ai.lovable.app/blog" />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="SEO Blog & Tutorials | AI Website Generator" />
+        <meta property="og:description" content="Praktische tips om gratis of goedkoop een professionele website te maken. Perfect voor beginners." />
+        <meta property="og:url" content="https://site-wave-ai.lovable.app/blog" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="SEO Blog & Tutorials | AI Website Generator" />
+        <meta name="twitter:description" content="Praktische tips om gratis of goedkoop een professionele website te maken." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify(blogSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      </Helmet>
+
       {/* Header */}
       <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -69,143 +105,151 @@ const Blog = () => {
             <span>Terug naar home</span>
           </Link>
           <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
-            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">Bekijk onze Demo<ExternalLink className="ml-2 h-4 w-4" />
+            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+              Probeer Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 md:py-24" style={{
-      background: 'var(--gradient-hero)'
-    }}>
+      <section className="py-16 md:py-24" style={{ background: 'var(--gradient-hero)' }}>
         <div className="container mx-auto px-4 text-center">
           <Badge variant="secondary" className="mb-4">
             <BookOpen className="h-3 w-3 mr-1" />
-            SEO Blog & Tutorials
+            20 Gratis Artikelen
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Leer Meer Over SEO & Website Generatie
+            Gratis Website Tips & SEO Handleidingen
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-            Praktische tips, tutorials en strategieën om je online zichtbaarheid te vergroten met statische websites en slimme SEO-technieken.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            Leer hoe je een professionele website maakt zonder technische kennis. 
+            Eenvoudig uitgelegd zodat iedereen het begrijpt. Van beginners tot ondernemers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
               <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Start met Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+                Maak Nu Je Website <ExternalLink className="ml-2 h-4 w-4" />
               </a>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/dashboard">Genereer Websites</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Featured CTA */}
+      {/* Quick Answer Box - AI Overview Optimized */}
       <section className="py-12 bg-primary/5 border-y border-border">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                <Rocket className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Klaar om te starten?</h3>
-                <p className="text-muted-foreground">Deploy onbeperkt statische websites met Gitpage.site</p>
-              </div>
-            </div>
-            <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
+              💡 Snel Antwoord: Hoe Maak Je Een Website?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              Met AI website generators zoals <strong>Gitpage.site</strong> maak je in 5 minuten een professionele website. 
+              Je typt wat je wilt, de AI maakt het. Geen code nodig, geen abonnement, direct online.
+            </p>
+            <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
               <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Bekijk Gitpage.site Plannen <ExternalLink className="ml-2 h-4 w-4" />
+                Probeer Het Gratis <Rocket className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Blog Posts Grid */}
+      {/* Articles Grid by Category */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map(post => <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-shadow border-border">
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="outline" className="text-xs">
-                      {post.category}
-                    </Badge>
-                    <span className="text-xs text-muted-foreground">{post.readTime} lezen</span>
-                  </div>
-                  <div className="h-12 w-12 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mb-4">
-                    <post.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl text-foreground">{post.title}</CardTitle>
-                  <CardDescription>{post.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col">
-                  <div className="space-y-4 flex-1">
-                    {post.content.map((paragraph, idx) => <p key={idx} className="text-sm text-muted-foreground">
-                        {paragraph}
-                      </p>)}
-                    
-                    <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-primary" />
-                        Quick Tips
-                      </h4>
-                      <ul className="space-y-2">
-                        {post.tips.map((tip, idx) => <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                            <span className="text-primary mt-1">•</span>
-                            {tip}
-                          </li>)}
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>)}
-          </div>
+          {categories.map(category => (
+            <div key={category} className="mb-16 last:mb-0">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 flex items-center gap-3">
+                <span className="h-8 w-1 bg-gradient-to-b from-primary to-secondary rounded-full" />
+                {category}
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {blogArticles
+                  .filter(article => article.category === category)
+                  .map(article => (
+                    <Link key={article.id} to={`/blog/${article.slug}`}>
+                      <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer group">
+                        <CardHeader>
+                          <div className="flex items-center gap-2 mb-3">
+                            <Badge variant="outline" className="text-xs">
+                              {article.category}
+                            </Badge>
+                            <span className="text-xs text-muted-foreground flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {article.readTime}
+                            </span>
+                          </div>
+                          <div className="h-12 w-12 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mb-4 group-hover:from-primary/20 group-hover:to-secondary/20 transition-colors">
+                            <article.icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <CardTitle className="text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                            {article.title}
+                          </CardTitle>
+                          <CardDescription className="line-clamp-2">
+                            {article.description}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+                            {article.shortAnswer}
+                          </p>
+                          <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                            Lees meer <ArrowRight className="h-4 w-4" />
+                          </span>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Why Gitpage CTA Section */}
+      {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-r from-primary to-secondary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
-            Waarom Kiezen voor Gitpage.site?
+            Klaar Om Te Beginnen?
           </h2>
+          <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto mb-8">
+            Maak vandaag nog je eerste website. Geen technische kennis nodig, 
+            geen dure abonnementen, gewoon een professionele website in minuten.
+          </p>
           <div className="grid md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="h-16 w-16 rounded-full bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
                 <Zap className="h-8 w-8 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold text-primary-foreground mb-2">Razendsnelle Deployment</h3>
+              <h3 className="font-semibold text-primary-foreground mb-2">5 Minuten</h3>
               <p className="text-primary-foreground/80 text-sm">
-                Van code naar live website in seconden via GitHub integratie
+                Van idee naar live website
               </p>
             </div>
             <div className="text-center">
               <div className="h-16 w-16 rounded-full bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
                 <Globe className="h-8 w-8 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold text-primary-foreground mb-2">Wereldwijd CDN</h3>
+              <h3 className="font-semibold text-primary-foreground mb-2">Direct Online</h3>
               <p className="text-primary-foreground/80 text-sm">
-                Automatische edge caching voor optimale laadtijden overal
+                Gratis hosting inbegrepen
               </p>
             </div>
             <div className="text-center">
               <div className="h-16 w-16 rounded-full bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
                 <Target className="h-8 w-8 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold text-primary-foreground mb-2">Onbeperkte Websites</h3>
+              <h3 className="font-semibold text-primary-foreground mb-2">SEO Ready</h3>
               <p className="text-primary-foreground/80 text-sm">
-                Eén abonnement, onbeperkt aantal websites en custom domains
+                Beter vindbaar in Google
               </p>
             </div>
           </div>
           <Button asChild size="lg" variant="secondary" className="text-foreground">
             <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-              Start Nu met Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+              Start Nu Gratis <ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
@@ -215,21 +259,23 @@ const Blog = () => {
       <footer className="py-8 border-t border-border">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-muted-foreground mb-4">
-            Deze pagina bevat affiliate links naar Gitpage.site. Wij ontvangen een commissie bij aankoop via onze link.
+            * Deze pagina bevat affiliate links. Wij ontvangen een kleine commissie bij aankoop via onze links, zonder extra kosten voor jou.
           </p>
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Home
             </Link>
-            <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Dashboard
+            <Link to="/blog" className="text-sm text-primary hover:text-primary/80 transition-colors">
+              Blog
             </Link>
-            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:text-primary/80 transition-colors">
-              Gitpage.site
+            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Gitpage.site →
             </a>
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Blog;
