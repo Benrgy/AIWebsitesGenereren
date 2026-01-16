@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle } from "lucide-react";
-import { getArticleBySlug, AFFILIATE_LINK } from "@/data/blogArticles";
+import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, Quote, TrendingUp, ListChecks } from "lucide-react";
+import { getArticleBySlug, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -30,7 +30,7 @@ const BlogArticle = () => {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": article.title,
-    "description": article.description,
+    "description": article.metaDescription,
     "datePublished": article.datePublished,
     "dateModified": article.dateModified,
     "author": {
@@ -66,15 +66,15 @@ const BlogArticle = () => {
     <>
       <Helmet>
         <title>{article.title} | Websites Genereren</title>
-        <meta name="description" content={article.description} />
+        <meta name="description" content={article.metaDescription} />
         <meta name="keywords" content={article.keywords.join(", ")} />
         <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.description} />
+        <meta property="og:description" content={article.metaDescription} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://websitesgenereren.nl/blog/${article.slug}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={article.title} />
-        <meta name="twitter:description" content={article.description} />
+        <meta name="twitter:description" content={article.metaDescription} />
         <link rel="canonical" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
         <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
@@ -114,7 +114,7 @@ const BlogArticle = () => {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
               {article.title}
             </h1>
-            <p className="text-xl text-muted-foreground">{article.description}</p>
+            <p className="text-xl text-muted-foreground">{article.metaDescription}</p>
           </div>
         </section>
 
@@ -127,11 +127,31 @@ const BlogArticle = () => {
                   <CheckCircle className="h-5 w-5 text-primary" />
                   Kort Antwoord
                 </h2>
-                <p className="text-foreground text-lg leading-relaxed">{article.shortAnswer}</p>
+                <p className="text-foreground text-lg leading-relaxed">{article.openingAnswer}</p>
               </CardContent>
             </Card>
           </div>
         </section>
+
+        {/* Executive Summary */}
+        {article.executiveSummary && (
+          <section className="py-6 bg-muted/30">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <h2 className="font-semibold text-lg text-foreground mb-4 flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-primary" />
+                Belangrijkste Bevindingen
+              </h2>
+              <ul className="space-y-2">
+                {article.executiveSummary.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-muted-foreground">
+                    <span className="text-primary font-bold mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
         {/* Main Content */}
         <article className="py-12 md:py-16">
@@ -152,14 +172,14 @@ const BlogArticle = () => {
               <Card className="bg-muted/50">
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <ListChecks className="h-5 w-5 text-primary" />
                     Praktische Tips
                   </h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {article.tips.map((tip, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-muted-foreground">
-                        <span className="text-primary font-bold">•</span>
-                        <span>{tip}</span>
+                      <li key={idx} className="border-l-2 border-primary/30 pl-4">
+                        <p className="font-semibold text-foreground">{tip.title}</p>
+                        <p className="text-muted-foreground text-sm">{tip.description}</p>
                       </li>
                     ))}
                   </ul>
