@@ -3,8 +3,44 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, Quote, TrendingUp, ListChecks } from "lucide-react";
+import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight } from "lucide-react";
 import { getArticleBySlug, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
+
+// Import blog images
+import seoGoogleSearch from "@/assets/blog/seo-google-search.jpg";
+import websiteBeginners from "@/assets/blog/website-beginners.jpg";
+import websiteCosts from "@/assets/blog/website-costs.jpg";
+import wordpressVsAi from "@/assets/blog/wordpress-vs-ai.jpg";
+import aiWebsiteGenerator from "@/assets/blog/ai-website-generator.jpg";
+import localShopWebsite from "@/assets/blog/local-shop-website.jpg";
+import zzpFreelancerWebsite from "@/assets/blog/zzp-freelancer-website.jpg";
+import photographerPortfolio from "@/assets/blog/photographer-portfolio.jpg";
+import githubHosting from "@/assets/blog/github-hosting.jpg";
+import googleFirstPage from "@/assets/blog/google-first-page.jpg";
+import localSeoCities from "@/assets/blog/local-seo-cities.jpg";
+import startupValidation from "@/assets/blog/startup-validation.jpg";
+
+// Map slugs to images
+const articleImages: Record<string, string> = {
+  "react-website-niet-gevonden-google": seoGoogleSearch,
+  "website-bouwen-zonder-technische-kennis": websiteBeginners,
+  "website-zonder-maandelijks-betalen": websiteCosts,
+  "wordpress-trage-website-oplossen": wordpressVsAi,
+  "website-zelf-bouwen-of-uitbesteden": zzpFreelancerWebsite,
+  "statische-html-website-ai-genereren": aiWebsiteGenerator,
+  "landingspagina-google-eerste-pagina": googleFirstPage,
+  "meerdere-lokale-websites-genereren": localSeoCities,
+  "website-bouwen-github-hosting": githubHosting,
+  "ai-website-generator-nederlands": aiWebsiteGenerator,
+  "wix-wordpress-alternatief-zonder-abonnement": wordpressVsAi,
+  "webdesigner-nodig-of-zelf-doen": zzpFreelancerWebsite,
+  "portfolio-website-fotograaf-gratis": photographerPortfolio,
+  "simpele-zakelijke-website-zzp": zzpFreelancerWebsite,
+  "website-kleine-winkel-lokaal": localShopWebsite,
+  "restaurant-website-reserveringen": localShopWebsite,
+  "kapper-kapsalon-website": localShopWebsite,
+  "startup-landingspagina-validatie": startupValidation,
+};
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -24,6 +60,7 @@ const BlogArticle = () => {
   }
 
   const Icon = article.icon;
+  const heroImage = articleImages[article.slug] || seoGoogleSearch;
 
   // Schema.org Article + FAQ structured data
   const schemaData = {
@@ -33,6 +70,7 @@ const BlogArticle = () => {
     "description": article.metaDescription,
     "datePublished": article.datePublished,
     "dateModified": article.dateModified,
+    "image": heroImage,
     "author": {
       "@type": "Organization",
       "name": "Websites Genereren"
@@ -71,151 +109,191 @@ const BlogArticle = () => {
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.metaDescription} />
         <meta property="og:type" content="article" />
+        <meta property="og:image" content={heroImage} />
         <meta property="og:url" content={`https://websitesgenereren.nl/blog/${article.slug}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={article.title} />
         <meta name="twitter:description" content={article.metaDescription} />
+        <meta name="twitter:image" content={heroImage} />
         <link rel="canonical" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
         <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link to="/blog" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+        {/* Minimal Header */}
+        <header className="border-b border-border/50 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+            <Link to="/blog" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="h-4 w-4" />
-              <span>Terug naar blog</span>
+              <span className="hidden sm:inline">Terug naar blog</span>
             </Link>
-            <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+            <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
               <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Probeer Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+                Probeer Gitpage <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
               </a>
             </Button>
           </div>
         </header>
 
-        {/* Article Hero */}
-        <section className="py-12 md:py-16" style={{ background: 'var(--gradient-hero)' }}>
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="flex items-center gap-3 mb-4">
-              <Badge variant="secondary">{article.category}</Badge>
-              <span className="text-sm text-muted-foreground flex items-center gap-1">
-                <Clock className="h-3 w-3" /> {article.readTime} lezen
-              </span>
-              <span className="text-sm text-muted-foreground flex items-center gap-1">
-                <Calendar className="h-3 w-3" /> {new Date(article.datePublished).toLocaleDateString('nl-NL')}
-              </span>
+        {/* Hero Section with Image */}
+        <section className="relative">
+          {/* Hero Image */}
+          <div className="w-full h-48 sm:h-64 md:h-80 overflow-hidden">
+            <img 
+              src={heroImage} 
+              alt={article.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          </div>
+          
+          {/* Hero Content */}
+          <div className="container mx-auto px-4 -mt-20 relative z-10">
+            <div className="max-w-3xl mx-auto">
+              {/* Meta info */}
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-0">
+                  {article.category}
+                </Badge>
+                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Clock className="h-3 w-3" /> {article.readTime}
+                </span>
+                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Calendar className="h-3 w-3" /> {new Date(article.datePublished).toLocaleDateString('nl-NL')}
+                </span>
+              </div>
+              
+              {/* Title */}
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+                {article.title}
+              </h1>
+              
+              {/* Description */}
+              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                {article.metaDescription}
+              </p>
             </div>
-            <div className="h-16 w-16 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mb-6">
-              <Icon className="h-8 w-8 text-primary" />
-            </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-              {article.title}
-            </h1>
-            <p className="text-xl text-muted-foreground">{article.metaDescription}</p>
           </div>
         </section>
 
-        {/* Quick Answer Box - Optimized for AI Overviews */}
-        <section className="py-8 bg-primary/5 border-y border-border">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <Card className="bg-background border-primary/20">
-              <CardContent className="p-6">
-                <h2 className="font-semibold text-lg text-foreground mb-3 flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-primary" />
+        {/* Quick Answer Box */}
+        <section className="py-8">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <Card className="border-primary/20 bg-primary/5">
+              <CardContent className="p-5">
+                <h2 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
                   Kort Antwoord
                 </h2>
-                <p className="text-foreground text-lg leading-relaxed">{article.openingAnswer}</p>
+                <p className="text-foreground leading-relaxed">{article.openingAnswer}</p>
               </CardContent>
             </Card>
           </div>
         </section>
 
         {/* Executive Summary */}
-        {article.executiveSummary && (
-          <section className="py-6 bg-muted/30">
-            <div className="container mx-auto px-4 max-w-4xl">
-              <h2 className="font-semibold text-lg text-foreground mb-4 flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-primary" />
-                Belangrijkste Bevindingen
-              </h2>
-              <ul className="space-y-2">
-                {article.executiveSummary.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-muted-foreground">
-                    <span className="text-primary font-bold mt-1">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+        {article.executiveSummary && article.executiveSummary.length > 0 && (
+          <section className="pb-8">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <div className="bg-muted/30 rounded-lg p-5">
+                <h2 className="font-semibold text-foreground mb-3 text-sm uppercase tracking-wide">
+                  Belangrijkste punten
+                </h2>
+                <ul className="space-y-2">
+                  {article.executiveSummary.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-muted-foreground text-sm">
+                      <ChevronRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </section>
         )}
 
         {/* Main Content */}
-        <article className="py-12 md:py-16">
-          <div className="container mx-auto px-4 max-w-4xl">
-            {article.sections.map((section, idx) => (
-              <section key={idx} className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">{section.heading}</h2>
-                {section.content.map((paragraph, pIdx) => (
-                  <p key={pIdx} className="text-lg text-muted-foreground mb-4 leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
-              </section>
-            ))}
+        <article className="pb-12">
+          <div className="container mx-auto px-4 max-w-3xl">
+            {/* Sections */}
+            <div className="space-y-10">
+              {article.sections.map((section, idx) => (
+                <section key={idx}>
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
+                    {section.heading}
+                  </h2>
+                  <div className="space-y-4">
+                    {section.content.map((paragraph, pIdx) => (
+                      <p key={pIdx} className="text-muted-foreground leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                  {section.calloutStat && (
+                    <div className="mt-4 p-4 border-l-2 border-primary bg-primary/5 rounded-r-lg">
+                      <p className="text-sm font-medium text-foreground">{section.calloutStat}</p>
+                    </div>
+                  )}
+                </section>
+              ))}
+            </div>
 
             {/* Tips Section */}
-            <section className="mb-12">
-              <Card className="bg-muted/50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+            <section className="mt-12">
+              <Card className="border-0 bg-muted/50">
+                <CardContent className="p-5">
+                  <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
                     <ListChecks className="h-5 w-5 text-primary" />
                     Praktische Tips
                   </h3>
-                  <ul className="space-y-4">
+                  <div className="grid gap-3">
                     {article.tips.map((tip, idx) => (
-                      <li key={idx} className="border-l-2 border-primary/30 pl-4">
-                        <p className="font-semibold text-foreground">{tip.title}</p>
-                        <p className="text-muted-foreground text-sm">{tip.description}</p>
-                      </li>
+                      <div key={idx} className="flex gap-3">
+                        <span className="text-primary font-bold text-lg">{idx + 1}</span>
+                        <div>
+                          <p className="font-medium text-foreground">{tip.title}</p>
+                          <p className="text-muted-foreground text-sm">{tip.description}</p>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </CardContent>
               </Card>
             </section>
 
-            {/* FAQ Section - Critical for AI Overviews */}
-            <section className="mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
-                <HelpCircle className="h-6 w-6 text-primary" />
+            {/* FAQ Section */}
+            <section className="mt-12">
+              <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                <HelpCircle className="h-5 w-5 text-primary" />
                 Veelgestelde Vragen
               </h2>
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {article.faq.map((item, idx) => (
-                  <Card key={idx} className="border-border">
-                    <CardContent className="p-6">
-                      <h3 className="font-semibold text-lg text-foreground mb-2">{item.question}</h3>
+                  <details key={idx} className="group border border-border rounded-lg">
+                    <summary className="flex items-center justify-between cursor-pointer p-4 font-medium text-foreground hover:bg-muted/30 rounded-lg transition-colors">
+                      {item.question}
+                      <ChevronRight className="h-4 w-4 text-muted-foreground group-open:rotate-90 transition-transform" />
+                    </summary>
+                    <div className="px-4 pb-4">
                       <p className="text-muted-foreground">{item.answer}</p>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </details>
                 ))}
               </div>
             </section>
 
             {/* CTA Section */}
-            <section className="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
+            <section className="mt-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl p-6 sm:p-8 text-center">
+              <h2 className="text-xl sm:text-2xl font-bold text-primary-foreground mb-3">
                 Klaar om te beginnen?
               </h2>
-              <p className="text-primary-foreground/90 mb-6 max-w-xl mx-auto">
-                Met Gitpage.site maak je in minuten professionele websites. Geen technische kennis nodig, geen maandelijkse abonnementen.
+              <p className="text-primary-foreground/90 mb-5 text-sm sm:text-base max-w-lg mx-auto">
+                Met Gitpage.site maak je in minuten een professionele website. Geen technische kennis nodig.
               </p>
-              <Button asChild size="lg" variant="secondary" className="text-foreground">
+              <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold">
                 <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Start nu met Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+                  Start nu gratis <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             </section>
@@ -223,15 +301,15 @@ const BlogArticle = () => {
         </article>
 
         {/* Footer */}
-        <footer className="py-8 border-t border-border">
+        <footer className="py-6 border-t border-border/50">
           <div className="container mx-auto px-4 text-center">
-            <p className="text-sm text-muted-foreground mb-4">
-              Deze pagina bevat affiliate links naar Gitpage.site. Wij ontvangen een commissie bij aankoop via onze link.
+            <p className="text-xs text-muted-foreground mb-3">
+              Deze pagina bevat affiliate links. Bij aankoop ontvangen wij een commissie.
             </p>
             <div className="flex justify-center gap-4">
-              <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</Link>
-              <Link to="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</Link>
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:text-primary/80 transition-colors">Gitpage.site</a>
+              <Link to="/" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Home</Link>
+              <Link to="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Blog</Link>
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors">Gitpage.site</a>
             </div>
           </div>
         </footer>
