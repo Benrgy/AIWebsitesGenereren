@@ -26,7 +26,7 @@ const Blog = () => {
     "blogPost": blogArticles.map(article => ({
       "@type": "BlogPosting",
       "headline": article.title,
-      "description": article.description,
+      "description": article.metaDescription,
       "url": `https://site-wave-ai.lovable.app/blog/${article.slug}`,
       "datePublished": article.datePublished,
       "dateModified": article.dateModified,
@@ -187,13 +187,13 @@ const Blog = () => {
                           <CardTitle className="text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2">
                             {article.title}
                           </CardTitle>
-                          <CardDescription className="line-clamp-2">
-                            {article.description}
+                        <CardDescription className="line-clamp-2">
+                            {article.metaDescription}
                           </CardDescription>
                         </CardHeader>
                         <CardContent>
                           <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-                            {article.shortAnswer}
+                            {article.openingAnswer}
                           </p>
                           <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             Lees meer <ArrowRight className="h-4 w-4" />
