@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight } from "lucide-react";
-import { getArticleBySlug, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
+import { getArticleBySlug, blogArticles, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 // Import blog images
 import seoGoogleSearch from "@/assets/blog/seo-google-search.jpg";
@@ -297,6 +297,55 @@ const BlogArticle = () => {
                 </a>
               </Button>
             </section>
+
+            {/* Related Articles Section */}
+            {(() => {
+              const relatedArticles = blogArticles
+                .filter(a => a.category === article.category && a.slug !== article.slug)
+                .slice(0, 3);
+              
+              if (relatedArticles.length === 0) return null;
+              
+              return (
+                <section className="mt-12">
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6">
+                    Gerelateerde Artikelen
+                  </h2>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {relatedArticles.map((relatedArticle) => (
+                      <Link 
+                        key={relatedArticle.id} 
+                        to={`/blog/${relatedArticle.slug}`}
+                        className="group"
+                      >
+                        <Card className="h-full hover:shadow-md hover:border-primary/30 transition-all overflow-hidden">
+                          <div className="relative h-28 overflow-hidden">
+                            <img 
+                              src={articleImages[relatedArticle.slug] || seoGoogleSearch} 
+                              alt={relatedArticle.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+                            <Badge variant="secondary" className="absolute bottom-2 left-2 text-xs bg-background/90 backdrop-blur-sm">
+                              {relatedArticle.category}
+                            </Badge>
+                          </div>
+                          <CardContent className="p-3">
+                            <h3 className="font-medium text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                              {relatedArticle.title}
+                            </h3>
+                            <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                              <Clock className="h-3 w-3" /> {relatedArticle.readTime}
+                            </p>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              );
+            })()}
           </div>
         </article>
 
