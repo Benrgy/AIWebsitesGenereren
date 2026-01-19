@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight, List } from "lucide-react";
 import { getArticleBySlug, blogArticles, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 // Import blog images
@@ -213,13 +213,71 @@ const BlogArticle = () => {
           </section>
         )}
 
+        {/* Table of Contents - Only show for articles with 3+ sections */}
+        {article.sections.length >= 3 && (
+          <section className="pb-8">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <Card className="border-border/50">
+                <CardContent className="p-5">
+                  <h2 className="font-semibold text-foreground mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+                    <List className="h-4 w-4 text-primary" />
+                    Inhoudsopgave
+                  </h2>
+                  <nav>
+                    <ol className="space-y-2">
+                      {article.sections.map((section, idx) => {
+                        const sectionId = `sectie-${idx + 1}`;
+                        return (
+                          <li key={idx}>
+                            <a 
+                              href={`#${sectionId}`}
+                              className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                            >
+                              <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
+                                {idx + 1}.
+                              </span>
+                              <span className="text-sm">{section.heading}</span>
+                            </a>
+                          </li>
+                        );
+                      })}
+                      <li>
+                        <a 
+                          href="#praktische-tips"
+                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                        >
+                          <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
+                            {article.sections.length + 1}.
+                          </span>
+                          <span className="text-sm">Praktische Tips</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="#veelgestelde-vragen"
+                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                        >
+                          <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
+                            {article.sections.length + 2}.
+                          </span>
+                          <span className="text-sm">Veelgestelde Vragen</span>
+                        </a>
+                      </li>
+                    </ol>
+                  </nav>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+        )}
+
         {/* Main Content */}
         <article className="pb-12">
           <div className="container mx-auto px-4 max-w-3xl">
             {/* Sections */}
             <div className="space-y-10">
               {article.sections.map((section, idx) => (
-                <section key={idx}>
+                <section key={idx} id={`sectie-${idx + 1}`} className="scroll-mt-20">
                   <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
                     {section.heading}
                   </h2>
@@ -240,7 +298,7 @@ const BlogArticle = () => {
             </div>
 
             {/* Tips Section */}
-            <section className="mt-12">
+            <section id="praktische-tips" className="mt-12 scroll-mt-20">
               <Card className="border-0 bg-muted/50">
                 <CardContent className="p-5">
                   <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
@@ -263,7 +321,7 @@ const BlogArticle = () => {
             </section>
 
             {/* FAQ Section */}
-            <section className="mt-12">
+            <section id="veelgestelde-vragen" className="mt-12 scroll-mt-20">
               <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
                 <HelpCircle className="h-5 w-5 text-primary" />
                 Veelgestelde Vragen
