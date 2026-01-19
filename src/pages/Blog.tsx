@@ -6,6 +6,36 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, ExternalLink, Rocket, Globe, Zap, Target, BookOpen, Clock, ArrowRight } from "lucide-react";
 import { blogArticles, AFFILIATE_LINK } from "@/data/blogArticles";
 
+// Import article images
+import seoGoogleSearch from "@/assets/blog/seo-google-search.jpg";
+import websiteBeginners from "@/assets/blog/website-beginners.jpg";
+import websiteCosts from "@/assets/blog/website-costs.jpg";
+import wordpressVsAi from "@/assets/blog/wordpress-vs-ai.jpg";
+import aiWebsiteGenerator from "@/assets/blog/ai-website-generator.jpg";
+import localShopWebsite from "@/assets/blog/local-shop-website.jpg";
+import zzpFreelancer from "@/assets/blog/zzp-freelancer-website.jpg";
+import photographerPortfolio from "@/assets/blog/photographer-portfolio.jpg";
+import githubHosting from "@/assets/blog/github-hosting.jpg";
+import googleFirstPage from "@/assets/blog/google-first-page.jpg";
+import localSeoCities from "@/assets/blog/local-seo-cities.jpg";
+import startupValidation from "@/assets/blog/startup-validation.jpg";
+
+// Map slugs to images
+const articleImages: Record<string, string> = {
+  "react-website-niet-gevonden-google": seoGoogleSearch,
+  "website-bouwen-zonder-technische-kennis": websiteBeginners,
+  "hoeveel-kost-website-laten-maken": websiteCosts,
+  "wordpress-vs-statische-html-website": wordpressVsAi,
+  "ai-website-generator-hoe-werkt-het": aiWebsiteGenerator,
+  "lokale-winkel-website-nodig": localShopWebsite,
+  "zzp-freelancer-website-portfolio": zzpFreelancer,
+  "fotograaf-portfolio-website-maken": photographerPortfolio,
+  "website-gratis-hosten-github-pages": githubHosting,
+  "eerste-pagina-google-komen": googleFirstPage,
+  "lokale-seo-meerdere-steden": localSeoCities,
+  "idee-valideren-landingspagina": startupValidation,
+};
+
 const Blog = () => {
   // Group articles by category
   const categories = [...new Set(blogArticles.map(article => article.category))];
@@ -170,31 +200,35 @@ const Blog = () => {
                   .filter(article => article.category === category)
                   .map(article => (
                     <Link key={article.id} to={`/blog/${article.slug}`}>
-                      <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer group">
-                        <CardHeader>
-                          <div className="flex items-center gap-2 mb-3">
-                            <Badge variant="outline" className="text-xs">
+                      <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer group overflow-hidden">
+                        {/* Thumbnail Image */}
+                        <div className="relative h-40 overflow-hidden">
+                          <img 
+                            src={articleImages[article.slug] || seoGoogleSearch} 
+                            alt={article.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                          <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
+                            <Badge variant="secondary" className="text-xs bg-background/90 backdrop-blur-sm">
                               {article.category}
                             </Badge>
-                            <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <span className="text-xs text-muted-foreground bg-background/90 backdrop-blur-sm px-2 py-0.5 rounded-full flex items-center gap-1">
                               <Clock className="h-3 w-3" />
                               {article.readTime}
                             </span>
                           </div>
-                          <div className="h-12 w-12 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mb-4 group-hover:from-primary/20 group-hover:to-secondary/20 transition-colors">
-                            <article.icon className="h-6 w-6 text-primary" />
-                          </div>
+                        </div>
+                        <CardHeader className="pt-4">
                           <CardTitle className="text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2">
                             {article.title}
                           </CardTitle>
-                        <CardDescription className="line-clamp-2">
+                          <CardDescription className="line-clamp-2">
                             {article.metaDescription}
                           </CardDescription>
                         </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-                            {article.openingAnswer}
-                          </p>
+                        <CardContent className="pt-0">
                           <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             Lees meer <ArrowRight className="h-4 w-4" />
                           </span>
