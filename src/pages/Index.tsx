@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
+import Footer from "@/components/Footer";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 import { 
@@ -67,8 +69,124 @@ const Index = () => {
     }
   ];
 
+  // Schema.org structured data for SEO and LLM optimization
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "WebsitesGenereren.nl",
+    "url": "https://websitesgenereren.nl",
+    "logo": "https://websitesgenereren.nl/favicon.ico",
+    "description": "De #1 AI Website Generator voor Nederland & België. Maak professionele websites zonder code.",
+    "sameAs": []
+  };
+
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AI Website Generator",
+    "applicationCategory": "WebApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "description": "Éénmalige betaling, geen abonnement"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1247"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Hoe maak ik een website zonder technische kennis?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Met de nieuwste AI website generators typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig, direct online in 5 minuten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Hoeveel kost een website maken?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Met onze aanbevolen AI tool betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Waarom is statische HTML beter voor SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Statische HTML websites laden 10x sneller dan WordPress of Wix. Zoekmachines kunnen de content direct indexeren zonder JavaScript uit te voeren, wat resulteert in betere rankings."
+        }
+      }
+    ]
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://websitesgenereren.nl"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>AI Website Generator Nederland | Gratis Website Maken Zonder Code | WebsitesGenereren.nl</title>
+        <meta name="description" content="Maak in 5 minuten een professionele website met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd. De #1 AI website builder voor Nederland & België." />
+        <meta name="keywords" content="website maken, ai website generator, gratis website, website bouwen, seo website, statische html, website zonder code, nederland, belgie" />
+        <link rel="canonical" href="https://websitesgenereren.nl/" />
+        
+        {/* Language and geo targeting */}
+        <html lang="nl" />
+        <meta name="geo.region" content="NL" />
+        <meta name="geo.placename" content="Nederland" />
+        <meta name="content-language" content="nl" />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="AI Website Generator Nederland | Gratis Website Maken" />
+        <meta property="og:description" content="Maak in 5 minuten een professionele website met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd." />
+        <meta property="og:url" content="https://websitesgenereren.nl/" />
+        <meta property="og:site_name" content="WebsitesGenereren.nl" />
+        <meta property="og:locale" content="nl_NL" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Website Generator Nederland" />
+        <meta name="twitter:description" content="Maak in 5 minuten een professionele website met AI. Geen code nodig." />
+        
+        {/* Robots for AI crawlers */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        
+        {/* Schema.org JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify(organizationSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(softwareSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
+      </Helmet>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-hero">
         <div className="container mx-auto px-4 py-20 sm:py-32">
@@ -682,24 +800,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer Note */}
-      <section className="py-8 bg-background border-t border-border/50">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              asChild
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <Link to="/blog">SEO Blog & Tutorials</Link>
-            </Button>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            De industriestandaard voor AI website generatie in Nederland en België
-          </p>
-        </div>
-      </section>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

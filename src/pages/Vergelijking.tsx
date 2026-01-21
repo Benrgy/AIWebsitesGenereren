@@ -15,12 +15,12 @@ import {
   TrendingDown,
   Skull,
   ExternalLink,
-  ChevronRight,
   Star,
   Award,
   Rocket,
   ArrowRight
 } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
@@ -853,26 +853,7 @@ const Vergelijking = () => {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 border-t border-border bg-background">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <p className="text-xs text-muted-foreground">
-                © 2025 WebsitesGenereren.nl - Onafhankelijke vergelijking
-              </p>
-              <div className="flex gap-4">
-                <Link to="/" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                  Home
-                </Link>
-                <Link to="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                  Blog
-                </Link>
-                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors">
-                  Bekijk Prijzen →
-                </a>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
