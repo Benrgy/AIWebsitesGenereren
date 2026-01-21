@@ -130,7 +130,7 @@ const BlogArticle = () => {
             </Link>
             <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
               <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Probeer Gitpage <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                Start Nu Gratis <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
               </a>
             </Button>
           </div>
@@ -347,7 +347,7 @@ const BlogArticle = () => {
                 Klaar om te beginnen?
               </h2>
               <p className="text-primary-foreground/90 mb-5 text-sm sm:text-base max-w-lg mx-auto">
-                Met Gitpage.site maak je in minuten een professionele website. Geen technische kennis nodig.
+                Met de #1 AI website generator maak je in minuten een professionele website. Geen technische kennis nodig.
               </p>
               <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold">
                 <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
@@ -416,7 +416,7 @@ const BlogArticle = () => {
             <div className="flex justify-center gap-4">
               <Link to="/" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Home</Link>
               <Link to="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Blog</Link>
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors">Gitpage.site</a>
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors">Start Gratis →</a>
             </div>
           </div>
         </footer>
