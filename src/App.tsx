@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
+import Vergelijking from "./pages/Vergelijking";
 import NotFound from "./pages/NotFound";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/dashboard" element={<AffiliateRedirect />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
+            <Route path="/vergelijking" element={<Vergelijking />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
