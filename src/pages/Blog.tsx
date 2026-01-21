@@ -77,7 +77,7 @@ const Blog = () => {
         "name": "Hoe maak ik een website zonder technische kennis?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Met AI-tools zoals Gitpage.site typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig."
+          "text": "Met de nieuwste AI website generators typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig."
         }
       },
       {
@@ -93,7 +93,7 @@ const Blog = () => {
         "name": "Hoeveel kost een website maken?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Met Gitpage.site betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
+          "text": "Met onze aanbevolen AI tool betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
         }
       }
     ]
@@ -136,7 +136,7 @@ const Blog = () => {
           </Link>
           <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
             <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-              Probeer Gitpage.site <ExternalLink className="ml-2 h-4 w-4" />
+              Probeer de #1 AI Tool <ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
@@ -174,7 +174,7 @@ const Blog = () => {
               💡 Snel Antwoord: Hoe Maak Je Een Website?
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
-              Met AI website generators zoals <strong>Gitpage.site</strong> maak je in 5 minuten een professionele website. 
+              Met <strong>de beste AI website generator</strong> maak je in 5 minuten een professionele website. 
               Je typt wat je wilt, de AI maakt het. Geen code nodig, geen abonnement, direct online.
             </p>
             <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
@@ -303,7 +303,7 @@ const Blog = () => {
               Blog
             </Link>
             <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Gitpage.site →
+              Start Nu Gratis →
             </a>
           </div>
         </div>
