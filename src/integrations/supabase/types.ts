@@ -18,21 +18,18 @@ export type Database = {
         Row: {
           created_at: string
           email: string
-          gitpage_api_key: string | null
           id: string
           updated_at: string
         }
         Insert: {
           created_at?: string
           email: string
-          gitpage_api_key?: string | null
           id: string
           updated_at?: string
         }
         Update: {
           created_at?: string
           email?: string
-          gitpage_api_key?: string | null
           id?: string
           updated_at?: string
         }
