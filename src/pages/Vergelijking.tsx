@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
+const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
 
 const Vergelijking = () => {
   return (
@@ -281,7 +282,7 @@ const Vergelijking = () => {
                     </td>
                   </tr>
                   <tr className="border-b border-border hover:bg-muted/30 transition-colors">
-                    <td className="py-4 px-4 font-medium">Maandelijkse Kosten</td>
+                    <td className="py-4 px-4 font-medium">Kosten Model</td>
                     <td className="py-4 px-4 text-center">
                       <span className="text-destructive font-medium">€15-50/mnd</span>
                     </td>
@@ -292,7 +293,7 @@ const Vergelijking = () => {
                       <span className="text-destructive font-medium">€18-40/mnd</span>
                     </td>
                     <td className="py-4 px-4 text-center bg-primary/5">
-                      <span className="font-bold text-primary">€0/mnd</span>
+                      <span className="font-bold text-primary">Éénmalig</span>
                     </td>
                   </tr>
                   <tr className="border-b border-border hover:bg-muted/30 transition-colors">
@@ -403,8 +404,8 @@ const Vergelijking = () => {
                     <span className="font-semibold text-primary">5 minuten</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Maandelijkse Kosten</span>
-                    <span className="font-bold text-primary">€0/mnd</span>
+                    <span className="text-muted-foreground">Kosten Model</span>
+                    <span className="font-bold text-primary">Éénmalig</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground">SEO Score</span>
@@ -421,7 +422,7 @@ const Vergelijking = () => {
                 </div>
                 <Button asChild className="w-full mt-6 bg-primary hover:bg-primary/90">
                   <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                    Probeer Gratis <ArrowRight className="ml-2 h-4 w-4" />
+                    Bekijk Prijzen <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
               </div>
@@ -521,21 +522,21 @@ const Vergelijking = () => {
                 <div className="relative h-48 mb-4">
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-primary to-primary/60 rounded-t-lg" style={{ height: '8%' }} />
                 </div>
-                <div className="text-3xl font-bold text-primary mb-1">€15-45</div>
-                <div className="text-sm text-muted-foreground">Eenmalig</div>
+                <div className="text-3xl font-bold text-primary mb-1">Éénmalig</div>
+                <div className="text-sm text-muted-foreground">Geen abonnement</div>
                 <div className="text-xs text-primary/80 mt-2">
-                  Alles inbegrepen, geen verborgen kosten
+                  Betaal 1x, bouw onbeperkt websites
                 </div>
               </div>
             </div>
 
             <div className="text-center mt-8">
               <p className="text-lg text-foreground mb-4">
-                <strong>Bespaar tot €2.100+</strong> over 3 jaar
+                <strong>Bespaar tot €2.100+</strong> over 3 jaar met éénmalige investering
               </p>
               <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
                 <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Start Zonder Abonnement <ArrowRight className="ml-2 h-5 w-5" />
+                  Bekijk Éénmalige Prijzen <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
             </div>
@@ -666,6 +667,163 @@ const Vergelijking = () => {
           </div>
         </section>
 
+        {/* Pricing Section */}
+        <section className="py-16 bg-muted/30">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+                <Star className="h-4 w-4" />
+                Éénmalige Betaling - Geen Abonnementen
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+                Kies Jouw Pakket
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Betaal één keer, bouw onbeperkt websites. Geen maandelijkse kosten, geen verrassingen.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {/* Basic Package */}
+              <div className="bg-background rounded-2xl p-8 border border-border shadow-lg hover:shadow-xl transition-shadow">
+                <h3 className="text-xl font-bold text-foreground mb-2">Basis Pakket</h3>
+                <p className="text-muted-foreground text-sm mb-6">AI Agent voor websites bouwen</p>
+                
+                <div className="mb-6">
+                  <span className="text-3xl font-bold text-foreground">Éénmalige</span>
+                  <span className="text-muted-foreground ml-2">investering</span>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  {[
+                    "25 websites per maand genereren",
+                    "In-App AI Page Editor",
+                    "AI Design Systeem",
+                    "Auto-genereer Blog Listing",
+                    "Auto-genereer SEO Blog",
+                    "Auto-genereer Beleid Pagina's",
+                    "Auto-genereer TOS Pagina",
+                    "Direct Online Publiceren",
+                    "100% Gratis Website Hosting",
+                    "100% Code Eigendom",
+                    "Geen Watermerken of Branding",
+                    "Eigen Domein Toevoegen"
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-sm">
+                      <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button asChild className="w-full" variant="outline">
+                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                    Bekijk Prijs <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+
+              {/* Pro Package */}
+              <div className="bg-primary/5 rounded-2xl p-8 border-2 border-primary shadow-lg hover:shadow-xl transition-shadow relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-1 rounded-full">POPULAIR</span>
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-2">Pro Pakket</h3>
+                <p className="text-muted-foreground text-sm mb-6">AI Agent voor bouwen op schaal</p>
+                
+                <div className="mb-6">
+                  <span className="text-3xl font-bold text-primary">Éénmalige</span>
+                  <span className="text-muted-foreground ml-2">investering</span>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  {[
+                    "Alles van Basis Pakket PLUS:",
+                    "Onbeperkt websites genereren",
+                    "Geïntegreerd Contactformulier",
+                    "GitHub en GitLab Integratie",
+                    "Code Editor toegang",
+                    "1-Click Sitemap.xml",
+                    "1-Click llms.txt (AI Visibility)",
+                    "1-Click robots.txt",
+                    "1-Click Schema Markup",
+                    "API Toegang inbegrepen",
+                    "Meerdere Taal Opties",
+                    "Nieuwe Features Aanvragen",
+                    "Prioriteit Support"
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-sm">
+                      <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                      <span className={idx === 0 ? "text-foreground font-medium" : "text-muted-foreground"}>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button asChild className="w-full bg-primary hover:bg-primary/90">
+                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                    Bekijk Prijs <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+
+            <div className="text-center mt-8">
+              <p className="text-sm text-muted-foreground">
+                Betaal één keer. Bouw onbeperkt websites!
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Free Alternative - Skool Community */}
+        <section className="py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="bg-gradient-to-br from-secondary/10 to-primary/10 rounded-2xl p-8 sm:p-12 border border-primary/20 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 text-secondary-foreground text-sm font-medium mb-6">
+                <Rocket className="h-4 w-4" />
+                Gratis Alternatief
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+                Wil Je Gratis Beginnen?
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+                Word lid van onze exclusieve community en krijg <strong className="text-foreground">gratis toegang</strong> tot 
+                deze AI website tool én nog veel meer premium tools die anderen honderden euro's kosten.
+              </p>
+              
+              <div className="grid sm:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
+                {[
+                  { icon: <Zap className="h-5 w-5" />, text: "Gratis AI Tools" },
+                  { icon: <Shield className="h-5 w-5" />, text: "Exclusieve Community" },
+                  { icon: <Star className="h-5 w-5" />, text: "Direct Toegang" }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-primary">{item.icon}</span>
+                    {item.text}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer">
+                    Word Gratis Lid <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                    Direct Kopen <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+
+              <p className="text-xs text-muted-foreground mt-6">
+                Als community-lid krijg je dezelfde tools gratis die anderen apart moeten kopen
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA */}
         <section className="py-20 bg-gradient-to-br from-primary to-secondary text-primary-foreground">
           <div className="max-w-4xl mx-auto px-4 text-center">
@@ -673,18 +831,23 @@ const Vergelijking = () => {
               Klaar Om De Juiste Keuze Te Maken?
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-              Duizenden ondernemers gingen je voor. Stop met betalen voor abonnementen, 
-              stop met beveiligingszorgen. <strong>Start vandaag nog gratis.</strong>
+              Duizenden ondernemers gingen je voor. Stop met maandelijkse abonnementen, 
+              investeer éénmalig in jouw online succes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold shadow-lg">
                 <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Start Gratis - Geen Creditcard <ArrowRight className="ml-2 h-5 w-5" />
+                  Bekijk Éénmalige Prijzen <ArrowRight className="ml-2 h-5 w-5" />
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer">
+                  Of Word Gratis Lid <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             </div>
             <p className="text-sm text-primary-foreground/70 mt-6">
-              ✓ Geen abonnement &nbsp; ✓ Geen technische kennis nodig &nbsp; ✓ Website in 5 minuten
+              ✓ Éénmalige betaling &nbsp; ✓ Geen technische kennis nodig &nbsp; ✓ Website in 5 minuten
             </p>
           </div>
         </section>
@@ -704,7 +867,7 @@ const Vergelijking = () => {
                   Blog
                 </Link>
                 <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors">
-                  Start Gratis →
+                  Bekijk Prijzen →
                 </a>
               </div>
             </div>
