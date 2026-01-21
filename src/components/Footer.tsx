@@ -71,12 +71,21 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact/Legal */}
+          {/* Legal */}
           <div>
-            <h3 className="font-semibold text-foreground mb-3 text-sm">Over Ons</h3>
-            <p className="text-sm text-muted-foreground">
-              Onafhankelijke reviews en vergelijkingen van website builders.
-            </p>
+            <h3 className="font-semibold text-foreground mb-3 text-sm">Juridisch</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Privacybeleid
+                </Link>
+              </li>
+              <li>
+                <Link to="/voorwaarden" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Algemene Voorwaarden
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
