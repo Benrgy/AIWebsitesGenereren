@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import Vergelijking from "./pages/Vergelijking";
+import Privacy from "./pages/Privacy";
+import Voorwaarden from "./pages/Voorwaarden";
 import NotFound from "./pages/NotFound";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
             <Route path="/vergelijking" element={<Vergelijking />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/voorwaarden" element={<Voorwaarden />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
