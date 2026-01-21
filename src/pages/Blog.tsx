@@ -286,7 +286,7 @@ const Blog = () => {
               Blog
             </Link>
             <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Start Nu Gratis →
+              Start Nu Het Nog Kan →
             </a>
           </div>
         </div>
