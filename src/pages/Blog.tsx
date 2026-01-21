@@ -33,9 +33,8 @@ const articleImages: Record<string, string> = {
   "website-gratis-hosten-github-pages": githubHosting,
   "eerste-pagina-google-komen": googleFirstPage,
   "lokale-seo-meerdere-steden": localSeoCities,
-  "idee-valideren-landingspagina": startupValidation,
+  "idee-valideren-landingspagina": startupValidation
 };
-
 const Blog = () => {
   // Group articles by category
   const categories = [...new Set(blogArticles.map(article => article.category))];
@@ -71,36 +70,30 @@ const Blog = () => {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Hoe maak ik een website zonder technische kennis?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Met de nieuwste AI website generators typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Waarom laadt mijn website zo traag?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "WordPress en andere CMS systemen zijn traag door plugins en databases. Statische HTML websites laden 10x sneller."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Hoeveel kost een website maken?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Met onze aanbevolen AI tool betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
-        }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Hoe maak ik een website zonder technische kennis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Met de nieuwste AI website generators typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig."
       }
-    ]
+    }, {
+      "@type": "Question",
+      "name": "Waarom laadt mijn website zo traag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WordPress en andere CMS systemen zijn traag door plugins en databases. Statische HTML websites laden 10x sneller."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Hoeveel kost een website maken?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Met onze aanbevolen AI tool betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
+      }
+    }]
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Helmet>
         <title>SEO Blog & Tutorials | Gratis Website Tips | AI Website Generator</title>
         <meta name="description" content="Leer hoe je gratis of goedkoop een professionele website maakt. Tips voor SEO, statische HTML, en website generatie met AI. Perfect voor beginners in Nederland en België." />
@@ -143,7 +136,9 @@ const Blog = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 md:py-24" style={{ background: 'var(--gradient-hero)' }}>
+      <section className="py-16 md:py-24" style={{
+      background: 'var(--gradient-hero)'
+    }}>
         <div className="container mx-auto px-4 text-center">
           <Badge variant="secondary" className="mb-4">
             <BookOpen className="h-3 w-3 mr-1" />
@@ -189,26 +184,17 @@ const Blog = () => {
       {/* Articles Grid by Category */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          {categories.map(category => (
-            <div key={category} className="mb-16 last:mb-0">
+          {categories.map(category => <div key={category} className="mb-16 last:mb-0">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 flex items-center gap-3">
                 <span className="h-8 w-1 bg-gradient-to-b from-primary to-secondary rounded-full" />
                 {category}
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {blogArticles
-                  .filter(article => article.category === category)
-                  .map(article => (
-                    <Link key={article.id} to={`/blog/${article.slug}`}>
+                {blogArticles.filter(article => article.category === category).map(article => <Link key={article.id} to={`/blog/${article.slug}`}>
                       <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer group overflow-hidden">
                         {/* Thumbnail Image */}
                         <div className="relative h-40 overflow-hidden">
-                          <img 
-                            src={articleImages[article.slug] || seoGoogleSearch} 
-                            alt={article.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                          />
+                          <img src={articleImages[article.slug] || seoGoogleSearch} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                           <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
                             <Badge variant="secondary" className="text-xs bg-background/90 backdrop-blur-sm">
@@ -234,11 +220,9 @@ const Blog = () => {
                           </span>
                         </CardContent>
                       </Card>
-                    </Link>
-                  ))}
+                    </Link>)}
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </section>
 
@@ -282,8 +266,7 @@ const Blog = () => {
             </div>
           </div>
           <Button asChild size="lg" variant="secondary" className="text-foreground">
-            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-              Start Nu Gratis <ExternalLink className="ml-2 h-4 w-4" />
+            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">Start Nu Het Nog Kan!<ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
@@ -308,8 +291,6 @@ const Blog = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Blog;
