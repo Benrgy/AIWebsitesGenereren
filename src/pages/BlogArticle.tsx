@@ -6,6 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight, List } from "lucide-react";
 import { getArticleBySlug, blogArticles, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
+const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
+
 // Import blog images
 import seoGoogleSearch from "@/assets/blog/seo-google-search.jpg";
 import websiteBeginners from "@/assets/blog/website-beginners.jpg";
@@ -130,7 +132,7 @@ const BlogArticle = () => {
             </Link>
             <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
               <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Start Nu Gratis <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                Start Vandaag Nog <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
               </a>
             </Button>
           </div>
@@ -351,7 +353,7 @@ const BlogArticle = () => {
               </p>
               <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold">
                 <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Start nu gratis <ExternalLink className="ml-2 h-4 w-4" />
+                  Start Vandaag Nog <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             </section>
@@ -408,15 +410,34 @@ const BlogArticle = () => {
         </article>
 
         {/* Footer */}
-        <footer className="py-6 border-t border-border/50">
+        <footer className="py-8 border-t border-border/50">
           <div className="container mx-auto px-4 text-center">
+            {/* Skool Community CTA */}
+            <div className="mb-6 p-4 bg-muted/30 rounded-lg max-w-md mx-auto">
+              <p className="text-sm font-medium text-foreground mb-2">
+                🎓 Word lid van onze community
+              </p>
+              <p className="text-xs text-muted-foreground mb-3">
+                Krijg gratis toegang tot premium tools en leer van andere ondernemers.
+              </p>
+              <a 
+                href={SKOOL_LINK} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                Bekijk de Skool Community <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+            
             <p className="text-xs text-muted-foreground mb-3">
               Deze pagina bevat affiliate links. Bij aankoop ontvangen wij een commissie.
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <Link to="/" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Home</Link>
               <Link to="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Blog</Link>
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors">Start Gratis →</a>
+              <Link to="/vergelijking" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Vergelijking</Link>
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors">Start Vandaag Nog →</a>
             </div>
           </div>
         </footer>
