@@ -1,40 +1,16 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { 
-  Check, 
-  X, 
-  AlertTriangle, 
-  Shield, 
-  Zap, 
-  DollarSign, 
-  Clock, 
-  Lock,
-  Bug,
-  RefreshCcw,
-  TrendingDown,
-  Skull,
-  ExternalLink,
-  Star,
-  Award,
-  Rocket,
-  ArrowRight
-} from "lucide-react";
+import { Check, X, AlertTriangle, Shield, Zap, DollarSign, Clock, Lock, Bug, RefreshCcw, TrendingDown, Skull, ExternalLink, Star, Award, Rocket, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
-
 const Vergelijking = () => {
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Website Builders Vergelijken 2025 | Wix vs Squarespace vs WordPress vs AI</title>
-        <meta 
-          name="description" 
-          content="Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators. Ontdek welke optie het beste is voor jouw situatie en budget." 
-        />
+        <meta name="description" content="Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators. Ontdek welke optie het beste is voor jouw situatie en budget." />
         <meta name="keywords" content="wix vergelijken, squarespace review, wordpress problemen, beste website builder, ai website generator" />
         <link rel="canonical" href="https://websitesgenereren.nl/vergelijking" />
         
@@ -425,12 +401,25 @@ const Vergelijking = () => {
 
               {/* Competitors */}
               <div className="grid gap-4">
-                {[
-                  { name: "WordPress", setup: "2-4 weken", cost: "€15-50/mnd", seo: "65/100", security: "Hoog risico" },
-                  { name: "Wix", setup: "3-5 dagen", cost: "€18-45/mnd", seo: "55/100", security: "Gemiddeld" },
-                  { name: "Squarespace", setup: "3-5 dagen", cost: "€18-40/mnd", seo: "60/100", security: "Gemiddeld" }
-                ].map((competitor) => (
-                  <div key={competitor.name} className="bg-muted/30 rounded-xl p-4 border border-border">
+                {[{
+                name: "WordPress",
+                setup: "2-4 weken",
+                cost: "€15-50/mnd",
+                seo: "65/100",
+                security: "Hoog risico"
+              }, {
+                name: "Wix",
+                setup: "3-5 dagen",
+                cost: "€18-45/mnd",
+                seo: "55/100",
+                security: "Gemiddeld"
+              }, {
+                name: "Squarespace",
+                setup: "3-5 dagen",
+                cost: "€18-40/mnd",
+                seo: "60/100",
+                security: "Gemiddeld"
+              }].map(competitor => <div key={competitor.name} className="bg-muted/30 rounded-xl p-4 border border-border">
                     <h3 className="font-semibold text-foreground mb-3">{competitor.name}</h3>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
@@ -450,8 +439,7 @@ const Vergelijking = () => {
                         <span className="text-destructive">{competitor.security}</span>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
           </div>
@@ -474,7 +462,9 @@ const Vergelijking = () => {
               <div className="bg-background rounded-xl p-6 border border-border text-center">
                 <h3 className="font-semibold text-foreground mb-4">WordPress</h3>
                 <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{ height: '85%' }} />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{
+                  height: '85%'
+                }} />
                 </div>
                 <div className="text-3xl font-bold text-destructive mb-1">€2.160+</div>
                 <div className="text-sm text-muted-foreground">Over 3 jaar</div>
@@ -487,7 +477,9 @@ const Vergelijking = () => {
               <div className="bg-background rounded-xl p-6 border border-border text-center">
                 <h3 className="font-semibold text-foreground mb-4">Wix Premium</h3>
                 <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{ height: '70%' }} />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{
+                  height: '70%'
+                }} />
                 </div>
                 <div className="text-3xl font-bold text-destructive mb-1">€1.296+</div>
                 <div className="text-sm text-muted-foreground">Over 3 jaar</div>
@@ -500,7 +492,9 @@ const Vergelijking = () => {
               <div className="bg-background rounded-xl p-6 border border-border text-center">
                 <h3 className="font-semibold text-foreground mb-4">Squarespace</h3>
                 <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{ height: '65%' }} />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{
+                  height: '65%'
+                }} />
                 </div>
                 <div className="text-3xl font-bold text-destructive mb-1">€1.080+</div>
                 <div className="text-sm text-muted-foreground">Over 3 jaar</div>
@@ -516,7 +510,9 @@ const Vergelijking = () => {
                 </div>
                 <h3 className="font-semibold text-primary mb-4">Onze Keuze</h3>
                 <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-primary to-primary/60 rounded-t-lg" style={{ height: '8%' }} />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-primary to-primary/60 rounded-t-lg" style={{
+                  height: '8%'
+                }} />
                 </div>
                 <div className="text-3xl font-bold text-primary mb-1">Éénmalig</div>
                 <div className="text-sm text-muted-foreground">Geen abonnement</div>
@@ -554,13 +550,27 @@ const Vergelijking = () => {
 
             <div className="space-y-6">
               {/* Speed Bars */}
-              {[
-                { name: "Onze #1 Keuze (Statische HTML)", time: 0.4, color: "bg-primary", winner: true },
-                { name: "WordPress (Geoptimaliseerd)", time: 2.1, color: "bg-yellow-500", winner: false },
-                { name: "Squarespace", time: 3.8, color: "bg-destructive", winner: false },
-                { name: "Wix", time: 5.2, color: "bg-destructive", winner: false },
-              ].map((item) => (
-                <div key={item.name} className="space-y-2">
+              {[{
+              name: "Onze #1 Keuze (Statische HTML)",
+              time: 0.4,
+              color: "bg-primary",
+              winner: true
+            }, {
+              name: "WordPress (Geoptimaliseerd)",
+              time: 2.1,
+              color: "bg-yellow-500",
+              winner: false
+            }, {
+              name: "Squarespace",
+              time: 3.8,
+              color: "bg-destructive",
+              winner: false
+            }, {
+              name: "Wix",
+              time: 5.2,
+              color: "bg-destructive",
+              winner: false
+            }].map(item => <div key={item.name} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className={`font-medium ${item.winner ? 'text-primary' : 'text-foreground'}`}>
                       {item.winner && <Star className="inline-block h-4 w-4 mr-1" />}
@@ -571,13 +581,11 @@ const Vergelijking = () => {
                     </span>
                   </div>
                   <div className="h-4 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full ${item.color} rounded-full transition-all duration-1000`}
-                      style={{ width: `${Math.min((item.time / 6) * 100, 100)}%` }}
-                    />
+                    <div className={`h-full ${item.color} rounded-full transition-all duration-1000`} style={{
+                  width: `${Math.min(item.time / 6 * 100, 100)}%`
+                }} />
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             <div className="mt-8 p-6 bg-primary/5 rounded-xl border border-primary/20">
@@ -616,17 +624,10 @@ const Vergelijking = () => {
                   Met onze aanbevolen oplossing is hacken simpelweg onmogelijk.
                 </p>
                 <ul className="space-y-3">
-                  {[
-                    "Geen database = niets te hacken",
-                    "Geen plugins = geen kwetsbaarheden",
-                    "Geen login pagina = geen brute force aanvallen",
-                    "GitHub bescherming = enterprise-level security"
-                  ].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-3">
+                  {["Geen database = niets te hacken", "Geen plugins = geen kwetsbaarheden", "Geen login pagina = geen brute force aanvallen", "GitHub bescherming = enterprise-level security"].map((item, idx) => <li key={idx} className="flex items-center gap-3">
                       <Check className="h-5 w-5 text-primary flex-shrink-0" />
                       <span className="text-foreground">{item}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
                 <Button asChild className="mt-8" size="lg">
                   <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
@@ -691,25 +692,10 @@ const Vergelijking = () => {
                 </div>
 
                 <ul className="space-y-3 mb-8">
-                  {[
-                    "25 websites per maand genereren",
-                    "In-App AI Page Editor",
-                    "AI Design Systeem",
-                    "Auto-genereer Blog Listing",
-                    "Auto-genereer SEO Blog",
-                    "Auto-genereer Beleid Pagina's",
-                    "Auto-genereer TOS Pagina",
-                    "Direct Online Publiceren",
-                    "100% Gratis Website Hosting",
-                    "100% Code Eigendom",
-                    "Geen Watermerken of Branding",
-                    "Eigen Domein Toevoegen"
-                  ].map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-sm">
+                  {["25 websites per maand genereren", "In-App AI Page Editor", "AI Design Systeem", "Auto-genereer Blog Listing", "Auto-genereer SEO Blog", "Auto-genereer Beleid Pagina's", "Auto-genereer TOS Pagina", "Direct Online Publiceren", "100% Gratis Website Hosting", "100% Code Eigendom", "Geen Watermerken of Branding", "Eigen Domein Toevoegen"].map((feature, idx) => <li key={idx} className="flex items-start gap-3 text-sm">
                       <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                       <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
 
                 <Button asChild className="w-full" variant="outline">
@@ -733,26 +719,10 @@ const Vergelijking = () => {
                 </div>
 
                 <ul className="space-y-3 mb-8">
-                  {[
-                    "Alles van Basis Pakket PLUS:",
-                    "Onbeperkt websites genereren",
-                    "Geïntegreerd Contactformulier",
-                    "GitHub en GitLab Integratie",
-                    "Code Editor toegang",
-                    "1-Click Sitemap.xml",
-                    "1-Click llms.txt (AI Visibility)",
-                    "1-Click robots.txt",
-                    "1-Click Schema Markup",
-                    "API Toegang inbegrepen",
-                    "Meerdere Taal Opties",
-                    "Nieuwe Features Aanvragen",
-                    "Prioriteit Support"
-                  ].map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-sm">
+                  {["Alles van Basis Pakket PLUS:", "Onbeperkt websites genereren", "Geïntegreerd Contactformulier", "GitHub en GitLab Integratie", "Code Editor toegang", "1-Click Sitemap.xml", "1-Click llms.txt (AI Visibility)", "1-Click robots.txt", "1-Click Schema Markup", "API Toegang inbegrepen", "Meerdere Taal Opties", "Nieuwe Features Aanvragen", "Prioriteit Support"].map((feature, idx) => <li key={idx} className="flex items-start gap-3 text-sm">
                       <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                       <span className={idx === 0 ? "text-foreground font-medium" : "text-muted-foreground"}>{feature}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
 
                 <Button asChild className="w-full bg-primary hover:bg-primary/90">
@@ -788,16 +758,19 @@ const Vergelijking = () => {
               </p>
               
               <div className="grid sm:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
-                {[
-                  { icon: <Zap className="h-5 w-5" />, text: "Gratis AI Tools" },
-                  { icon: <Shield className="h-5 w-5" />, text: "Exclusieve Community" },
-                  { icon: <Star className="h-5 w-5" />, text: "Direct Toegang" }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                {[{
+                icon: <Zap className="h-5 w-5" />,
+                text: "Gratis AI Tools"
+              }, {
+                icon: <Shield className="h-5 w-5" />,
+                text: "Exclusieve Community"
+              }, {
+                icon: <Star className="h-5 w-5" />,
+                text: "Direct Toegang"
+              }].map((item, idx) => <div key={idx} className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                     <span className="text-primary">{item.icon}</span>
                     {item.text}
-                  </div>
-                ))}
+                  </div>)}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -837,8 +810,7 @@ const Vergelijking = () => {
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer">
-                  Of Word Gratis Lid <ExternalLink className="ml-2 h-4 w-4" />
+                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer">Of Word Lid<ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             </div>
@@ -851,8 +823,6 @@ const Vergelijking = () => {
         {/* Footer */}
         <Footer />
       </div>
-    </>
-  );
+    </>;
 };
-
 export default Vergelijking;
