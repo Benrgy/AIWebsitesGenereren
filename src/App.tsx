@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import ScrollToTop from "@/components/ScrollToTop";
+import CookieConsent from "@/components/CookieConsent";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ScrollToTop />
+          <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
