@@ -99,13 +99,20 @@ const Blog = () => {
         <title>SEO Blog & Tutorials | Gratis Website Tips | AI Website Generator</title>
         <meta name="description" content="Leer hoe je gratis of goedkoop een professionele website maakt. Tips voor SEO, statische HTML, en website generatie met AI. Perfect voor beginners in Nederland en België." />
         <meta name="keywords" content="website maken tips, gratis website, seo tips, statische html, website bouwen, ai website generator, website zonder code" />
-        <link rel="canonical" href="https://site-wave-ai.lovable.app/blog" />
+        <link rel="canonical" href="https://websitesgenereren.nl/blog" />
+        
+        {/* Hreflang tags for NL and BE */}
+        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/blog" />
+        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/blog" />
+        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/blog" />
         
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="SEO Blog & Tutorials | AI Website Generator" />
         <meta property="og:description" content="Praktische tips om gratis of goedkoop een professionele website te maken. Perfect voor beginners." />
-        <meta property="og:url" content="https://site-wave-ai.lovable.app/blog" />
+        <meta property="og:url" content="https://websitesgenereren.nl/blog" />
+        <meta property="og:locale" content="nl_NL" />
+        <meta property="og:locale:alternate" content="nl_BE" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
