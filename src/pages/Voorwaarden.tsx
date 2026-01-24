@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Voorwaarden = () => {
@@ -25,27 +25,7 @@ const Voorwaarden = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center space-x-2">
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                WebsitesGenereren
-              </span>
-            </Link>
-            <nav className="flex items-center gap-6">
-              <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Home
-              </Link>
-              <Link to="/vergelijking" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Vergelijking
-              </Link>
-              <Link to="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Blog
-              </Link>
-            </nav>
-          </div>
-        </header>
+        <Header />
 
         {/* Main Content */}
         <main className="container py-12 max-w-4xl">

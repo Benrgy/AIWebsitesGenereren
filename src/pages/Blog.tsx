@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Rocket, Globe, Zap, Target, BookOpen, Clock, ArrowRight } from "lucide-react";
 import { blogArticles, AFFILIATE_LINK } from "@/data/blogArticles";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 // Import article images
@@ -128,24 +129,7 @@ const Blog = () => {
         </script>
       </Helmet>
 
-      {/* Header */}
-      <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="font-bold text-lg text-foreground">
-            Websites<span className="text-primary">Genereren</span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link to="/vergelijking" className="text-sm text-muted-foreground hover:text-foreground transition-colors hidden sm:inline">
-              Vergelijking
-            </Link>
-            <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Probeer de #1 AI Tool <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="py-16 md:py-24" style={{

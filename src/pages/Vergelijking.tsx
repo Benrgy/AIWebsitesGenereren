@@ -20,6 +20,7 @@ import {
   Rocket,
   ArrowRight
 } from "lucide-react";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
@@ -51,24 +52,7 @@ const Vergelijking = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        {/* Navigation */}
-        <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <Link to="/" className="font-bold text-lg text-foreground">
-              Websites<span className="text-primary">Genereren</span>
-            </Link>
-            <div className="flex items-center gap-3">
-              <Link to="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors hidden sm:inline">
-                Blog
-              </Link>
-              <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
-                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Bekijk de Winnaar <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                </a>
-              </Button>
-            </div>
-          </div>
-        </nav>
+        <Header />
 
         {/* Hero Section */}
         <section className="relative py-16 sm:py-24 overflow-hidden">
