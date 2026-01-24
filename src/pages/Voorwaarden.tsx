@@ -10,6 +10,18 @@ const Voorwaarden = () => {
         <meta name="description" content="Algemene voorwaarden van WebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://websitesgenereren.nl/voorwaarden" />
+        
+        {/* Hreflang tags for NL and BE */}
+        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/voorwaarden" />
+        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/voorwaarden" />
+        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/voorwaarden" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Algemene Voorwaarden | WebsitesGenereren.nl" />
+        <meta property="og:description" content="Algemene voorwaarden van WebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools." />
+        <meta property="og:url" content="https://websitesgenereren.nl/voorwaarden" />
+        <meta property="og:locale" content="nl_NL" />
+        <meta property="og:locale:alternate" content="nl_BE" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

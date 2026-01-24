@@ -151,6 +151,11 @@ const Index = () => {
         <meta name="keywords" content="website maken, ai website generator, gratis website, website bouwen, seo website, statische html, website zonder code, nederland, belgie" />
         <link rel="canonical" href="https://websitesgenereren.nl/" />
         
+        {/* Hreflang tags for NL and BE */}
+        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/" />
+        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/" />
+        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/" />
+        
         {/* Language and geo targeting */}
         <html lang="nl" />
         <meta name="geo.region" content="NL" />
@@ -164,6 +169,7 @@ const Index = () => {
         <meta property="og:url" content="https://websitesgenereren.nl/" />
         <meta property="og:site_name" content="WebsitesGenereren.nl" />
         <meta property="og:locale" content="nl_NL" />
+        <meta property="og:locale:alternate" content="nl_BE" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />

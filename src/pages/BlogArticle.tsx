@@ -108,16 +108,29 @@ const BlogArticle = () => {
         <title>{article.title} | Websites Genereren</title>
         <meta name="description" content={article.metaDescription} />
         <meta name="keywords" content={article.keywords.join(", ")} />
+        <link rel="canonical" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
+        
+        {/* Hreflang tags for NL and BE */}
+        <link rel="alternate" hrefLang="nl-NL" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
+        <link rel="alternate" hrefLang="nl-BE" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
+        <link rel="alternate" hrefLang="x-default" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
+        
+        {/* Open Graph */}
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.metaDescription} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content={heroImage} />
         <meta property="og:url" content={`https://websitesgenereren.nl/blog/${article.slug}`} />
+        <meta property="og:locale" content="nl_NL" />
+        <meta property="og:locale:alternate" content="nl_BE" />
+        
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={article.title} />
         <meta name="twitter:description" content={article.metaDescription} />
         <meta name="twitter:image" content={heroImage} />
-        <link rel="canonical" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
+        
+        {/* Schema.org */}
         <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>

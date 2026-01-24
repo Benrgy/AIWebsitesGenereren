@@ -36,6 +36,18 @@ const Vergelijking = () => {
         />
         <meta name="keywords" content="wix vergelijken, squarespace review, wordpress problemen, beste website builder, ai website generator" />
         <link rel="canonical" href="https://websitesgenereren.nl/vergelijking" />
+        
+        {/* Hreflang tags for NL and BE */}
+        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/vergelijking" />
+        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/vergelijking" />
+        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/vergelijking" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Website Builders Vergelijken 2025 | Wix vs Squarespace vs WordPress vs AI" />
+        <meta property="og:description" content="Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators." />
+        <meta property="og:url" content="https://websitesgenereren.nl/vergelijking" />
+        <meta property="og:locale" content="nl_NL" />
+        <meta property="og:locale:alternate" content="nl_BE" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
