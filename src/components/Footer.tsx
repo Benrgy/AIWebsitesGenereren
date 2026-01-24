@@ -1,14 +1,10 @@
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
-
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="py-8 border-t border-border bg-background">
+  return <footer className="py-8 border-t border-border bg-background">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-4 gap-8 mb-8">
@@ -49,23 +45,12 @@ const Footer = () => {
             <h3 className="font-semibold text-foreground mb-3 text-sm">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href={AFFILIATE_LINK} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
-                >
+                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1">
                   Start Nu <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
               <li>
-                <a 
-                  href={SKOOL_LINK} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
-                >
-                  Gratis Community <ExternalLink className="h-3 w-3" />
+                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1">Word Lid Van Onze Community<ExternalLink className="h-3 w-3" />
                 </a>
               </li>
             </ul>
@@ -101,8 +86,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
