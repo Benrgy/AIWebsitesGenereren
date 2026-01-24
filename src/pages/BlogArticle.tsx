@@ -3,8 +3,9 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight, List } from "lucide-react";
+import { ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight, List } from "lucide-react";
 import { getArticleBySlug, blogArticles, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
+import Header from "@/components/Header";
 
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
 
@@ -136,20 +137,7 @@ const BlogArticle = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        {/* Minimal Header */}
-        <header className="border-b border-border/50 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
-          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-            <Link to="/blog" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Terug naar blog</span>
-            </Link>
-            <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Start Vandaag Nog <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-              </a>
-            </Button>
-          </div>
-        </header>
+        <Header variant="minimal" backLink={{ to: "/blog", label: "Terug naar blog" }} />
 
         {/* Hero Section with Image */}
         <section className="relative">

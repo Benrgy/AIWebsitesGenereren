@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
@@ -193,6 +194,8 @@ const Index = () => {
           {JSON.stringify(breadcrumbSchema)}
         </script>
       </Helmet>
+      <Header />
+      
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-hero">
         <div className="container mx-auto px-4 py-20 sm:py-32">
