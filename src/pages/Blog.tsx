@@ -169,8 +169,7 @@ const Blog = () => {
               Je typt wat je wilt, de AI maakt het. Geen code nodig, geen abonnement, direct online.
             </p>
             <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                Probeer Het Gratis <Rocket className="ml-2 h-4 w-4" />
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">Word Lid<Rocket className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </div>
