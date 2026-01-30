@@ -1,78 +1,120 @@
 
 
-# Documentatie: GitHub Pages Deployment Handleiding
+# Twee Herbruikbare Documenten voor GitHub Pages Deployment
 
 ## Overzicht
 
-Er wordt een complete handleiding gemaakt die je stap-voor-stap door het deployment proces leidt voor Lovable projecten op GitHub Pages. Deze documentatie kun je hergebruiken voor al je toekomstige projecten.
+Er worden twee documenten gemaakt:
+1. Een **prompt template** die je direct in een Lovable chat kunt plakken om deployment problemen op te lossen
+2. Een **kennisbank document** dat je kunt toevoegen aan Lovable's custom knowledge voor automatische ondersteuning
 
 ---
 
-## Te maken bestand
+## Document 1: Prompt Template
 
-**Bestand:** `GITHUB_PAGES_DEPLOYMENT.md`
+**Bestand:** `GITHUB_PAGES_PROMPT.md`
 
-Dit bestand bevat:
+Een copy-paste prompt die je in elk Lovable project kunt gebruiken wanneer je GitHub Pages deployment wilt configureren of een "exit code 128" error wilt oplossen.
 
-### 1. Checklist voor Nieuwe Projecten
-Een snelle checklist van alle benodigde configuraties voordat je begint met deployen.
+**Inhoud:**
+- Directe instructies voor Lovable AI
+- Vereiste configuraties in een compacte vorm
+- Troubleshooting commands
+- Checklist voor handmatige GitHub stappen
 
-### 2. Vite Configuratie
-Uitleg over de `base` path configuratie in `vite.config.ts` voor subdirectory hosting.
-
-### 3. Router Configuratie  
-Waarom `HashRouter` nodig is in plaats van `BrowserRouter` voor static hosting.
-
-### 4. GitHub Actions Workflow
-Complete workflow configuratie inclusief:
-- Permissions block (de oplossing voor "exit code 128")
-- Node.js setup
-- Build en deploy stappen
-
-### 5. SPA Fallback
-De `404.html` redirect oplossing voor client-side routing.
-
-### 6. GitHub Repository Instellingen
-Screenshots-vriendelijke instructies voor:
-- Pages Source configuratie
-- Workflow permissions instellingen
-
-### 7. Troubleshooting Sectie
-Veelvoorkomende errors en hun oplossingen:
-- Exit code 128
-- Blank scherm
-- 404 errors op routes
-
-### 8. Migratie naar Andere Hosts
-Notities voor toekomstige migratie naar Cloudways of andere platforms.
+**Gebruik:** Kopieer en plak de volledige prompt in de chat van een nieuw Lovable project.
 
 ---
 
-## Documentatie Structuur
+## Document 2: Kennisbank Document
 
-```text
-GITHUB_PAGES_DEPLOYMENT.md
-├── Snelle Checklist
-├── Stap 1: Vite Configuratie
-├── Stap 2: Router Aanpassen
-├── Stap 3: GitHub Actions Workflow
-├── Stap 4: SPA Fallback (404.html)
-├── Stap 5: GitHub Instellingen
-├── Troubleshooting
-│   ├── Exit code 128
-│   ├── Blank scherm
-│   └── 404 op pagina's
-└── Migratie naar Cloudways
+**Bestand:** `LOVABLE_KNOWLEDGE_GITHUB_PAGES.md`
+
+Een geoptimaliseerd document voor Lovable's custom knowledge systeem (Settings → Manage Knowledge).
+
+**Inhoud:**
+- Compacte technische specificaties
+- Standaard configuraties
+- Error-oplossing mappings
+- Instructies voor de AI
+
+**Kenmerken:**
+- Gestructureerd voor AI parsing
+- Bevat de volledige bestandstemplates
+- Troubleshooting decision tree
+
+---
+
+## Te Maken Bestanden
+
+### 1. GITHUB_PAGES_PROMPT.md
+
+Een kant-en-klare prompt die begint met:
+
+```markdown
+Configureer dit project voor GitHub Pages deployment met de volgende specificaties:
+
+1. VITE CONFIGURATIE
+   - Voeg `base: mode === 'production' ? '/REPO_NAAM/' : '/'` toe aan vite.config.ts
+   
+2. ROUTER
+   - Vervang BrowserRouter door HashRouter in App.tsx
+   
+3. GITHUB ACTIONS WORKFLOW
+   - Maak .github/workflows/deploy.yml met permissions block
+   
+4. SPA FALLBACK
+   - Maak public/404.html met redirect script
+   - Maak public/.nojekyll (leeg bestand)
+```
+
+Plus een troubleshooting sectie en handmatige stappen.
+
+---
+
+### 2. LOVABLE_KNOWLEDGE_GITHUB_PAGES.md
+
+Een kennisbank document met:
+
+```markdown
+# GitHub Pages Deployment voor Lovable Projecten
+
+## Automatische Configuratie
+Wanneer een gebruiker vraagt om GitHub Pages deployment, pas deze configuraties toe:
+
+### Vereiste Bestanden
+1. vite.config.ts - base path configuratie
+2. .github/workflows/deploy.yml - met permissions block  
+3. public/404.html - SPA redirect
+4. public/.nojekyll - voorkom Jekyll processing
+
+### Error Mappings
+- "exit code 128" → Ontbrekende permissions in workflow
+- Wit scherm → Verkeerde base path of branch source
+- 404 op routes → Gebruik HashRouter
+
+### Handmatige Stappen (altijd vermelden)
+- GitHub Settings → Pages → Source: gh-pages branch
+- GitHub Settings → Actions → Workflow permissions: Read and write
 ```
 
 ---
 
-## Voordelen van deze documentatie
+## Gebruik van de Documenten
 
-| Aspect | Voordeel |
-|--------|----------|
-| Herbruikbaar | Kopieer naar elk nieuw project |
-| Compleet | Alle stappen op één plek |
-| Troubleshooting | Snelle oplossingen voor bekende problemen |
-| Cloudways-ready | Notities voor toekomstige migratie |
+| Document | Locatie | Wanneer Gebruiken |
+|----------|---------|-------------------|
+| Prompt Template | Kopieer naar chat | Bij nieuw project of deployment probleem |
+| Kennisbank | Settings → Manage Knowledge | Eenmalig toevoegen, altijd beschikbaar |
+
+---
+
+## Voordelen
+
+| Aspect | Prompt Template | Kennisbank |
+|--------|-----------------|------------|
+| Snelheid | Direct toepasbaar | Automatisch beschikbaar |
+| Controle | Volledige controle over timing | AI past toe wanneer relevant |
+| Updates | Handmatig kopiëren | Eenmalig instellen |
+| Scope | Per project | Alle projecten in workspace |
 
