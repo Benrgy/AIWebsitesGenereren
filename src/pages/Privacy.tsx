@@ -1,28 +1,38 @@
-import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
+import { generateWebPageSchema, generateBreadcrumbSchema, getFullUrl } from "@/lib/seoConfig";
 
 const Privacy = () => {
+  // Schema.org: WebPage
+  const webPageSchema = generateWebPageSchema({
+    title: "Privacybeleid",
+    description: "Privacybeleid van WebsitesGenereren.nl - Wij verzamelen geen persoonlijke gegevens van bezoekers.",
+    url: getFullUrl("/privacy"),
+    dateModified: "2025-01-30",
+    breadcrumbs: [
+      { name: "Home", url: getFullUrl("/") },
+      { name: "Privacy", url: getFullUrl("/privacy") }
+    ]
+  });
+
+  // Schema.org: Breadcrumb
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: getFullUrl("/") },
+    { name: "Privacy", url: getFullUrl("/privacy") }
+  ]);
+
   return (
     <>
-      <Helmet>
-        <title>Privacybeleid | WebsitesGenereren.nl</title>
-        <meta name="description" content="Privacybeleid van WebsitesGenereren.nl - Wij verzamelen geen persoonlijke gegevens van bezoekers." />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://websitesgenereren.nl/privacy" />
-        
-        {/* Hreflang tags for NL and BE */}
-        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/privacy" />
-        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/privacy" />
-        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/privacy" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content="Privacybeleid | WebsitesGenereren.nl" />
-        <meta property="og:description" content="Privacybeleid van WebsitesGenereren.nl - Wij verzamelen geen persoonlijke gegevens van bezoekers." />
-        <meta property="og:url" content="https://websitesgenereren.nl/privacy" />
-        <meta property="og:locale" content="nl_NL" />
-        <meta property="og:locale:alternate" content="nl_BE" />
-      </Helmet>
+      <SEOHead
+        title="Privacybeleid | WebsitesGenereren.nl"
+        description="Privacybeleid van WebsitesGenereren.nl - Wij verzamelen geen persoonlijke gegevens van bezoekers. Transparant over affiliate relaties."
+        keywords="privacybeleid, privacy, websitesgenereren, geen cookies, geen tracking"
+        canonical="/privacy"
+        aiSummary="WebsitesGenereren.nl verzamelt geen persoonlijke gegevens. Geen cookies, geen tracking, geen IP-logging. De site is een affiliate voor een AI website generator tool."
+        aiTopic="Privacy, Gegevensbescherming, Affiliate Disclosure"
+        schemas={[webPageSchema, breadcrumbSchema]}
+      />
 
       <div className="min-h-screen bg-background">
         <Header />
