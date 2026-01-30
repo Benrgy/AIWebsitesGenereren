@@ -1,62 +1,105 @@
 
-# Fix: GitHub Pages Blank Scherm - Synchronisatie Oplossing
 
-## Diagnose
+# Fix: GitHub Actions Permissions Error (Exit Code 128)
 
-De code in Lovable bevat alle correcte wijzigingen:
-- ✅ `vite.config.ts` met `base: '/AIWebsitesGenereren/'`
-- ✅ `src/App.tsx` met `HashRouter`
-- ✅ `public/404.html` SPA fallback
-- ✅ `index.html` met URL handler script
-- ✅ `.github/workflows/deploy.yml` automatische deployment
+## Probleem Gevonden
 
-**Probleem**: Deze wijzigingen zijn nog niet naar GitHub gepusht, dus GitHub Pages draait nog de oude code.
+De GitHub Actions workflow faalt met "exit code 128" door twee configuratieproblemen:
+
+1. **Ontbrekende write permissions** in de workflow
+2. **GitHub Pages Source** staat op `main` branch, maar de workflow deployt naar `gh-pages`
 
 ---
 
-## Oplossing in 2 stappen
+## Technische Oplossing
 
-### Stap 1: Voeg .nojekyll bestand toe
+### Stap 1: Voeg permissions toe aan workflow
 
-Maak een leeg bestand `public/.nojekyll` aan. Dit voorkomt dat GitHub Pages Jekyll gebruikt, wat nodig is om bestanden met underscores correct te serveren.
+**Bestand:** `.github/workflows/deploy.yml`
 
-**Bestand**: `public/.nojekyll`
+De workflow mist expliciete `permissions` om naar de repository te schrijven. Dit moet worden toegevoegd:
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 ```
-(leeg bestand)
+
+De belangrijkste toevoeging is:
+```yaml
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 ```
 
-### Stap 2: Synchroniseer naar GitHub
-
-Na goedkeuring van dit plan:
-1. Push de wijzigingen naar je GitHub repository
-2. De GitHub Actions workflow bouwt automatisch de site
-3. Binnen 2 minuten is je site live op `https://benrgy.github.io/AIWebsitesGenereren/`
+Dit geeft de workflow expliciet toestemming om:
+- `contents: write` - Naar de `gh-pages` branch te pushen
+- `pages: write` - GitHub Pages te updaten
+- `id-token: write` - Authenticatie tokens te gebruiken
 
 ---
 
-## Handmatige stappen na implementatie
+## Handmatige stap in GitHub (verplicht)
 
-### A. Push vanuit Lovable naar GitHub
-1. Ga naar **Settings** (tandwiel icoon)
-2. Klik op **GitHub** onder Connectors
-3. Klik op **Sync** of **Push to GitHub**
+Na het deployen van de workflow update, moet je de GitHub Pages source wijzigen:
 
-### B. Controleer GitHub Actions
-1. Open `https://github.com/benrgy/AIWebsitesGenereren`
-2. Klik op **Actions** tab
-3. Wacht tot de workflow groen is ✅
+1. Ga naar `https://github.com/benrgy/AIWebsitesGenereren/settings/pages`
+2. Onder **Build and deployment** → **Source**:
+   - Verander van `Deploy from a branch` + `main` 
+   - Naar `Deploy from a branch` + **`gh-pages`** + `/(root)`
+3. Klik op **Save**
 
-### C. Verifieer GitHub Pages configuratie
-1. Open repository **Settings**
-2. Ga naar **Pages** in de sidebar
-3. Controleer dat **Source** = `gh-pages` branch staat
+Dit is nodig omdat de workflow de gebouwde site naar de `gh-pages` branch pusht, niet naar `main`.
 
 ---
 
-## Samenvatting wijzigingen
+## Waarom dit de oplossing is
 
-| Bestand | Actie | Reden |
-|---------|-------|-------|
-| `public/.nojekyll` | Nieuw | Voorkom Jekyll processing |
+| Probleem | Huidige situatie | Oplossing |
+|----------|------------------|-----------|
+| Exit code 128 | Workflow kan niet schrijven naar gh-pages | `permissions: contents: write` |
+| Blank scherm | Pages leest van main (broncode) | Source wijzigen naar gh-pages (gebouwde site) |
 
-De overige bestanden zijn al correct geconfigureerd. Na het pushen naar GitHub werkt je site.
+---
+
+## Samenvatting
+
+| Actie | Bestand/Locatie | Wijziging |
+|-------|-----------------|-----------|
+| Code aanpassing | `.github/workflows/deploy.yml` | Toevoegen `permissions` block |
+| GitHub instelling | Settings → Pages → Source | Wijzigen naar `gh-pages` branch |
+
+Na beide stappen: wacht 1-2 minuten en je site is live op `https://benrgy.github.io/AIWebsitesGenereren/`
+
