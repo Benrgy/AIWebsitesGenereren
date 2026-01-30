@@ -1,162 +1,184 @@
 
-# Bijgewerkt Plan: Index.tsx Upgraden naar SEOHead Component
+# Performance Optimalisatie Plan
 
-## Grondige Analyse Uitgevoerd
+Dit plan richt zich op het verbeteren van de Core Web Vitals scores en het oplossen van de NO_FCP errors die in de PageSpeed Insights resultaten werden gevonden.
 
-Na complete review van alle bestanden is de conclusie:
+---
 
-### Blog Artikelen Status: ✅ 100% Geoptimaliseerd
+## Overzicht van de Problemen
 
-Alle **20 blog artikelen** in `src/data/blogArticles.ts` hebben de volledige "Triple Crown" optimalisatie:
+De PageSpeed Insights tests toonden **NO_FCP (No First Contentful Paint) errors** - dit betekent dat de testcrawler geen content kon meten. Dit is een bekend probleem bij Single Page Applications (SPA's) zoals deze React-applicatie.
 
-| Element | Status | Details |
-|---------|--------|---------|
-| openingAnswer | ✅ | Direct antwoord in ~50 woorden |
-| executiveSummary | ✅ | 3-4 bullet points met statistieken |
-| sections (H2) | ✅ | 5-8 vraag-gebaseerde secties per artikel |
-| calloutStat | ✅ | Statistieken met bronvermelding |
-| tips | ✅ | 3-5 praktische tips |
-| faq | ✅ | 5-7 FAQ per artikel |
-| expertQuotes | ✅ | 1-3 expert quotes met naam/titel |
-| statistics | ✅ | 3-5 statistieken met bronnen |
-| keywords | ✅ | SEO keyword clusters |
-| datePublished/Modified | ✅ | Freshness signals |
+### Hoofdoorzaken:
+1. **Client-side Rendering** - Alle content wordt pas getoond nadat JavaScript is geladen
+2. **Grote initiële bundle** - Alle pagina's worden in één keer geladen
+3. **Afbeeldingen niet geoptimaliseerd** - Geen prioritering voor hero images
+4. **Geen prerendering** - Crawlers zien alleen een lege div
 
-### BlogArticle.tsx Status: ✅ Volledig Geoptimaliseerd
+---
+
+## Oplossingen (4 Fasen)
+
+### Fase 1: Quick Wins - Image Optimalisatie
+
+**Doel:** Verbeter LCP (Largest Contentful Paint) door hero images te prioriteren
+
+**Wijzigingen:**
+
+1. **BlogArticle.tsx** - Hero image optimalisatie:
+   - Voeg `fetchpriority="high"` toe aan hero image
+   - Voeg `loading="eager"` toe (niet lazy voor above-the-fold)
+   - Voeg expliciete `width` en `height` attributen toe
+
+2. **Blog.tsx** - Grid images behouden lazy loading (correct)
+
+**Verwachte impact:** LCP verbetering van 1-2 seconden op mobiel
+
+---
+
+### Fase 2: Code Splitting met React.lazy()
+
+**Doel:** Verminder initiële bundle grootte en verbeter FCP (First Contentful Paint)
+
+**Wijzigingen in App.tsx:**
 
 ```text
-SEOHead component         ✅ Geïmplementeerd
-Article Schema            ✅ Met speakable selectors
-FAQ Schema               ✅ Automatisch uit article.faq
-Breadcrumb Schema        ✅ Home > Blog > Artikel
-AI Meta Tags             ✅ aiSummary = openingAnswer
-Hero Image               ✅ Per slug toegewezen
-Table of Contents        ✅ Dynamisch gegenereerd
+// Huidige situatie:
+import Index from "./pages/Index";
+import Blog from "./pages/Blog";
+// etc...
+
+// Na optimalisatie:
+const Index = lazy(() => import("./pages/Index"));
+const Blog = lazy(() => import("./pages/Blog"));
+// etc...
 ```
 
-### Overige Pagina's Status: ✅ Geoptimaliseerd
+**Voeg Suspense fallback toe:**
+- Een lichtgewicht loading skeleton die direct rendert
+- Dit geeft de crawler iets om te "zien" tijdens het laden
 
-| Pagina | SEOHead | Schema | AI Tags | GEO Tags |
-|--------|---------|--------|---------|----------|
-| Blog.tsx | ✅ | CollectionPage + ItemList | ✅ | ✅ Auto |
-| Vergelijking.tsx | ✅ | ComparisonSchema + FAQ | ✅ | ✅ Auto |
-| Privacy.tsx | ✅ | WebPage + Breadcrumb | N.v.t. | ✅ Auto |
-| Voorwaarden.tsx | ✅ | WebPage + Breadcrumb | N.v.t. | ✅ Auto |
-| NotFound.tsx | ✅ | WebPage (noIndex) | N.v.t. | ✅ Auto |
+**Verwachte impact:** 
+- Initiële bundle 40-60% kleiner
+- FCP verbetering van 0.5-1 seconde
 
 ---
 
-## Enige Gap Geïdentificeerd: Index.tsx
+### Fase 3: Prerendering / Static Generation (Optioneel)
 
-De **homepage** (`src/pages/Index.tsx`) is de enige pagina die nog de oude directe `<Helmet>` implementatie gebruikt (regels 149-196).
+**Doel:** Geef crawlers direct HTML content
 
-### Wat Index.tsx Mist
+**Opties:**
 
-| Element | Huidige Status | Vereist |
-|---------|---------------|---------|
-| Component | Directe Helmet (50+ regels) | SEOHead component |
-| ai.summary | ❌ Ontbreekt | Direct antwoord 50 woorden |
-| ai.topic | ❌ Ontbreekt | Topic classificatie |
-| audience | ❌ Ontbreekt | Regionale targeting |
-| ai.freshness | ❌ Ontbreekt | Update signaal |
+**Optie A: vite-plugin-ssr (eenvoudig)**
+- Voegt static HTML generatie toe voor routes
+- Crawlers zien direct content
+- Behoud HashRouter compatibiliteit
 
-### Wat Index.tsx WEL Heeft (te behouden)
+**Optie B: React-snap (post-build)**
+- Rendert alle routes naar static HTML na build
+- Geen code wijzigingen nodig
 
-- ✅ Organization Schema
-- ✅ SoftwareApplication Schema
-- ✅ FAQ Schema
-- ✅ Breadcrumb Schema
-- ✅ Hreflang tags
-- ✅ Open Graph basics
-- ✅ GEO meta tags (geo.region, geo.placename)
+**Opmerking:** Dit is een grotere wijziging die zorgvuldige testing vereist
 
 ---
 
-## Implementatie Strategie
+### Fase 4: Accessibility & Best Practices
 
-### Doel
-Refactor Index.tsx naar SEOHead component **zonder enige wijziging** aan:
-- Design/layout
-- Functionaliteit
-- Visuele elementen
-- UX flow
+**Doel:** Verbeter Accessibility score en fix ARIA issues
 
-### Aanpak
+**Wijzigingen:**
 
-**Stap 1: Import wijzigen**
-```typescript
-// VERWIJDER
-import { Helmet } from "react-helmet-async";
+1. **Header.tsx** - Voeg aria-labels toe aan navigatie
+2. **Button componenten** - Zorg voor accessible names op icon-only buttons
+3. **Images** - Verbeter alt-teksten voor SEO en accessibility
+4. **Focus management** - Verbeter keyboard navigatie
 
-// TOEVOEGEN
-import SEOHead from "@/components/SEOHead";
-```
+---
 
-**Stap 2: Bestaande schema's behouden**
-De huidige schema definities (regels 73-145) blijven exact hetzelfde:
-- organizationSchema
-- softwareSchema
-- faqSchema
-- breadcrumbSchema
+## Implementatie Prioriteit
 
-**Stap 3: Helmet block vervangen door SEOHead**
-Het huidige Helmet block (regels 149-196, ~48 regels) wordt vervangen door een compact SEOHead:
-
-```typescript
-<SEOHead
-  title="AI Website Generator Nederland | Gratis Website Maken Zonder Code | WebsitesGenereren.nl"
-  description="Maak in 5 minuten een professionele website met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd. De #1 AI website builder voor Nederland & België."
-  keywords="website maken, ai website generator, gratis website, website bouwen, seo website, statische html, website zonder code, nederland, belgie"
-  canonical="/"
-  aiSummary="WebsitesGenereren.nl is de #1 AI website generator voor Nederland en België. Maak binnen 5 minuten een professionele website met AI, zonder code te schrijven. Éénmalige betaling, geen abonnement, gratis hosting inbegrepen."
-  aiTopic="AI Website Generatie, Website Bouwen, No-Code Tools"
-  schemas={[organizationSchema, softwareSchema, faqSchema, breadcrumbSchema]}
-/>
-```
+| Prioriteit | Fase | Geschatte Tijd | Impact |
+|------------|------|----------------|--------|
+| 1 (Kritiek) | Fase 1: Image Optimalisatie | 15 min | Hoog |
+| 2 (Hoog) | Fase 2: Code Splitting | 30 min | Hoog |
+| 3 (Medium) | Fase 4: Accessibility | 45 min | Medium |
+| 4 (Later) | Fase 3: Prerendering | 2+ uur | Zeer Hoog |
 
 ---
 
 ## Technische Details
 
-### Wijzigingen in Index.tsx
+### Fase 1: Exacte Code Wijzigingen
 
-**Regels te wijzigen:**
-1. Regel 2: Import van Helmet wijzigen naar SEOHead
-2. Regels 149-196: Helm block vervangen door SEOHead (netto ~33 regels minder code)
+**src/pages/BlogArticle.tsx** (regel 126-130):
+```tsx
+// Van:
+<img 
+  src={heroImage} 
+  alt={article.title}
+  className="w-full h-full object-cover"
+/>
 
-### Code die ONGEWIJZIGD blijft
+// Naar:
+<img 
+  src={heroImage} 
+  alt={article.title}
+  className="w-full h-full object-cover"
+  fetchPriority="high"
+  loading="eager"
+  width={1200}
+  height={320}
+  decoding="async"
+/>
+```
 
-- Alle JSX na regel 196 (hele UI/layout)
-- Alle schema definities (regels 73-145)
-- Affiliate links
-- Testimonials array
-- Website types array
-- Alle componenten (Header, Footer, ProcessDemo, etc.)
-- Styling en animaties
-- Responsive behavior
+### Fase 2: Code Splitting Setup
+
+**src/App.tsx**:
+```tsx
+import { lazy, Suspense } from "react";
+
+// Lazy loaded pages
+const Index = lazy(() => import("./pages/Index"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogArticle = lazy(() => import("./pages/BlogArticle"));
+const Vergelijking = lazy(() => import("./pages/Vergelijking"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Voorwaarden = lazy(() => import("./pages/Voorwaarden"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-pulse text-primary">Laden...</div>
+  </div>
+);
+
+// In de Routes, wrap met Suspense:
+<Suspense fallback={<PageLoader />}>
+  <Routes>
+    <Route path="/" element={<Index />} />
+    // etc...
+  </Routes>
+</Suspense>
+```
 
 ---
 
-## Verwachte Resultaten
+## Verwachte Resultaten Na Implementatie
 
-| Aspect | Vóór | Na |
-|--------|------|-----|
-| SEO meta code | 48 regels | 15 regels |
-| AI meta tags | Geen | ai.summary + ai.topic |
-| Consistency | Afwijkend van andere pagina's | Uniform met hele site |
-| Maintainability | Handmatig bijwerken | Gecentraliseerd |
-| Visueel | Ongewijzigd | Ongewijzigd |
-| Functionaliteit | Ongewijzigd | Ongewijzigd |
+| Metric | Huidige Score | Verwacht Na Fase 1+2 |
+|--------|--------------|---------------------|
+| Performance | Error (NO_FCP) | 60-80 |
+| LCP | Niet meetbaar | < 2.5s |
+| FCP | Niet meetbaar | < 1.8s |
+| Speed Index | Niet meetbaar | < 3.0s |
 
 ---
 
-## Samenvatting
+## Aanbeveling
 
-De blog artikelen en alle andere pagina's zijn 100% geoptimaliseerd. Alleen de homepage heeft een technische refactor nodig:
+Start met **Fase 1 en Fase 2** - deze geven de grootste verbeteringen met relatief weinig risico. Na implementatie, run opnieuw een PageSpeed test om de verbeteringen te meten.
 
-1. **Geen inhoudelijke wijzigingen** - alle content, design en functionaliteit blijft identiek
-2. **Alleen technische upgrade** - Helmet → SEOHead component
-3. **Toevoegen AI meta tags** - aiSummary en aiTopic voor LLM citability
-4. **Minder code** - van 48 naar 15 regels voor SEO meta tags
-
-Na deze wijziging is de hele site consistent geoptimaliseerd voor de "Triple Crown" van moderne vindbaarheid.
+Fase 3 (prerendering) is de meest impactvolle oplossing voor het NO_FCP probleem, maar vereist meer testing en kan compatibiliteitsproblemen veroorzaken met HashRouter.
