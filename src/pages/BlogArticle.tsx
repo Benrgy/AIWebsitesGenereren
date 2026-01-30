@@ -6,6 +6,7 @@ import { ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, Che
 import { getArticleBySlug, blogArticles, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
 import Header from "@/components/Header";
 import SEOHead from "@/components/SEOHead";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
 import { 
   generateArticleSchema, 
   generateFAQSchema, 
@@ -116,6 +117,8 @@ const BlogArticle = () => {
         aiTopic={article.category}
         schemas={[articleSchema, faqSchema, breadcrumbSchema]}
       />
+
+      <ReadingProgressBar />
 
       <div className="min-h-screen bg-background">
         <Header variant="minimal" backLink={{ to: "/blog", label: "Terug naar blog" }} />
