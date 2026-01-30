@@ -15,19 +15,19 @@ import {
   getFullUrl 
 } from "@/lib/seoConfig";
 
-// Import article images
-import seoGoogleSearch from "@/assets/blog/seo-google-search.jpg";
-import websiteBeginners from "@/assets/blog/website-beginners.jpg";
-import websiteCosts from "@/assets/blog/website-costs.jpg";
-import wordpressVsAi from "@/assets/blog/wordpress-vs-ai.jpg";
-import aiWebsiteGenerator from "@/assets/blog/ai-website-generator.jpg";
-import localShopWebsite from "@/assets/blog/local-shop-website.jpg";
-import zzpFreelancer from "@/assets/blog/zzp-freelancer-website.jpg";
-import photographerPortfolio from "@/assets/blog/photographer-portfolio.jpg";
-import githubHosting from "@/assets/blog/github-hosting.jpg";
-import googleFirstPage from "@/assets/blog/google-first-page.jpg";
-import localSeoCities from "@/assets/blog/local-seo-cities.jpg";
-import startupValidation from "@/assets/blog/startup-validation.jpg";
+// WebP images for better performance (30-50% smaller than JPG)
+import seoGoogleSearch from "@/assets/blog/seo-google-search.webp";
+import websiteBeginners from "@/assets/blog/website-beginners.webp";
+import websiteCosts from "@/assets/blog/website-costs.webp";
+import wordpressVsAi from "@/assets/blog/wordpress-vs-ai.webp";
+import aiWebsiteGenerator from "@/assets/blog/ai-website-generator.webp";
+import localShopWebsite from "@/assets/blog/local-shop-website.webp";
+import zzpFreelancer from "@/assets/blog/zzp-freelancer-website.webp";
+import photographerPortfolio from "@/assets/blog/photographer-portfolio.webp";
+import githubHosting from "@/assets/blog/github-hosting.webp";
+import googleFirstPage from "@/assets/blog/google-first-page.webp";
+import localSeoCities from "@/assets/blog/local-seo-cities.webp";
+import startupValidation from "@/assets/blog/startup-validation.webp";
 
 // Map slugs to images
 const articleImages: Record<string, string> = {
