@@ -35,6 +35,9 @@ const CookieConsent = () => {
       className={`fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 transition-all duration-500 ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
+      role="dialog"
+      aria-labelledby="cookie-consent-title"
+      aria-describedby="cookie-consent-description"
     >
       <div className="container mx-auto max-w-4xl">
         <div className="bg-card border border-border rounded-xl shadow-lg p-4 sm:p-6">
@@ -42,14 +45,14 @@ const CookieConsent = () => {
             {/* Icon & Text */}
             <div className="flex items-start gap-3 flex-1">
               <div className="hidden sm:flex h-10 w-10 rounded-full bg-primary/10 items-center justify-center flex-shrink-0">
-                <Cookie className="h-5 w-5 text-primary" />
+                <Cookie className="h-5 w-5 text-primary" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1">
+                <h3 id="cookie-consent-title" className="font-semibold text-foreground mb-1">
                   🍪 Cookies & Privacy
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  Wij gebruiken <strong>geen tracking cookies</strong> en verzamelen geen persoonlijke gegevens. 
+                <p id="cookie-consent-description" className="text-sm text-muted-foreground">
+                  Wij gebruiken <strong>geen tracking cookies</strong> en verzamelen geen persoonlijke gegevens.
                   Deze site gebruikt alleen functionele cookies voor de beste ervaring. 
                   Lees meer in ons{" "}
                   <Link 
@@ -87,7 +90,7 @@ const CookieConsent = () => {
               className="absolute top-2 right-2 sm:hidden p-1 text-muted-foreground hover:text-foreground"
               aria-label="Sluiten"
             >
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
         </div>

@@ -28,18 +28,27 @@ const Header = ({ variant = "default", backLink }: HeaderProps) => {
 
   if (variant === "minimal" && backLink) {
     return (
-      <header className="border-b border-border/50 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+      <header 
+        className="border-b border-border/50 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50"
+        role="banner"
+      >
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <Link 
             to={backLink.to} 
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            aria-label={backLink.label}
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             <span className="hidden sm:inline">{backLink.label}</span>
           </Link>
           <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
-            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-              Start Vandaag Nog <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+            <a 
+              href={AFFILIATE_LINK} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Start vandaag nog met de AI website generator (opent in nieuw tabblad)"
+            >
+              Start Vandaag Nog <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
             </a>
           </Button>
         </div>
@@ -48,15 +57,25 @@ const Header = ({ variant = "default", backLink }: HeaderProps) => {
   }
 
   return (
-    <header className="border-b border-border/40 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+    <header 
+      className="border-b border-border/40 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50"
+      role="banner"
+    >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link to="/" className="font-bold text-lg text-foreground">
+        <Link 
+          to="/" 
+          className="font-bold text-lg text-foreground"
+          aria-label="WebsitesGenereren - Naar homepagina"
+        >
           Websites<span className="text-primary">Genereren</span>
         </Link>
         
         <div className="flex items-center gap-4 sm:gap-6">
           {/* Desktop Navigation */}
-          <nav className="hidden sm:flex items-center gap-6">
+          <nav 
+            className="hidden sm:flex items-center gap-6"
+            aria-label="Hoofdnavigatie"
+          >
             {navLinks.map((link) => (
               <Link 
                 key={link.to}
@@ -66,6 +85,7 @@ const Header = ({ variant = "default", backLink }: HeaderProps) => {
                     ? "text-primary font-medium" 
                     : "text-muted-foreground hover:text-foreground"
                 }`}
+                aria-current={isActive(link.to) ? "page" : undefined}
               >
                 {link.label}
               </Link>
@@ -74,35 +94,54 @@ const Header = ({ variant = "default", backLink }: HeaderProps) => {
           
           {/* Desktop CTA */}
           <Button asChild className="hidden sm:inline-flex bg-gradient-to-r from-primary to-secondary hover:opacity-90">
-            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+            <a 
+              href={AFFILIATE_LINK} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Probeer de #1 AI Tool (opent in nieuw tabblad)"
+            >
               Probeer de #1 AI Tool
-              <ExternalLink className="ml-2 h-4 w-4" />
+              <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
             </a>
           </Button>
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="sm:hidden">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Menu openen</span>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="sm:hidden"
+                aria-label="Navigatiemenu openen"
+                aria-expanded={isOpen}
+                aria-controls="mobile-navigation"
+              >
+                <Menu className="h-5 w-5" aria-hidden="true" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-background">
-              <div className="flex flex-col h-full">
+            <SheetContent 
+              side="right" 
+              className="w-[280px] bg-background"
+              aria-label="Mobiel navigatiemenu"
+            >
+              <div className="flex flex-col h-full" id="mobile-navigation">
                 {/* Mobile Logo */}
                 <div className="py-4 border-b border-border">
                   <Link 
                     to="/" 
                     className="font-bold text-lg text-foreground"
                     onClick={() => setIsOpen(false)}
+                    aria-label="WebsitesGenereren - Naar homepagina"
                   >
                     Websites<span className="text-primary">Genereren</span>
                   </Link>
                 </div>
                 
                 {/* Mobile Navigation Links */}
-                <nav className="flex flex-col py-6 gap-1">
+                <nav 
+                  className="flex flex-col py-6 gap-1"
+                  aria-label="Mobiele navigatie"
+                >
                   {navLinks.map((link) => {
                     const Icon = link.icon;
                     return (
@@ -115,8 +154,9 @@ const Header = ({ variant = "default", backLink }: HeaderProps) => {
                             ? "bg-primary/10 text-primary font-medium"
                             : "text-foreground hover:bg-muted"
                         }`}
+                        aria-current={isActive(link.to) ? "page" : undefined}
                       >
-                        <Icon className="h-5 w-5" />
+                        <Icon className="h-5 w-5" aria-hidden="true" />
                         {link.label}
                       </Link>
                     );
@@ -135,10 +175,11 @@ const Header = ({ variant = "default", backLink }: HeaderProps) => {
                       target="_blank" 
                       rel="noopener noreferrer"
                       onClick={() => setIsOpen(false)}
+                      aria-label="Start vandaag nog met de AI website generator (opent in nieuw tabblad)"
                     >
-                      <Rocket className="mr-2 h-4 w-4" />
+                      <Rocket className="mr-2 h-4 w-4" aria-hidden="true" />
                       Start Vandaag Nog
-                      <ExternalLink className="ml-2 h-4 w-4" />
+                      <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
                     </a>
                   </Button>
                   
