@@ -2,6 +2,19 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
+    <script type="text/javascript">
+      // GitHub Pages SPA support
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Website Generator | Professionele Websites Maken | Nederland &amp; België</title>
     <meta name="description" content="Maak een professionele website met AI. Geen code nodig, geen abonnement. Pure statische HTML voor perfecte SEO/GEO Llm&#39;s . De makkelijkste manier om een website te bouwen in Nederland en België.">
