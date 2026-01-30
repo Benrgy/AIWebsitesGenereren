@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -146,54 +146,15 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>AI Website Generator Nederland | Gratis Website Maken Zonder Code | WebsitesGenereren.nl</title>
-        <meta name="description" content="Maak in 5 minuten een professionele website met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd. De #1 AI website builder voor Nederland & België." />
-        <meta name="keywords" content="website maken, ai website generator, gratis website, website bouwen, seo website, statische html, website zonder code, nederland, belgie" />
-        <link rel="canonical" href="https://websitesgenereren.nl/" />
-        
-        {/* Hreflang tags for NL and BE */}
-        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/" />
-        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/" />
-        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/" />
-        
-        {/* Language and geo targeting */}
-        <html lang="nl" />
-        <meta name="geo.region" content="NL" />
-        <meta name="geo.placename" content="Nederland" />
-        <meta name="content-language" content="nl" />
-        
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="AI Website Generator Nederland | Gratis Website Maken" />
-        <meta property="og:description" content="Maak in 5 minuten een professionele website met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd." />
-        <meta property="og:url" content="https://websitesgenereren.nl/" />
-        <meta property="og:site_name" content="WebsitesGenereren.nl" />
-        <meta property="og:locale" content="nl_NL" />
-        <meta property="og:locale:alternate" content="nl_BE" />
-        
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Website Generator Nederland" />
-        <meta name="twitter:description" content="Maak in 5 minuten een professionele website met AI. Geen code nodig." />
-        
-        {/* Robots for AI crawlers */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        
-        {/* Schema.org JSON-LD */}
-        <script type="application/ld+json">
-          {JSON.stringify(organizationSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(softwareSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchema)}
-        </script>
-      </Helmet>
+      <SEOHead
+        title="AI Website Generator Nederland | Gratis Website Maken Zonder Code | WebsitesGenereren.nl"
+        description="Maak in 5 minuten een professionele website met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd. De #1 AI website builder voor Nederland & België."
+        keywords="website maken, ai website generator, gratis website, website bouwen, seo website, statische html, website zonder code, nederland, belgie"
+        canonical="/"
+        aiSummary="WebsitesGenereren.nl is de #1 AI website generator voor Nederland en België. Maak binnen 5 minuten een professionele website met AI, zonder code te schrijven. Éénmalige betaling, geen abonnement, gratis hosting inbegrepen."
+        aiTopic="AI Website Generatie, Website Bouwen, No-Code Tools"
+        schemas={[organizationSchema, softwareSchema, faqSchema, breadcrumbSchema]}
+      />
       <Header />
       
       {/* Hero Section */}
