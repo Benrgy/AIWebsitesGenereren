@@ -7,6 +7,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
+import SkipLink from "@/components/SkipLink";
 
 // Lazy loaded pages for better performance (code splitting)
 const Index = lazy(() => import("./pages/Index"));
@@ -44,19 +45,22 @@ const App = () => (
         <Toaster />
         <Sonner />
         <HashRouter>
+          <SkipLink />
           <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/auth" element={<AffiliateRedirect />} />
-              <Route path="/dashboard" element={<AffiliateRedirect />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogArticle />} />
-              <Route path="/vergelijking" element={<Vergelijking />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/voorwaarden" element={<Voorwaarden />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <main id="main-content">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/auth" element={<AffiliateRedirect />} />
+                <Route path="/dashboard" element={<AffiliateRedirect />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogArticle />} />
+                <Route path="/vergelijking" element={<Vergelijking />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/voorwaarden" element={<Voorwaarden />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
           </Suspense>
           <ScrollToTop />
           <CookieConsent />
