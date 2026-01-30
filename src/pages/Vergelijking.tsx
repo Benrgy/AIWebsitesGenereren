@@ -1,31 +1,102 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, X, AlertTriangle, Shield, Zap, DollarSign, Clock, Lock, Bug, RefreshCcw, TrendingDown, Skull, ExternalLink, Star, Award, Rocket, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
+import { 
+  generateComparisonSchema, 
+  generateFAQSchema, 
+  generateBreadcrumbSchema,
+  getFullUrl 
+} from "@/lib/seoConfig";
+
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
+
 const Vergelijking = () => {
-  return <>
-      <Helmet>
-        <title>Website Builders Vergelijken 2025 | Wix vs Squarespace vs WordPress vs AI</title>
-        <meta name="description" content="Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators. Ontdek welke optie het beste is voor jouw situatie en budget." />
-        <meta name="keywords" content="wix vergelijken, squarespace review, wordpress problemen, beste website builder, ai website generator" />
-        <link rel="canonical" href="https://websitesgenereren.nl/vergelijking" />
-        
-        {/* Hreflang tags for NL and BE */}
-        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/vergelijking" />
-        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/vergelijking" />
-        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/vergelijking" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content="Website Builders Vergelijken 2025 | Wix vs Squarespace vs WordPress vs AI" />
-        <meta property="og:description" content="Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators." />
-        <meta property="og:url" content="https://websitesgenereren.nl/vergelijking" />
-        <meta property="og:locale" content="nl_NL" />
-        <meta property="og:locale:alternate" content="nl_BE" />
-      </Helmet>
+  // Schema.org: Product Comparison
+  const comparisonSchema = generateComparisonSchema({
+    title: "Website Builders Vergelijking 2025",
+    description: "Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators. Ontdek welke optie het beste is voor jouw situatie en budget.",
+    url: getFullUrl("/vergelijking"),
+    products: [
+      {
+        name: "WordPress",
+        description: "Open-source CMS met hoge technische drempel en beveiligingsrisico's",
+        brand: "Automattic",
+        rating: 3.5,
+        price: "15-50",
+        priceCurrency: "EUR"
+      },
+      {
+        name: "Wix",
+        description: "Drag-and-drop website builder met maandelijkse abonnementen",
+        brand: "Wix.com",
+        rating: 3.2,
+        price: "18-45",
+        priceCurrency: "EUR"
+      },
+      {
+        name: "Squarespace",
+        description: "Design-gefocuste website builder met beperkte flexibiliteit",
+        brand: "Squarespace",
+        rating: 3.4,
+        price: "18-40",
+        priceCurrency: "EUR"
+      },
+      {
+        name: "AI Website Generator",
+        description: "Moderne AI-gestuurde oplossing met eenmalige betaling en statische HTML output",
+        brand: "AI Website Generator",
+        rating: 4.8,
+        price: "0.50",
+        priceCurrency: "EUR"
+      }
+    ]
+  });
+
+  // Schema.org: FAQ
+  const faqSchema = generateFAQSchema([
+    {
+      question: "Waarom is WordPress onveilig?",
+      answer: "WordPress wordt dagelijks meer dan 30.000 keer gehackt vanwege kwetsbare plugins en thema's. Statische HTML websites hebben geen database of server-side code, waardoor ze praktisch niet te hacken zijn."
+    },
+    {
+      question: "Wat kost een website per jaar bij Wix?",
+      answer: "Wix kost gemiddeld €350+ per jaar als je alle kosten optelt: abonnement (€18-45/maand), domein, e-mail en premium features. Met een AI website generator betaal je eenmalig slechts €0,50 per website."
+    },
+    {
+      question: "Waarom is een statische website sneller dan WordPress?",
+      answer: "Statische websites bestaan uit kant-en-klare HTML bestanden die direct geladen worden. WordPress moet elke pagina dynamisch opbouwen vanuit een database, wat 3-10x langzamer is."
+    },
+    {
+      question: "Kan ik mijn Wix website exporteren?",
+      answer: "Nee, Wix websites kunnen niet geëxporteerd worden. Dit is vendor lock-in: je blijft betalen of verliest alles. Met statische HTML websites heb je volledige controle over je bestanden."
+    },
+    {
+      question: "Wat is de beste website builder voor SEO?",
+      answer: "Statische HTML websites scoren het beste voor SEO vanwege snelle laadtijden, schone code en perfecte Core Web Vitals. AI website generators maken automatisch SEO-geoptimaliseerde statische websites."
+    }
+  ]);
+
+  // Schema.org: Breadcrumb
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: getFullUrl("/") },
+    { name: "Vergelijking", url: getFullUrl("/vergelijking") }
+  ]);
+
+  return (
+    <>
+      <SEOHead
+        title="Website Builders Vergelijken 2025 | Wix vs Squarespace vs WordPress vs AI"
+        description="Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators. Ontdek welke optie het beste is voor jouw situatie en budget. Inclusief kosten, snelheid en SEO analyse."
+        keywords="wix vergelijken, squarespace review, wordpress problemen, beste website builder, ai website generator, website builder vergelijking 2025"
+        canonical="/vergelijking"
+        aiSummary="Deze vergelijking toont dat AI website generators superieur zijn aan WordPress, Wix en Squarespace: eenmalige betaling vs maandelijkse abonnementen, statische HTML voor snelheid en SEO, en geen beveiligingsrisico's."
+        aiTopic="Website Builder Vergelijking, Wix Alternative, WordPress Alternative"
+        schemas={[comparisonSchema, faqSchema, breadcrumbSchema]}
+      />
 
       <div className="min-h-screen bg-background">
         <Header />
@@ -304,32 +375,17 @@ const Vergelijking = () => {
                       <span className="text-destructive">Hoog</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="text-yellow-600">Gemiddeld</span>
+                      <span className="text-muted-foreground">Laag</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="text-yellow-600">Gemiddeld</span>
-                    </td>
-                    <td className="py-4 px-4 text-center bg-primary/5">
-                      <span className="font-semibold text-primary">Minimaal</span>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-border hover:bg-muted/30 transition-colors">
-                    <td className="py-4 px-4 font-medium">Onderhoud Nodig</td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-destructive">Continu</span>
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-yellow-600">Regelmatig</span>
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-yellow-600">Regelmatig</span>
+                      <span className="text-muted-foreground">Laag</span>
                     </td>
                     <td className="py-4 px-4 text-center bg-primary/5">
                       <span className="font-semibold text-primary">Geen</span>
                     </td>
                   </tr>
                   <tr className="border-b border-border hover:bg-muted/30 transition-colors">
-                    <td className="py-4 px-4 font-medium">Code Eigendom</td>
+                    <td className="py-4 px-4 font-medium">Volledige Eigendom</td>
                     <td className="py-4 px-4 text-center">
                       <Check className="h-5 w-5 text-primary mx-auto" />
                     </td>
@@ -344,18 +400,18 @@ const Vergelijking = () => {
                     </td>
                   </tr>
                   <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="py-4 px-4 font-medium">Gratis Hosting</td>
+                    <td className="py-4 px-4 font-medium">Onze Aanbeveling</td>
                     <td className="py-4 px-4 text-center">
-                      <X className="h-5 w-5 text-destructive mx-auto" />
+                      <span className="text-destructive">❌ Afgeraden</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <X className="h-5 w-5 text-destructive mx-auto" />
+                      <span className="text-yellow-600">⚠️ Met voorbehoud</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <X className="h-5 w-5 text-destructive mx-auto" />
+                      <span className="text-yellow-600">⚠️ Met voorbehoud</span>
                     </td>
                     <td className="py-4 px-4 text-center bg-primary/5 rounded-b-xl">
-                      <Check className="h-5 w-5 text-primary mx-auto" />
+                      <span className="font-bold text-primary">✅ Beste keuze</span>
                     </td>
                   </tr>
                 </tbody>
@@ -364,465 +420,134 @@ const Vergelijking = () => {
 
             {/* Mobile Cards */}
             <div className="lg:hidden space-y-6">
-              {/* Winner Card */}
-              <div className="bg-primary/5 rounded-2xl p-6 border-2 border-primary">
-                <div className="flex items-center gap-2 mb-4">
-                  <Award className="h-6 w-6 text-primary" />
-                  <h3 className="font-bold text-xl text-primary">Onze #1 Keuze</h3>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Setup Tijd</span>
-                    <span className="font-semibold text-primary">5 minuten</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Kosten Model</span>
-                    <span className="font-bold text-primary">Éénmalig</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">SEO Score</span>
-                    <span className="font-semibold text-primary">95/100</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Beveiliging</span>
-                    <span className="font-semibold text-primary">Minimaal risico</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Code Eigendom</span>
-                    <Check className="h-5 w-5 text-primary" />
-                  </div>
-                </div>
-                <Button asChild className="w-full mt-6 bg-primary hover:bg-primary/90">
-                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                    Bekijk Prijzen <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-
-              {/* Competitors */}
-              <div className="grid gap-4">
-                {[{
-                name: "WordPress",
-                setup: "2-4 weken",
-                cost: "€15-50/mnd",
-                seo: "65/100",
-                security: "Hoog risico"
-              }, {
-                name: "Wix",
-                setup: "3-5 dagen",
-                cost: "€18-45/mnd",
-                seo: "55/100",
-                security: "Gemiddeld"
-              }, {
-                name: "Squarespace",
-                setup: "3-5 dagen",
-                cost: "€18-40/mnd",
-                seo: "60/100",
-                security: "Gemiddeld"
-              }].map(competitor => <div key={competitor.name} className="bg-muted/30 rounded-xl p-4 border border-border">
-                    <h3 className="font-semibold text-foreground mb-3">{competitor.name}</h3>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Setup Tijd</span>
-                        <span className="text-muted-foreground">{competitor.setup}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Kosten</span>
-                        <span className="text-destructive font-medium">{competitor.cost}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">SEO Score</span>
-                        <span className="text-muted-foreground">{competitor.seo}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Beveiliging</span>
-                        <span className="text-destructive">{competitor.security}</span>
-                      </div>
-                    </div>
-                  </div>)}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Cost Calculator Visual */}
-        <section className="py-16 bg-muted/30">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                Wat Je Écht Betaalt Over 3 Jaar
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                De verborgen kosten van "goedkope" website builders
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-6">
-              {/* WordPress */}
-              <div className="bg-background rounded-xl p-6 border border-border text-center">
-                <h3 className="font-semibold text-foreground mb-4">WordPress</h3>
-                <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{
-                  height: '85%'
-                }} />
-                </div>
-                <div className="text-3xl font-bold text-destructive mb-1">€2.160+</div>
-                <div className="text-sm text-muted-foreground">Over 3 jaar</div>
-                <div className="text-xs text-muted-foreground mt-2">
-                  Hosting + domein + plugins + beveiliging + onderhoud
+              {/* WordPress Card */}
+              <div className="bg-background border border-border rounded-xl p-6">
+                <h3 className="font-bold text-lg text-foreground mb-4 flex items-center gap-2">
+                  <span className="text-destructive">❌</span> WordPress
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between"><span className="text-muted-foreground">Setup Tijd:</span><span>2-4 weken</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Kosten:</span><span className="text-destructive">€15-50/mnd</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">SEO Score:</span><span className="text-yellow-600">65/100</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Beveiliging:</span><span className="text-destructive">Hoog risico</span></div>
                 </div>
               </div>
 
-              {/* Wix */}
-              <div className="bg-background rounded-xl p-6 border border-border text-center">
-                <h3 className="font-semibold text-foreground mb-4">Wix Premium</h3>
-                <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{
-                  height: '70%'
-                }} />
-                </div>
-                <div className="text-3xl font-bold text-destructive mb-1">€1.296+</div>
-                <div className="text-sm text-muted-foreground">Over 3 jaar</div>
-                <div className="text-xs text-muted-foreground mt-2">
-                  Abonnement + domein + extra features
+              {/* Wix Card */}
+              <div className="bg-background border border-border rounded-xl p-6">
+                <h3 className="font-bold text-lg text-foreground mb-4 flex items-center gap-2">
+                  <span className="text-yellow-600">⚠️</span> Wix
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between"><span className="text-muted-foreground">Setup Tijd:</span><span>3-5 dagen</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Kosten:</span><span className="text-destructive">€18-45/mnd</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">SEO Score:</span><span className="text-destructive">55/100</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Eigendom:</span><span className="text-destructive">Geen export</span></div>
                 </div>
               </div>
 
-              {/* Squarespace */}
-              <div className="bg-background rounded-xl p-6 border border-border text-center">
-                <h3 className="font-semibold text-foreground mb-4">Squarespace</h3>
-                <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-destructive to-destructive/60 rounded-t-lg" style={{
-                  height: '65%'
-                }} />
-                </div>
-                <div className="text-3xl font-bold text-destructive mb-1">€1.080+</div>
-                <div className="text-sm text-muted-foreground">Over 3 jaar</div>
-                <div className="text-xs text-muted-foreground mt-2">
-                  Abonnement + domein + scheduling
-                </div>
-              </div>
-
-              {/* Our Choice */}
-              <div className="bg-primary/10 rounded-xl p-6 border-2 border-primary text-center relative overflow-hidden">
-                <div className="absolute top-2 right-2">
-                  <span className="text-xs font-semibold bg-primary text-primary-foreground px-2 py-1 rounded">WINNAAR</span>
-                </div>
-                <h3 className="font-semibold text-primary mb-4">Onze Keuze</h3>
-                <div className="relative h-48 mb-4">
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-t from-primary to-primary/60 rounded-t-lg" style={{
-                  height: '8%'
-                }} />
-                </div>
-                <div className="text-3xl font-bold text-primary mb-1">Éénmalig</div>
-                <div className="text-sm text-muted-foreground">Geen abonnement</div>
-                <div className="text-xs text-primary/80 mt-2">
-                  Betaal 1x, bouw onbeperkt websites
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center mt-8">
-              <p className="text-lg text-foreground mb-4">
-                <strong>Bespaar tot €2.100+</strong> over 3 jaar met éénmalige investering
-              </p>
-              <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
-                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Bekijk Éénmalige Prijzen <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Speed Comparison Visual */}
-        <section className="py-16">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                <Zap className="inline-block h-8 w-8 text-primary mr-2" />
-                Snelheid = Geld
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Elke seconde laadtijd kost je 7% conversie. Kijk hoe jouw keuze presteert.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {/* Speed Bars */}
-              {[{
-              name: "Onze #1 Keuze (Statische HTML)",
-              time: 0.4,
-              color: "bg-primary",
-              winner: true
-            }, {
-              name: "WordPress (Geoptimaliseerd)",
-              time: 2.1,
-              color: "bg-yellow-500",
-              winner: false
-            }, {
-              name: "Squarespace",
-              time: 3.8,
-              color: "bg-destructive",
-              winner: false
-            }, {
-              name: "Wix",
-              time: 5.2,
-              color: "bg-destructive",
-              winner: false
-            }].map(item => <div key={item.name} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className={`font-medium ${item.winner ? 'text-primary' : 'text-foreground'}`}>
-                      {item.winner && <Star className="inline-block h-4 w-4 mr-1" />}
-                      {item.name}
-                    </span>
-                    <span className={`font-semibold ${item.winner ? 'text-primary' : 'text-muted-foreground'}`}>
-                      {item.time}s
-                    </span>
-                  </div>
-                  <div className="h-4 bg-muted rounded-full overflow-hidden">
-                    <div className={`h-full ${item.color} rounded-full transition-all duration-1000`} style={{
-                  width: `${Math.min(item.time / 6 * 100, 100)}%`
-                }} />
-                  </div>
-                </div>)}
-            </div>
-
-            <div className="mt-8 p-6 bg-primary/5 rounded-xl border border-primary/20">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Rocket className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">Waarom Statische HTML Wint</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Terwijl Wix en Squarespace eerst JavaScript moeten laden en uitvoeren, 
-                    serveert onze aanbevolen tool <strong>pure HTML</strong> direct vanaf 
-                    GitHub's razendsnelle CDN. Resultaat: <strong className="text-primary">10x sneller</strong> dan 
-                    de concurrentie en <strong className="text-primary">hogere Google rankings</strong>.
-                  </p>
+              {/* AI Generator Card - Highlighted */}
+              <div className="bg-primary/5 border-2 border-primary rounded-xl p-6">
+                <h3 className="font-bold text-lg text-primary mb-4 flex items-center gap-2">
+                  <Award className="h-5 w-5" /> Onze #1 Keuze
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between"><span className="text-muted-foreground">Setup Tijd:</span><span className="font-semibold text-primary">5 minuten</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Kosten:</span><span className="font-bold text-primary">Éénmalig</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">SEO Score:</span><span className="font-bold text-primary">95/100</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Beveiliging:</span><span className="font-semibold text-primary">Geen risico</span></div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Security Shield Section */}
-        <section className="py-16 bg-muted/30">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                  <Shield className="h-4 w-4" />
-                  100% Veilig
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                  Nooit Meer Zorgen Over Hacks
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  WordPress sites worden <strong>30.000+ keer per dag</strong> gehackt. 
-                  Met onze aanbevolen oplossing is hacken simpelweg onmogelijk.
-                </p>
-                <ul className="space-y-3">
-                  {["Geen database = niets te hacken", "Geen plugins = geen kwetsbaarheden", "Geen login pagina = geen brute force aanvallen", "GitHub bescherming = enterprise-level security"].map((item, idx) => <li key={idx} className="flex items-center gap-3">
-                      <Check className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="text-foreground">{item}</span>
-                    </li>)}
-                </ul>
-                <Button asChild className="mt-8" size="lg">
-                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                    Start Veilig <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl p-8 text-center">
-                  <Shield className="h-32 w-32 text-primary mx-auto mb-6" />
-                  <div className="text-5xl font-bold text-primary mb-2">0</div>
-                  <div className="text-lg text-muted-foreground">Succesvolle hacks ooit</div>
-                  <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                    <div className="bg-background/80 rounded-lg p-3">
-                      <div className="font-bold text-foreground">Geen</div>
-                      <div className="text-muted-foreground">Database</div>
-                    </div>
-                    <div className="bg-background/80 rounded-lg p-3">
-                      <div className="font-bold text-foreground">Geen</div>
-                      <div className="text-muted-foreground">Plugins</div>
-                    </div>
-                    <div className="bg-background/80 rounded-lg p-3">
-                      <div className="font-bold text-foreground">Geen</div>
-                      <div className="text-muted-foreground">PHP Code</div>
-                    </div>
-                    <div className="bg-background/80 rounded-lg p-3">
-                      <div className="font-bold text-foreground">100%</div>
-                      <div className="text-muted-foreground">Statisch</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing Section */}
-        <section className="py-16 bg-muted/30">
+        {/* Solution Section */}
+        <section className="py-16 bg-primary/5">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                <Star className="h-4 w-4" />
-                Éénmalige Betaling - Geen Abonnementen
-              </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                Kies Jouw Pakket
+                <Shield className="inline-block h-8 w-8 text-primary mr-3" />
+                De Oplossing: AI + Statische HTML
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Betaal één keer, bouw onbeperkt websites. Geen maandelijkse kosten, geen verrassingen.
+                Een nieuwe aanpak die de problemen van traditionele builders elimineert
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {/* Basic Package */}
-              <div className="bg-background rounded-2xl p-8 border border-border shadow-lg hover:shadow-xl transition-shadow">
-                <h3 className="text-xl font-bold text-foreground mb-2">Basis Pakket</h3>
-                <p className="text-muted-foreground text-sm mb-6">AI Agent voor websites bouwen</p>
-                
-                <div className="mb-6">
-                  <span className="text-3xl font-bold text-foreground">Éénmalige</span>
-                  <span className="text-muted-foreground ml-2">investering</span>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-background rounded-xl p-6 border border-primary/20 text-center">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Zap className="h-8 w-8 text-primary" />
                 </div>
-
-                <ul className="space-y-3 mb-8">
-                  {["25 websites per maand genereren", "In-App AI Page Editor", "AI Design Systeem", "Auto-genereer Blog Listing", "Auto-genereer SEO Blog", "Auto-genereer Beleid Pagina's", "Auto-genereer TOS Pagina", "Direct Online Publiceren", "100% Gratis Website Hosting", "100% Code Eigendom", "Geen Watermerken of Branding", "Eigen Domein Toevoegen"].map((feature, idx) => <li key={idx} className="flex items-start gap-3 text-sm">
-                      <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>)}
-                </ul>
-
-                <Button asChild className="w-full" variant="outline">
-                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                    Bekijk Prijs <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
+                <h3 className="font-bold text-lg text-foreground mb-2">Razendsnel</h3>
+                <p className="text-muted-foreground text-sm">
+                  Statische HTML laadt in milliseconden. Geen database, geen server delays.
+                </p>
               </div>
 
-              {/* Pro Package */}
-              <div className="bg-primary/5 rounded-2xl p-8 border-2 border-primary shadow-lg hover:shadow-xl transition-shadow relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-1 rounded-full">POPULAIR</span>
+              <div className="bg-background rounded-xl p-6 border border-primary/20 text-center">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-2">Pro Pakket</h3>
-                <p className="text-muted-foreground text-sm mb-6">AI Agent voor bouwen op schaal</p>
-                
-                <div className="mb-6">
-                  <span className="text-3xl font-bold text-primary">Éénmalige</span>
-                  <span className="text-muted-foreground ml-2">investering</span>
-                </div>
-
-                <ul className="space-y-3 mb-8">
-                  {["Alles van Basis Pakket PLUS:", "Onbeperkt websites genereren", "Geïntegreerd Contactformulier", "GitHub en GitLab Integratie", "Code Editor toegang", "1-Click Sitemap.xml", "1-Click llms.txt (AI Visibility)", "1-Click robots.txt", "1-Click Schema Markup", "API Toegang inbegrepen", "Meerdere Taal Opties", "Nieuwe Features Aanvragen", "Prioriteit Support"].map((feature, idx) => <li key={idx} className="flex items-start gap-3 text-sm">
-                      <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                      <span className={idx === 0 ? "text-foreground font-medium" : "text-muted-foreground"}>{feature}</span>
-                    </li>)}
-                </ul>
-
-                <Button asChild className="w-full bg-primary hover:bg-primary/90">
-                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                    Bekijk Prijs <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
+                <h3 className="font-bold text-lg text-foreground mb-2">100% Veilig</h3>
+                <p className="text-muted-foreground text-sm">
+                  Geen plugins, geen database = geen kwetsbaarheden. Onhackbaar.
+                </p>
               </div>
-            </div>
 
-            <div className="text-center mt-8">
-              <p className="text-sm text-muted-foreground">
-                Betaal één keer. Bouw onbeperkt websites!
-              </p>
+              <div className="bg-background rounded-xl p-6 border border-primary/20 text-center">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <DollarSign className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="font-bold text-lg text-foreground mb-2">Éénmalig Betalen</h3>
+                <p className="text-muted-foreground text-sm">
+                  Geen maandelijkse kosten. Betaal één keer, gebruik voor altijd.
+                </p>
+              </div>
+
+              <div className="bg-background rounded-xl p-6 border border-primary/20 text-center">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Star className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="font-bold text-lg text-foreground mb-2">SEO Optimaal</h3>
+                <p className="text-muted-foreground text-sm">
+                  Perfect voor Google. Schone code, snelle laadtijd, hoge rankings.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Free Alternative - Skool Community */}
-        <section className="py-16">
-          <div className="max-w-4xl mx-auto px-4">
-            <div className="bg-gradient-to-br from-secondary/10 to-primary/10 rounded-2xl p-8 sm:p-12 border border-primary/20 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 text-secondary-foreground text-sm font-medium mb-6">
-                <Rocket className="h-4 w-4" />
-                Gratis Alternatief
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                Wil Je Gratis Beginnen?
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-                Word lid van onze exclusieve community en krijg <strong className="text-foreground">gratis toegang</strong> tot 
-                deze AI website tool én nog veel meer premium tools die anderen honderden euro's kosten.
-              </p>
-              
-              <div className="grid sm:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
-                {[{
-                icon: <Zap className="h-5 w-5" />,
-                text: "Gratis AI Tools"
-              }, {
-                icon: <Shield className="h-5 w-5" />,
-                text: "Exclusieve Community"
-              }, {
-                icon: <Star className="h-5 w-5" />,
-                text: "Direct Toegang"
-              }].map((item, idx) => <div key={idx} className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                    <span className="text-primary">{item.icon}</span>
-                    {item.text}
-                  </div>)}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                  <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer">
-                    Word Gratis Lid <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                    Direct Kopen <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-
-              <p className="text-xs text-muted-foreground mt-6">
-                Als community-lid krijg je dezelfde tools gratis die anderen apart moeten kopen
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-br from-primary to-secondary text-primary-foreground">
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-primary to-secondary">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Klaar Om De Juiste Keuze Te Maken?
+            <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-6">
+              Klaar Om Te Switchen?
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-              Duizenden ondernemers gingen je voor. Stop met maandelijkse abonnementen, 
-              investeer éénmalig in jouw online succes.
+              Stop met maandelijks betalen voor langzame, onveilige websites. 
+              Ontdek waarom duizenden ondernemers de overstap maken.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold shadow-lg">
+              <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold">
                 <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Bekijk Éénmalige Prijzen <ArrowRight className="ml-2 h-5 w-5" />
+                  Start Direct <ExternalLink className="ml-2 h-5 w-5" />
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer">Of Word Lid<ExternalLink className="ml-2 h-4 w-4" />
+                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer">
+                  Gratis Toegang via Community <Rocket className="ml-2 h-5 w-5" />
                 </a>
               </Button>
             </div>
-            <p className="text-sm text-primary-foreground/70 mt-6">
-              ✓ Éénmalige betaling &nbsp; ✓ Geen technische kennis nodig &nbsp; ✓ Website in 5 minuten
-            </p>
           </div>
         </section>
 
-        {/* Footer */}
         <Footer />
       </div>
-    </>;
+    </>
+  );
 };
+
 export default Vergelijking;

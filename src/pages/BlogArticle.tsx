@@ -1,11 +1,17 @@
 import { useParams, Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight, List } from "lucide-react";
 import { getArticleBySlug, blogArticles, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
 import Header from "@/components/Header";
+import SEOHead from "@/components/SEOHead";
+import { 
+  generateArticleSchema, 
+  generateFAQSchema, 
+  generateBreadcrumbSchema,
+  getFullUrl 
+} from "@/lib/seoConfig";
 
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
 
@@ -64,77 +70,51 @@ const BlogArticle = () => {
 
   const Icon = article.icon;
   const heroImage = articleImages[article.slug] || seoGoogleSearch;
+  const articleUrl = getFullUrl(`/blog/${article.slug}`);
 
-  // Schema.org Article + FAQ structured data
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": article.title,
-    "description": article.metaDescription,
-    "datePublished": article.datePublished,
-    "dateModified": article.dateModified,
-    "image": heroImage,
-    "author": {
-      "@type": "Organization",
-      "name": "Websites Genereren"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Websites Genereren",
-      "url": "https://websitesgenereren.nl"
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://websitesgenereren.nl/blog/${article.slug}`
-    },
-    "keywords": article.keywords.join(", ")
-  };
+  // Schema.org: Article with speakable for voice search
+  const articleSchema = generateArticleSchema({
+    title: article.title,
+    description: article.metaDescription,
+    url: articleUrl,
+    image: heroImage,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    keywords: article.keywords,
+    speakable: [".quick-answer", "h1", ".executive-summary"]
+  });
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": article.faq.map(item => ({
-      "@type": "Question",
-      "name": item.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.answer
-      }
+  // Schema.org: FAQ
+  const faqSchema = generateFAQSchema(
+    article.faq.map(item => ({
+      question: item.question,
+      answer: item.answer
     }))
-  };
+  );
+
+  // Schema.org: Breadcrumb
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: getFullUrl("/") },
+    { name: "Blog", url: getFullUrl("/blog") },
+    { name: article.title, url: articleUrl }
+  ]);
 
   return (
     <>
-      <Helmet>
-        <title>{article.title} | Websites Genereren</title>
-        <meta name="description" content={article.metaDescription} />
-        <meta name="keywords" content={article.keywords.join(", ")} />
-        <link rel="canonical" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
-        
-        {/* Hreflang tags for NL and BE */}
-        <link rel="alternate" hrefLang="nl-NL" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
-        <link rel="alternate" hrefLang="nl-BE" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
-        <link rel="alternate" hrefLang="x-default" href={`https://websitesgenereren.nl/blog/${article.slug}`} />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.metaDescription} />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content={heroImage} />
-        <meta property="og:url" content={`https://websitesgenereren.nl/blog/${article.slug}`} />
-        <meta property="og:locale" content="nl_NL" />
-        <meta property="og:locale:alternate" content="nl_BE" />
-        
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={article.title} />
-        <meta name="twitter:description" content={article.metaDescription} />
-        <meta name="twitter:image" content={heroImage} />
-        
-        {/* Schema.org */}
-        <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
+      <SEOHead
+        title={`${article.title} | WebsitesGenereren.nl`}
+        description={article.metaDescription}
+        keywords={article.keywords.join(", ")}
+        canonical={`/blog/${article.slug}`}
+        ogType="article"
+        ogImage={heroImage}
+        articlePublishedTime={article.datePublished}
+        articleModifiedTime={article.dateModified}
+        articleSection={article.category}
+        aiSummary={article.openingAnswer}
+        aiTopic={article.category}
+        schemas={[articleSchema, faqSchema, breadcrumbSchema]}
+      />
 
       <div className="min-h-screen bg-background">
         <Header variant="minimal" backLink={{ to: "/blog", label: "Terug naar blog" }} />

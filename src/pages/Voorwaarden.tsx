@@ -1,28 +1,38 @@
-import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
+import { generateWebPageSchema, generateBreadcrumbSchema, getFullUrl } from "@/lib/seoConfig";
 
 const Voorwaarden = () => {
+  // Schema.org: WebPage
+  const webPageSchema = generateWebPageSchema({
+    title: "Algemene Voorwaarden",
+    description: "Algemene voorwaarden van WebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools.",
+    url: getFullUrl("/voorwaarden"),
+    dateModified: "2025-01-30",
+    breadcrumbs: [
+      { name: "Home", url: getFullUrl("/") },
+      { name: "Voorwaarden", url: getFullUrl("/voorwaarden") }
+    ]
+  });
+
+  // Schema.org: Breadcrumb
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: getFullUrl("/") },
+    { name: "Voorwaarden", url: getFullUrl("/voorwaarden") }
+  ]);
+
   return (
     <>
-      <Helmet>
-        <title>Algemene Voorwaarden | WebsitesGenereren.nl</title>
-        <meta name="description" content="Algemene voorwaarden van WebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools." />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://websitesgenereren.nl/voorwaarden" />
-        
-        {/* Hreflang tags for NL and BE */}
-        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/voorwaarden" />
-        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/voorwaarden" />
-        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/voorwaarden" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content="Algemene Voorwaarden | WebsitesGenereren.nl" />
-        <meta property="og:description" content="Algemene voorwaarden van WebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools." />
-        <meta property="og:url" content="https://websitesgenereren.nl/voorwaarden" />
-        <meta property="og:locale" content="nl_NL" />
-        <meta property="og:locale:alternate" content="nl_BE" />
-      </Helmet>
+      <SEOHead
+        title="Algemene Voorwaarden | WebsitesGenereren.nl"
+        description="Algemene voorwaarden van WebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools. Transparant over onze werkwijze."
+        keywords="algemene voorwaarden, voorwaarden, websitesgenereren, affiliate, ai website generator"
+        canonical="/voorwaarden"
+        aiSummary="WebsitesGenereren.nl is een affiliate website die AI website generatie tools aanbeveelt. Wij verkopen niets direct maar ontvangen commissie van de tool-ontwikkelaar. De koper betaalt dezelfde prijs."
+        aiTopic="Algemene Voorwaarden, Affiliate Disclosure, Website Terms"
+        schemas={[webPageSchema, breadcrumbSchema]}
+      />
 
       <div className="min-h-screen bg-background">
         <Header />

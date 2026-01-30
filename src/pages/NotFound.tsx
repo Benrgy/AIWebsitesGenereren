@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Home, Search, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
+import { generateWebPageSchema, getFullUrl } from "@/lib/seoConfig";
 
 const NotFound = () => {
   const location = useLocation();
@@ -13,18 +14,23 @@ const NotFound = () => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
+  // Schema.org: WebPage for error page
+  const errorPageSchema = generateWebPageSchema({
+    title: "Pagina Niet Gevonden",
+    description: "Deze pagina bestaat niet. Ga terug naar de homepage van WebsitesGenereren.nl.",
+    url: getFullUrl("/404"),
+  });
+
   return (
     <>
-      <Helmet>
-        <title>Pagina Niet Gevonden | WebsitesGenereren.nl</title>
-        <meta name="description" content="Deze pagina bestaat niet. Ga terug naar de homepage van WebsitesGenereren.nl." />
-        <meta name="robots" content="noindex, follow" />
-        
-        {/* Hreflang tags for NL and BE */}
-        <link rel="alternate" hrefLang="nl-NL" href="https://websitesgenereren.nl/404" />
-        <link rel="alternate" hrefLang="nl-BE" href="https://websitesgenereren.nl/404" />
-        <link rel="alternate" hrefLang="x-default" href="https://websitesgenereren.nl/404" />
-      </Helmet>
+      <SEOHead
+        title="Pagina Niet Gevonden | WebsitesGenereren.nl"
+        description="Deze pagina bestaat niet. Ga terug naar de homepage van WebsitesGenereren.nl voor tips over AI website generatie."
+        canonical="/404"
+        noIndex={true}
+        includeGeoTags={false}
+        schemas={[errorPageSchema]}
+      />
 
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
