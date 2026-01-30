@@ -4,13 +4,13 @@ const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  return <footer className="py-8 border-t border-border bg-background">
+  return <footer className="py-8 border-t border-border bg-background" role="contentinfo">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link to="/" className="font-bold text-lg text-foreground">
+            <Link to="/" className="font-bold text-lg text-foreground" aria-label="WebsitesGenereren - Naar homepagina">
               Websites<span className="text-primary">Genereren</span>
             </Link>
             <p className="text-sm text-muted-foreground mt-2">
@@ -19,7 +19,7 @@ const Footer = () => {
           </div>
 
           {/* Navigation */}
-          <div>
+          <nav aria-label="Footer navigatie">
             <h3 className="font-semibold text-foreground mb-3 text-sm">Navigatie</h3>
             <ul className="space-y-2">
               <li>
@@ -38,19 +38,19 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Resources */}
           <div>
             <h3 className="font-semibold text-foreground mb-3 text-sm">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1">
-                  Start Nu <ExternalLink className="h-3 w-3" />
+                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1" aria-label="Start nu met de AI tool (opent in nieuw tabblad)">
+                  Start Nu <ExternalLink className="h-3 w-3" aria-hidden="true" />
                 </a>
               </li>
               <li>
-                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1">Word Lid Van Onze Community<ExternalLink className="h-3 w-3" />
+                <a href={SKOOL_LINK} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1" aria-label="Word lid van onze Skool community (opent in nieuw tabblad)">Word Lid Van Onze Community<ExternalLink className="h-3 w-3" aria-hidden="true" />
                 </a>
               </li>
             </ul>
