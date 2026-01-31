@@ -1,66 +1,63 @@
 
+# Fix: Inhoudsopgave Navigatie met HashRouter
 
-# Cloudways Deployment Configuratie voor websitesgenereren.nl
+## Probleem Analyse
+De Table of Contents gebruikt standaard anchor links (`href="#sectie-1"`). Met HashRouter wordt de URL-structuur:
+- **Huidige URL**: `https://aiwebsitesgenereren.nl/#/blog/artikel-slug`
+- **Na klik op ToC**: `https://aiwebsitesgenereren.nl/#sectie-1` (FOUT - vervangt de route!)
 
-## Overzicht
-Aanpassing van de huidige GitHub Pages configuratie naar Cloudways hosting met het domein `aiwebsitesgenereren.nl`.
+Dit leidt tot een 404 omdat `sectie-1` geen geldige route is.
 
-## Wijzigingen
+## Oplossing
+Vervang anchor links door JavaScript scroll-functionaliteit met `scrollIntoView()`. Dit werkt perfect met HashRouter omdat de URL niet verandert.
 
-### 1. Vite Base Path Aanpassen
-**Bestand:** `vite.config.ts`
+## Technische Wijzigingen
 
-De huidige configuratie gebruikt `/AIWebsitesGenereren/` voor GitHub Pages. Voor Cloudways moet dit naar `/`:
+### Bestand: `src/pages/BlogArticle.tsx`
+
+**Stap 1**: Voeg een scroll handler functie toe (regel ~56):
+```typescript
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+```
+
+**Stap 2**: Vervang alle `<a href="#...">` links in de inhoudsopgave door `<button>` elementen met `onClick`:
 
 ```typescript
-// Van:
-base: mode === 'production' ? '/AIWebsitesGenereren/' : '/',
+// Van (regel 224-234):
+<a 
+  href={`#${sectionId}`}
+  className="..."
+>
+  ...
+</a>
 
 // Naar:
-base: '/',
+<button 
+  type="button"
+  onClick={() => scrollToSection(sectionId)}
+  className="... text-left w-full"
+>
+  ...
+</button>
 ```
 
-### 2. Router Keuze
-**Optie A: HashRouter behouden (aanbevolen - geen server config nodig)**
-- URLs worden: `https://aiwebsitesgenereren.nl/#/blog`
-- Geen `.htaccess` configuratie nodig
-- Werkt direct out-of-the-box
+Dit geldt voor:
+1. Secties (regel 220-235)
+2. Praktische Tips link (regel 237-246)
+3. Veelgestelde Vragen link (regel 247-257)
 
-**Optie B: BrowserRouter voor schonere URLs**
-- URLs worden: `https://aiwebsitesgenereren.nl/blog`
-- Vereist `.htaccess` voor SPA routing
+## Verwacht Resultaat
+| Aspect | Voor | Na |
+|--------|------|-----|
+| ToC klik gedrag | 404 error | Smooth scroll naar sectie |
+| URL verandering | Ja (breekt route) | Nee (blijft intact) |
+| Gebruikerservaring | Slecht | Goed |
+| SEO impact | Negatief (bounce) | Positief (engagement) |
 
-### 3. Apache .htaccess (alleen bij BrowserRouter)
-**Bestand:** `public/.htaccess`
-
-```apache
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
-```
-
----
-
-## Technische Details
-
-| Aspect | GitHub Pages | Cloudways |
-|--------|--------------|-----------|
-| Base path | `/AIWebsitesGenereren/` | `/` |
-| Router | HashRouter | HashRouter of BrowserRouter |
-| SSL | Automatisch | Via Cloudways panel |
-| Deploy | GitHub Actions | Git pull of SFTP |
-
-## Aanbeveling
-Start met **Optie A (HashRouter behouden)** - dit werkt direct zonder extra configuratie. Je kunt later altijd upgraden naar BrowserRouter voor schonere URLs.
-
-## Na Implementatie
-1. Bouw het project: `npm run build`
-2. Deploy de `dist/` folder naar Cloudways
-3. Configureer SSL in Cloudways panel
-4. Test alle routes op `https://aiwebsitesgenereren.nl`
-
+## Alternatief (voor later)
+Als je in de toekomst overschakelt naar BrowserRouter met `.htaccess` configuratie, kunnen anchor links weer werken. Maar de JavaScript scroll-oplossing is robuuster en werkt met beide routers.
