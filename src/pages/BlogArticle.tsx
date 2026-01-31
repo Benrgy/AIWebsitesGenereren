@@ -57,6 +57,13 @@ const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = getArticleBySlug(slug || "");
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   if (!article) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -221,39 +228,42 @@ const BlogArticle = () => {
                         const sectionId = `sectie-${idx + 1}`;
                         return (
                           <li key={idx}>
-                            <a 
-                              href={`#${sectionId}`}
-                              className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                            <button 
+                              type="button"
+                              onClick={() => scrollToSection(sectionId)}
+                              className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group text-left w-full"
                             >
                               <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
                                 {idx + 1}.
                               </span>
                               <span className="text-sm">{section.heading}</span>
-                            </a>
+                            </button>
                           </li>
                         );
                       })}
                       <li>
-                        <a 
-                          href="#praktische-tips"
-                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                        <button 
+                          type="button"
+                          onClick={() => scrollToSection('praktische-tips')}
+                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group text-left w-full"
                         >
                           <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
                             {article.sections.length + 1}.
                           </span>
                           <span className="text-sm">Praktische Tips</span>
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a 
-                          href="#veelgestelde-vragen"
-                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                        <button 
+                          type="button"
+                          onClick={() => scrollToSection('veelgestelde-vragen')}
+                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group text-left w-full"
                         >
                           <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
                             {article.sections.length + 2}.
                           </span>
                           <span className="text-sm">Veelgestelde Vragen</span>
-                        </a>
+                        </button>
                       </li>
                     </ol>
                   </nav>
