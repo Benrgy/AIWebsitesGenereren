@@ -1,63 +1,60 @@
 
-# Fix: Inhoudsopgave Navigatie met HashRouter
+# Fix: Automatisch Naar Boven Scrollen Bij Navigatie
 
-## Probleem Analyse
-De Table of Contents gebruikt standaard anchor links (`href="#sectie-1"`). Met HashRouter wordt de URL-structuur:
-- **Huidige URL**: `https://aiwebsitesgenereren.nl/#/blog/artikel-slug`
-- **Na klik op ToC**: `https://aiwebsitesgenereren.nl/#sectie-1` (FOUT - vervangt de route!)
+## Probleem
+Bij Single Page Applications (SPAs) met React Router wordt de scroll positie behouden wanneer je naar een nieuwe pagina navigeert. Hierdoor begint een blogartikel halverwege of onderaan in plaats van bovenaan.
 
-Dit leidt tot een 404 omdat `sectie-1` geen geldige route is.
+## Oorzaak
+De huidige `ScrollToTop` component (regel 65 in App.tsx) is alleen een floating button voor handmatig terug scrollen. Er is geen automatische scroll reset bij route wijzigingen.
 
 ## Oplossing
-Vervang anchor links door JavaScript scroll-functionaliteit met `scrollIntoView()`. Dit werkt perfect met HashRouter omdat de URL niet verandert.
+Maak een nieuwe component `ScrollRestoration` die bij elke route wijziging automatisch naar boven scrollt.
 
 ## Technische Wijzigingen
 
-### Bestand: `src/pages/BlogArticle.tsx`
+### Nieuw Bestand: `src/components/ScrollRestoration.tsx`
 
-**Stap 1**: Voeg een scroll handler functie toe (regel ~56):
 ```typescript
-const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+const ScrollRestoration = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 };
+
+export default ScrollRestoration;
 ```
 
-**Stap 2**: Vervang alle `<a href="#...">` links in de inhoudsopgave door `<button>` elementen met `onClick`:
+### Bestand: `src/App.tsx`
+
+Import en toevoegen binnen de HashRouter:
 
 ```typescript
-// Van (regel 224-234):
-<a 
-  href={`#${sectionId}`}
-  className="..."
->
-  ...
-</a>
+import ScrollRestoration from "@/components/ScrollRestoration";
 
-// Naar:
-<button 
-  type="button"
-  onClick={() => scrollToSection(sectionId)}
-  className="... text-left w-full"
->
+// In de component, direct na <HashRouter>:
+<HashRouter>
+  <ScrollRestoration />
+  <SkipLink />
   ...
-</button>
+</HashRouter>
 ```
-
-Dit geldt voor:
-1. Secties (regel 220-235)
-2. Praktische Tips link (regel 237-246)
-3. Veelgestelde Vragen link (regel 247-257)
 
 ## Verwacht Resultaat
-| Aspect | Voor | Na |
-|--------|------|-----|
-| ToC klik gedrag | 404 error | Smooth scroll naar sectie |
-| URL verandering | Ja (breekt route) | Nee (blijft intact) |
-| Gebruikerservaring | Slecht | Goed |
-| SEO impact | Negatief (bounce) | Positief (engagement) |
 
-## Alternatief (voor later)
-Als je in de toekomst overschakelt naar BrowserRouter met `.htaccess` configuratie, kunnen anchor links weer werken. Maar de JavaScript scroll-oplossing is robuuster en werkt met beide routers.
+| Scenario | Voor | Na |
+|----------|------|-----|
+| Klik op blogartikel | Pagina start halverwege | Pagina start bovenaan |
+| Navigeer naar andere pagina | Scroll positie blijft | Scroll reset naar top |
+| Gebruik browser back-knop | Werkt normaal | Werkt normaal |
+
+## Waarom Deze Aanpak?
+- **Eenvoudig**: Minimale code, maximaal effect
+- **Betrouwbaar**: Standaard React Router patroon
+- **Performance**: Geen impact op laadtijd
