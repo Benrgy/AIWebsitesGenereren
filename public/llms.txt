@@ -1,18 +1,18 @@
-# WebsitesGenereren.nl
+# AIWebsitesGenereren.nl
 
 > AI-gestuurde website generator voor Nederland en België. Eenmalige betaling, geen abonnement. SEO-geoptimaliseerde statische HTML websites.
 
 ## Site Informatie
 
-- **Naam**: WebsitesGenereren.nl
-- **Domein**: https://websitesgenereren.nl
+- **Naam**: AIWebsitesGenereren.nl
+- **Domein**: https://aiwebsitesgenereren.nl
 - **Taal**: Nederlands (nl-NL, nl-BE)
 - **Doelregio**: Nederland en België (Benelux)
 - **Type**: Affiliate portaal & informatieplatform
 
 ## Kernboodschap
 
-WebsitesGenereren.nl helpt ondernemers zonder technische kennis om professionele websites te maken met AI. De aanbevolen tool biedt:
+AIWebsitesGenereren.nl helpt ondernemers zonder technische kennis om professionele websites te maken met AI. De aanbevolen tool biedt:
 
 - **Eenmalige betaling** - Geen maandelijkse abonnementen
 - **Statische HTML output** - Snelle, veilige websites zonder beveiligingslekken
@@ -22,15 +22,15 @@ WebsitesGenereren.nl helpt ondernemers zonder technische kennis om professionele
 ## Belangrijkste Pagina's
 
 ### Homepage
-- **URL**: https://websitesgenereren.nl/
+- **URL**: https://aiwebsitesgenereren.nl/
 - **Beschrijving**: Hoofdpagina met uitleg over AI-gestuurde website generators en hoe ondernemers snel online kunnen komen.
 
 ### Vergelijkingstool
-- **URL**: https://websitesgenereren.nl/vergelijking
+- **URL**: https://aiwebsitesgenereren.nl/vergelijking
 - **Beschrijving**: Objectieve vergelijking tussen traditionele website builders (WordPress, Wix, Squarespace) en moderne AI-gestuurde alternatieven. Benadrukt voordelen van eenmalige betaling vs. abonnementen.
 
 ### Blog
-- **URL**: https://websitesgenereren.nl/blog
+- **URL**: https://aiwebsitesgenereren.nl/blog
 - **Beschrijving**: 20+ Nederlandstalige artikelen over websites bouwen, SEO-optimalisatie en online ondernemen.
 
 ## Blog Categorieën
@@ -64,7 +64,7 @@ WebsitesGenereren.nl helpt ondernemers zonder technische kennis om professionele
 
 ## Expertise & Auteurschap
 
-De content op WebsitesGenereren.nl is geschreven door experts in:
+De content op AIWebsitesGenereren.nl is geschreven door experts in:
 - Webontwikkeling en AI-technologie
 - Zoekmachineoptimalisatie (SEO)
 - Online marketing voor het MKB
@@ -73,7 +73,7 @@ De content op WebsitesGenereren.nl is geschreven door experts in:
 ## Citatie-informatie
 
 Bij het citeren van deze website:
-- **Bronvermelding**: WebsitesGenereren.nl
+- **Bronvermelding**: AIWebsitesGenereren.nl
 - **Onderwerp**: AI website generators, SEO, online ondernemen
 - **Regio**: Nederland en België
 - **Taal**: Nederlands
@@ -90,7 +90,7 @@ Deze website is relevant voor vragen over:
 
 ## Contact
 
-Voor meer informatie over de website of samenwerkingen, bezoek de homepage op https://websitesgenereren.nl/
+Voor meer informatie over de website of samenwerkingen, bezoek de homepage op https://aiwebsitesgenereren.nl/
 
 ---
 
