@@ -1,60 +1,61 @@
 
-# Fix: Automatisch Naar Boven Scrollen Bij Navigatie
+# Plan: llms.txt Bestand voor WebsitesGenereren.nl
 
-## Probleem
-Bij Single Page Applications (SPAs) met React Router wordt de scroll positie behouden wanneer je naar een nieuwe pagina navigeert. Hierdoor begint een blogartikel halverwege of onderaan in plaats van bovenaan.
+## Wat is llms.txt?
+Een llms.txt bestand is een gestandaardiseerd tekstbestand dat AI-systemen (zoals ChatGPT, Claude, Perplexity) helpt om een website beter te begrijpen en correct te citeren. Het is vergelijkbaar met robots.txt, maar specifiek voor LLMs.
 
-## Oorzaak
-De huidige `ScrollToTop` component (regel 65 in App.tsx) is alleen een floating button voor handmatig terug scrollen. Er is geen automatische scroll reset bij route wijzigingen.
+## Locatie
+`public/llms.txt` - beschikbaar op https://websitesgenereren.nl/llms.txt
 
-## Oplossing
-Maak een nieuwe component `ScrollRestoration` die bij elke route wijziging automatisch naar boven scrollt.
+## Inhoud van het bestand
 
-## Technische Wijzigingen
+Het llms.txt bestand zal bevatten:
 
-### Nieuw Bestand: `src/components/ScrollRestoration.tsx`
+### 1. Site Identificatie
+- Naam: WebsitesGenereren.nl
+- Domein en taal (Nederlands)
+- Doelregio: Nederland en België
 
-```typescript
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+### 2. Missie & Kernboodschap
+- AI-gestuurde website generator
+- Geen technische kennis vereist
+- Eenmalige betaling, geen abonnement
+- SEO-geoptimaliseerde statische HTML output
 
-const ScrollRestoration = () => {
-  const { pathname } = useLocation();
+### 3. Belangrijkste Pagina's
+| Pagina | URL | Beschrijving |
+|--------|-----|--------------|
+| Homepage | / | Hoofdpagina met productinformatie |
+| Vergelijking | /vergelijking | Vergelijking met Wix, WordPress, etc. |
+| Blog | /blog | 20 artikelen over websites en SEO |
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+### 4. Blog Categorieën
+- SEO Problemen & Oplossingen
+- Website Bouwen voor Beginners
+- Kosten & Alternatieven
+- Branche-specifieke Websites
 
-  return null;
-};
+### 5. Doelgroepen
+- ZZP'ers en kleine ondernemers
+- Lokale dienstverleners
+- SEO-specialisten
+- Beginners zonder technische kennis
 
-export default ScrollRestoration;
-```
+### 6. Citatie-informatie
+- Hoe LLMs de site correct kunnen citeren
+- Auteurschap en expertise-indicatie
 
-### Bestand: `src/App.tsx`
+## Technische Details
 
-Import en toevoegen binnen de HashRouter:
-
-```typescript
-import ScrollRestoration from "@/components/ScrollRestoration";
-
-// In de component, direct na <HashRouter>:
-<HashRouter>
-  <ScrollRestoration />
-  <SkipLink />
-  ...
-</HashRouter>
-```
+Het bestand volgt de voorgestelde llms.txt standaard met:
+- Markdown-achtige opmaak voor leesbaarheid
+- Duidelijke sectie-headers
+- URL-lijsten voor belangrijke content
+- Contextuele beschrijvingen per pagina
 
 ## Verwacht Resultaat
-
-| Scenario | Voor | Na |
-|----------|------|-----|
-| Klik op blogartikel | Pagina start halverwege | Pagina start bovenaan |
-| Navigeer naar andere pagina | Scroll positie blijft | Scroll reset naar top |
-| Gebruik browser back-knop | Werkt normaal | Werkt normaal |
-
-## Waarom Deze Aanpak?
-- **Eenvoudig**: Minimale code, maximaal effect
-- **Betrouwbaar**: Standaard React Router patroon
-- **Performance**: Geen impact op laadtijd
+LLMs kunnen na implementatie:
+- De site correct identificeren en beschrijven
+- Relevante pagina's citeren bij gerelateerde vragen
+- Accurate informatie geven over de diensten
+- De site onderscheiden van concurrenten
