@@ -2,11 +2,12 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight, List } from "lucide-react";
+import { ExternalLink, CheckCircle, Clock, Calendar, HelpCircle, ListChecks, ChevronRight } from "lucide-react";
 import { getArticleBySlug, blogArticles, AFFILIATE_LINK, BlogArticle as BlogArticleType } from "@/data/blogArticles";
 import Header from "@/components/Header";
 import SEOHead from "@/components/SEOHead";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
+import TableOfContents from "@/components/TableOfContents";
 import { 
   generateArticleSchema, 
   generateFAQSchema, 
@@ -56,13 +57,6 @@ const articleImages: Record<string, string> = {
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = getArticleBySlug(slug || "");
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   if (!article) {
     return (
@@ -212,200 +206,160 @@ const BlogArticle = () => {
           </section>
         )}
 
-        {/* Table of Contents - Only show for articles with 3+ sections */}
-        {article.sections.length >= 3 && (
-          <section className="pb-8">
-            <div className="container mx-auto px-4 max-w-3xl">
-              <Card className="border-border/50">
-                <CardContent className="p-5">
-                  <h2 className="font-semibold text-foreground mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
-                    <List className="h-4 w-4 text-primary" />
-                    Inhoudsopgave
-                  </h2>
-                  <nav>
-                    <ol className="space-y-2">
-                      {article.sections.map((section, idx) => {
-                        const sectionId = `sectie-${idx + 1}`;
-                        return (
-                          <li key={idx}>
-                            <button 
-                              type="button"
-                              onClick={() => scrollToSection(sectionId)}
-                              className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group text-left w-full"
-                            >
-                              <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
-                                {idx + 1}.
-                              </span>
-                              <span className="text-sm">{section.heading}</span>
-                            </button>
-                          </li>
-                        );
-                      })}
-                      <li>
-                        <button 
-                          type="button"
-                          onClick={() => scrollToSection('praktische-tips')}
-                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group text-left w-full"
-                        >
-                          <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
-                            {article.sections.length + 1}.
-                          </span>
-                          <span className="text-sm">Praktische Tips</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button 
-                          type="button"
-                          onClick={() => scrollToSection('veelgestelde-vragen')}
-                          className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group text-left w-full"
-                        >
-                          <span className="text-xs font-medium text-primary/70 group-hover:text-primary w-5">
-                            {article.sections.length + 2}.
-                          </span>
-                          <span className="text-sm">Veelgestelde Vragen</span>
-                        </button>
-                      </li>
-                    </ol>
-                  </nav>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
-        )}
-
-        {/* Main Content */}
+        {/* Main Content with Sticky Sidebar */}
         <article className="pb-12">
-          <div className="container mx-auto px-4 max-w-3xl">
-            {/* Sections */}
-            <div className="space-y-10">
-              {article.sections.map((section, idx) => (
-                <section key={idx} id={`sectie-${idx + 1}`} className="scroll-mt-20">
-                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
-                    {section.heading}
+          <div className="container mx-auto px-4">
+            <div className="flex gap-8 max-w-5xl mx-auto">
+              {/* Sticky Sidebar - Desktop Only */}
+              {article.sections.length >= 3 && (
+                <aside className="hidden lg:block w-64 shrink-0">
+                  <div className="sticky top-20">
+                    <TableOfContents sections={article.sections} />
+                  </div>
+                </aside>
+              )}
+
+              {/* Article Content */}
+              <div className="flex-1 max-w-3xl">
+                {/* Mobile ToC - Only show inline on mobile for articles with 3+ sections */}
+                {article.sections.length >= 3 && (
+                  <div className="lg:hidden mb-8">
+                    <TableOfContents sections={article.sections} />
+                  </div>
+                )}
+
+                {/* Sections */}
+                <div className="space-y-10">
+                  {article.sections.map((section, idx) => (
+                    <section key={idx} id={`sectie-${idx + 1}`} className="scroll-mt-20">
+                      <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
+                        {section.heading}
+                      </h2>
+                      <div className="space-y-4">
+                        {section.content.map((paragraph, pIdx) => (
+                          <p key={pIdx} className="text-muted-foreground leading-relaxed">
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                      {section.calloutStat && (
+                        <div className="mt-4 p-4 border-l-2 border-primary bg-primary/5 rounded-r-lg">
+                          <p className="text-sm font-medium text-foreground">{section.calloutStat}</p>
+                        </div>
+                      )}
+                    </section>
+                  ))}
+                </div>
+
+                {/* Tips Section */}
+                <section id="praktische-tips" className="mt-12 scroll-mt-20">
+                  <Card className="border-0 bg-muted/50">
+                    <CardContent className="p-5">
+                      <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
+                        <ListChecks className="h-5 w-5 text-primary" />
+                        Praktische Tips
+                      </h3>
+                      <div className="grid gap-3">
+                        {article.tips.map((tip, idx) => (
+                          <div key={idx} className="flex gap-3">
+                            <span className="text-primary font-bold text-lg">{idx + 1}</span>
+                            <div>
+                              <p className="font-medium text-foreground">{tip.title}</p>
+                              <p className="text-muted-foreground text-sm">{tip.description}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </section>
+
+                {/* FAQ Section */}
+                <section id="veelgestelde-vragen" className="mt-12 scroll-mt-20">
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                    <HelpCircle className="h-5 w-5 text-primary" />
+                    Veelgestelde Vragen
                   </h2>
                   <div className="space-y-4">
-                    {section.content.map((paragraph, pIdx) => (
-                      <p key={pIdx} className="text-muted-foreground leading-relaxed">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                  {section.calloutStat && (
-                    <div className="mt-4 p-4 border-l-2 border-primary bg-primary/5 rounded-r-lg">
-                      <p className="text-sm font-medium text-foreground">{section.calloutStat}</p>
-                    </div>
-                  )}
-                </section>
-              ))}
-            </div>
-
-            {/* Tips Section */}
-            <section id="praktische-tips" className="mt-12 scroll-mt-20">
-              <Card className="border-0 bg-muted/50">
-                <CardContent className="p-5">
-                  <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                    <ListChecks className="h-5 w-5 text-primary" />
-                    Praktische Tips
-                  </h3>
-                  <div className="grid gap-3">
-                    {article.tips.map((tip, idx) => (
-                      <div key={idx} className="flex gap-3">
-                        <span className="text-primary font-bold text-lg">{idx + 1}</span>
-                        <div>
-                          <p className="font-medium text-foreground">{tip.title}</p>
-                          <p className="text-muted-foreground text-sm">{tip.description}</p>
+                    {article.faq.map((item, idx) => (
+                      <details key={idx} className="group border border-border rounded-lg">
+                        <summary className="flex items-center justify-between cursor-pointer p-4 font-medium text-foreground hover:bg-muted/30 rounded-lg transition-colors">
+                          {item.question}
+                          <ChevronRight className="h-4 w-4 text-muted-foreground group-open:rotate-90 transition-transform" />
+                        </summary>
+                        <div className="px-4 pb-4">
+                          <p className="text-muted-foreground">{item.answer}</p>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-
-            {/* FAQ Section */}
-            <section id="veelgestelde-vragen" className="mt-12 scroll-mt-20">
-              <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-                <HelpCircle className="h-5 w-5 text-primary" />
-                Veelgestelde Vragen
-              </h2>
-              <div className="space-y-4">
-                {article.faq.map((item, idx) => (
-                  <details key={idx} className="group border border-border rounded-lg">
-                    <summary className="flex items-center justify-between cursor-pointer p-4 font-medium text-foreground hover:bg-muted/30 rounded-lg transition-colors">
-                      {item.question}
-                      <ChevronRight className="h-4 w-4 text-muted-foreground group-open:rotate-90 transition-transform" />
-                    </summary>
-                    <div className="px-4 pb-4">
-                      <p className="text-muted-foreground">{item.answer}</p>
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="mt-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl p-6 sm:p-8 text-center">
-              <h2 className="text-xl sm:text-2xl font-bold text-primary-foreground mb-3">
-                Klaar om te beginnen?
-              </h2>
-              <p className="text-primary-foreground/90 mb-5 text-sm sm:text-base max-w-lg mx-auto">
-                Met de #1 AI website generator maak je in minuten een professionele website. Geen technische kennis nodig.
-              </p>
-              <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold">
-                <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
-                  Start Vandaag Nog <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            </section>
-
-            {/* Related Articles Section */}
-            {(() => {
-              const relatedArticles = blogArticles
-                .filter(a => a.category === article.category && a.slug !== article.slug)
-                .slice(0, 3);
-              
-              if (relatedArticles.length === 0) return null;
-              
-              return (
-                <section className="mt-12">
-                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6">
-                    Gerelateerde Artikelen
-                  </h2>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {relatedArticles.map((relatedArticle) => (
-                      <Link 
-                        key={relatedArticle.id} 
-                        to={`/blog/${relatedArticle.slug}`}
-                        className="group"
-                      >
-                        <Card className="h-full hover:shadow-md hover:border-primary/30 transition-all overflow-hidden">
-                          <div className="relative h-28 overflow-hidden">
-                            <img 
-                              src={articleImages[relatedArticle.slug] || seoGoogleSearch} 
-                              alt={relatedArticle.title}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-                            <Badge variant="secondary" className="absolute bottom-2 left-2 text-xs bg-background/90 backdrop-blur-sm">
-                              {relatedArticle.category}
-                            </Badge>
-                          </div>
-                          <CardContent className="p-3">
-                            <h3 className="font-medium text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                              {relatedArticle.title}
-                            </h3>
-                            <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-                              <Clock className="h-3 w-3" /> {relatedArticle.readTime}
-                            </p>
-                          </CardContent>
-                        </Card>
-                      </Link>
+                      </details>
                     ))}
                   </div>
                 </section>
-              );
-            })()}
+
+                {/* CTA Section */}
+                <section className="mt-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl p-6 sm:p-8 text-center">
+                  <h2 className="text-xl sm:text-2xl font-bold text-primary-foreground mb-3">
+                    Klaar om te beginnen?
+                  </h2>
+                  <p className="text-primary-foreground/90 mb-5 text-sm sm:text-base max-w-lg mx-auto">
+                    Met de #1 AI website generator maak je in minuten een professionele website. Geen technische kennis nodig.
+                  </p>
+                  <Button asChild size="lg" variant="secondary" className="text-foreground font-semibold">
+                    <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                      Start Vandaag Nog <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </section>
+
+                {/* Related Articles Section */}
+                {(() => {
+                  const relatedArticles = blogArticles
+                    .filter(a => a.category === article.category && a.slug !== article.slug)
+                    .slice(0, 3);
+                  
+                  if (relatedArticles.length === 0) return null;
+                  
+                  return (
+                    <section className="mt-12">
+                      <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6">
+                        Gerelateerde Artikelen
+                      </h2>
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {relatedArticles.map((relatedArticle) => (
+                          <Link 
+                            key={relatedArticle.id} 
+                            to={`/blog/${relatedArticle.slug}`}
+                            className="group"
+                          >
+                            <Card className="h-full hover:shadow-md hover:border-primary/30 transition-all overflow-hidden">
+                              <div className="relative h-28 overflow-hidden">
+                                <img 
+                                  src={articleImages[relatedArticle.slug] || seoGoogleSearch} 
+                                  alt={relatedArticle.title}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                  loading="lazy"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+                                <Badge variant="secondary" className="absolute bottom-2 left-2 text-xs bg-background/90 backdrop-blur-sm">
+                                  {relatedArticle.category}
+                                </Badge>
+                              </div>
+                              <CardContent className="p-3">
+                                <h3 className="font-medium text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                                  {relatedArticle.title}
+                                </h3>
+                                <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                                  <Clock className="h-3 w-3" /> {relatedArticle.readTime}
+                                </p>
+                              </CardContent>
+                            </Card>
+                          </Link>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })()}
+              </div>
+            </div>
           </div>
         </article>
 
