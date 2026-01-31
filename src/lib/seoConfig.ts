@@ -5,7 +5,7 @@ export const SEO_CONFIG = {
   site: {
     name: "WebsitesGenereren.nl",
     domain: "https://websitesgenereren.nl",
-    logo: "https://websitesgenereren.nl/favicon.ico",
+    logo: "https://websitesgenereren.nl/favicon.png",
     language: "nl",
     regions: ["NL", "BE"],
     locales: ["nl_NL", "nl_BE"],
@@ -20,7 +20,7 @@ export const SEO_CONFIG = {
     name: "WebsitesGenereren.nl",
     alternateName: "AI Website Generator Nederland",
     url: "https://websitesgenereren.nl",
-    logo: "https://websitesgenereren.nl/favicon.ico",
+    logo: "https://websitesgenereren.nl/favicon.png",
     description: "AI-gestuurde website generator voor professionele websites in minuten.",
     foundingDate: "2024",
     areaServed: ["NL", "BE"],
