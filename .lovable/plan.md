@@ -1,76 +1,66 @@
-# Performance Optimalisatie Plan
 
-## ✅ STATUS: AFGEROND - 31 januari 2026
 
-Dit plan richtte zich op het verbeteren van de Core Web Vitals scores en het oplossen van de NO_FCP errors. **Alle doelen zijn behaald.**
+# Cloudways Deployment Configuratie voor websitesgenereren.nl
 
----
+## Overzicht
+Aanpassing van de huidige GitHub Pages configuratie naar Cloudways hosting met het domein `aiwebsitesgenereren.nl`.
 
-## Behaalde Resultaten
+## Wijzigingen
 
-### PageSpeed Insights Scores (GitHub Pages)
+### 1. Vite Base Path Aanpassen
+**Bestand:** `vite.config.ts`
 
-| Metric | Desktop | Mobile | Doel | Status |
-|--------|---------|--------|------|--------|
-| **Performance** | **100** | ~90 | 60-80 | ✅ Overtroffen |
-| FCP | 0.4s | 1.6s | < 1.8s | ✅ Behaald |
-| LCP | 0.4s | 1.7s | < 2.5s | ✅ Behaald |
-| TBT | 0ms | 0ms | < 200ms | ✅ Behaald |
-| CLS | 0 | 0 | < 0.1 | ✅ Behaald |
-| Speed Index | 0.6s | 1.6s | < 3.0s | ✅ Behaald |
+De huidige configuratie gebruikt `/AIWebsitesGenereren/` voor GitHub Pages. Voor Cloudways moet dit naar `/`:
 
-**Het NO_FCP probleem is volledig opgelost!**
+```typescript
+// Van:
+base: mode === 'production' ? '/AIWebsitesGenereren/' : '/',
 
----
+// Naar:
+base: '/',
+```
 
-## Geïmplementeerde Optimalisaties
+### 2. Router Keuze
+**Optie A: HashRouter behouden (aanbevolen - geen server config nodig)**
+- URLs worden: `https://aiwebsitesgenereren.nl/#/blog`
+- Geen `.htaccess` configuratie nodig
+- Werkt direct out-of-the-box
 
-### ✅ Fase 1: Image Optimalisatie
-- Hero images voorzien van `fetchPriority="high"` en `loading="eager"`
-- Expliciete `width` en `height` attributen toegevoegd
-- Alle blog afbeeldingen geconverteerd naar WebP formaat
+**Optie B: BrowserRouter voor schonere URLs**
+- URLs worden: `https://aiwebsitesgenereren.nl/blog`
+- Vereist `.htaccess` voor SPA routing
 
-### ✅ Fase 2: Code Splitting
-- `React.lazy()` geïmplementeerd voor alle pagina's
-- `<Suspense>` met PageLoader fallback toegevoegd
-- Initiële bundle grootte significant verminderd
+### 3. Apache .htaccess (alleen bij BrowserRouter)
+**Bestand:** `public/.htaccess`
 
-### ✅ Fase 4: Accessibility & UX
-- ARIA labels toegevoegd aan Header en Footer
-- Skip-to-content link geïmplementeerd
-- Reading progress bar op blog artikelen
-- Semantic HTML landmarks (`<main>`, `<nav>`, `<footer>`)
-- Focus management verbeterd
-
-### ✅ Extra Optimalisaties
-- DNS-prefetching voor Supabase backend in `index.html`
-- Cookie consent met ARIA verbeteringen
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+```
 
 ---
 
-## Niet Geïmplementeerd (Niet Nodig)
+## Technische Details
 
-### Fase 3: Prerendering / Static Generation
-**Reden:** De behaalde scores zijn uitstekend zonder prerendering. De complexiteit en potentiële compatibiliteitsproblemen met HashRouter maken deze optimalisatie niet noodzakelijk.
+| Aspect | GitHub Pages | Cloudways |
+|--------|--------------|-----------|
+| Base path | `/AIWebsitesGenereren/` | `/` |
+| Router | HashRouter | HashRouter of BrowserRouter |
+| SSL | Automatisch | Via Cloudways panel |
+| Deploy | GitHub Actions | Git pull of SFTP |
 
----
+## Aanbeveling
+Start met **Optie A (HashRouter behouden)** - dit werkt direct zonder extra configuratie. Je kunt later altijd upgraden naar BrowserRouter voor schonere URLs.
 
-## Resterende Verbetermogelijkheden (Optioneel)
+## Na Implementatie
+1. Bouw het project: `npm run build`
+2. Deploy de `dist/` folder naar Cloudways
+3. Configureer SSL in Cloudways panel
+4. Test alle routes op `https://aiwebsitesgenereren.nl`
 
-Deze zijn **niet kritiek** maar kunnen overwogen worden voor toekomstige iteraties:
-
-1. **Cache TTL** - GitHub Pages beperking (10 min), niet te wijzigen
-2. **Unused JavaScript** (~43 KiB) - Verdere tree-shaking mogelijk
-3. **CSS Code Splitting** - Complexe implementatie voor kleine winst
-4. **Preconnect hints** - Kan mobiele score marginaal verbeteren
-
----
-
-## Conclusie
-
-De performance optimalisatie is **succesvol afgerond**. De site behaalt:
-- **Perfect 100/100 score op desktop**
-- **Uitstekende ~90 score op mobiel** (met 4G throttling simulatie)
-- **Alle Core Web Vitals ruim binnen de "goede" drempelwaarden**
-
-Het NO_FCP probleem dat in de oorspronkelijke PageSpeed tests optrad is volledig opgelost door de implementatie van code-splitting met React.lazy() en Suspense.
