@@ -13,7 +13,7 @@ export const SEO_CONFIG = {
   },
   defaults: {
     titleSuffix: " | WebsitesGenereren.nl",
-    ogImage: "https://websitesgenereren.nl/og-image.jpg",
+    ogImage: "https://websitesgenereren.nl/og-image.png",
     twitterHandle: "@websitesgenereren",
   },
   organization: {
