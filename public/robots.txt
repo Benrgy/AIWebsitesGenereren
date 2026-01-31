@@ -1,6 +1,6 @@
-# WebsitesGenereren.nl - AI Website Generator
+# AIWebsitesGenereren.nl - AI Website Generator
 # Optimized for search engines, AI crawlers, and LLMs
-# Last updated: 2025-01-30
+# Last updated: 2025-01-31
 
 # =====================================================
 # MAJOR SEARCH ENGINES
@@ -183,9 +183,9 @@ Disallow: /_internal/
 # SITEMAP & HOST DECLARATION
 # =====================================================
 
-Sitemap: https://websitesgenereren.nl/sitemap.xml
+Sitemap: https://aiwebsitesgenereren.nl/sitemap.xml
 
-Host: https://websitesgenereren.nl
+Host: https://aiwebsitesgenereren.nl
 
 # =====================================================
 # LLM CONTEXT FILE
@@ -193,4 +193,4 @@ Host: https://websitesgenereren.nl
 # =====================================================
 
 # llms.txt provides structured information for LLMs
-# See: https://websitesgenereren.nl/llms.txt
+# See: https://aiwebsitesgenereren.nl/llms.txt
