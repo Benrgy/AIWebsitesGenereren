@@ -1,61 +1,67 @@
 
-# Plan: llms.txt Bestand voor WebsitesGenereren.nl
+# Plan: Nieuw Favicon met Globe, Gradient en SEO Optimalisatie
 
-## Wat is llms.txt?
-Een llms.txt bestand is een gestandaardiseerd tekstbestand dat AI-systemen (zoals ChatGPT, Claude, Perplexity) helpt om een website beter te begrijpen en correct te citeren. Het is vergelijkbaar met robots.txt, maar specifiek voor LLMs.
+## Wat gaan we doen
+Een modern favicon ontwerpen dat past bij de AI Website Generator branding, inclusief volledige SEO optimalisatie voor maximale zichtbaarheid in zoekresultaten.
 
-## Locatie
-`public/llms.txt` - beschikbaar op https://websitesgenereren.nl/llms.txt
+## Stappen
 
-## Inhoud van het bestand
+### Stap 1: Favicon Genereren met AI
+Met Lovable's AI image generatie maken we een favicon met deze kenmerken:
+- **Vorm**: Gestileerde globe/wereldbol
+- **Kleuren**: Gradient van blauw (#3B82F6) naar cyaan (#06B6D4)
+- **Stijl**: Modern, minimalistisch, geschikt voor kleine weergave
+- **Formaat**: 512x512 PNG (wordt geschaald naar alle favicon formaten)
 
-Het llms.txt bestand zal bevatten:
+### Stap 2: Favicon Bestand Toevoegen
+- Het gegenereerde icoon opslaan als `public/favicon.png`
+- De oude favicon vervangen
 
-### 1. Site Identificatie
-- Naam: WebsitesGenereren.nl
-- Domein en taal (Nederlands)
-- Doelregio: Nederland en België
+### Stap 3: SEO Optimalisatie in index.html
 
-### 2. Missie & Kernboodschap
-- AI-gestuurde website generator
-- Geen technische kennis vereist
-- Eenmalige betaling, geen abonnement
-- SEO-geoptimaliseerde statische HTML output
+**Favicon meta tags met beschrijvende attributen:**
+```html
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+```
 
-### 3. Belangrijkste Pagina's
-| Pagina | URL | Beschrijving |
-|--------|-----|--------------|
-| Homepage | / | Hoofdpagina met productinformatie |
-| Vergelijking | /vergelijking | Vergelijking met Wix, WordPress, etc. |
-| Blog | /blog | 20 artikelen over websites en SEO |
+**Open Graph image update (voor social sharing):**
+```html
+<meta property="og:image:alt" content="AI Website Generator - Maak professionele websites in minuten met kunstmatige intelligentie" />
+```
 
-### 4. Blog Categorieën
-- SEO Problemen & Oplossingen
-- Website Bouwen voor Beginners
-- Kosten & Alternatieven
-- Branche-specifieke Websites
+### Stap 4: Schema.org Logo Optimalisatie
 
-### 5. Doelgroepen
-- ZZP'ers en kleine ondernemers
-- Lokale dienstverleners
-- SEO-specialisten
-- Beginners zonder technische kennis
+Update de Organization structured data met beschrijvende logo informatie:
+```json
+{
+  "@type": "Organization",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://aiwebsitesgenereren.nl/favicon.png",
+    "width": 512,
+    "height": 512,
+    "caption": "AI Website Generator Nederland - Logo voor professionele website creatie met kunstmatige intelligentie"
+  }
+}
+```
 
-### 6. Citatie-informatie
-- Hoe LLMs de site correct kunnen citeren
-- Auteurschap en expertise-indicatie
+### Stap 5: WebSite Schema Update
 
-## Technische Details
+Voeg het logo ook toe aan de WebSite structured data voor betere herkenning door zoekmachines.
 
-Het bestand volgt de voorgestelde llms.txt standaard met:
-- Markdown-achtige opmaak voor leesbaarheid
-- Duidelijke sectie-headers
-- URL-lijsten voor belangrijke content
-- Contextuele beschrijvingen per pagina
+## SEO Voordelen
 
-## Verwacht Resultaat
-LLMs kunnen na implementatie:
-- De site correct identificeren en beschrijven
-- Relevante pagina's citeren bij gerelateerde vragen
-- Accurate informatie geven over de diensten
-- De site onderscheiden van concurrenten
+| Element | SEO Impact |
+|---------|------------|
+| Beschrijvende logo caption | Helpt Google de merkidentiteit te begrijpen |
+| ImageObject schema | Geeft zoekmachines context over het logo |
+| Consistente branding | Verhoogt merkherkenning in zoekresultaten |
+| Apple-touch-icon | Verbetert mobiele gebruikerservaring |
+
+## Resultaat
+- Professionele favicon die past bij de blauw-cyaan branding
+- Volledig SEO-geoptimaliseerd met structured data
+- Beschrijvende captions voor AI-zoekmachines en Google Image Search
+- Werkt in alle browsers en als app-icoon op mobiel
+- Herkenbaar als AI/tech/website gerelateerd door de globe vorm
