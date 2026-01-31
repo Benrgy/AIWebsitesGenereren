@@ -1,67 +1,52 @@
 
-# Plan: Nieuw Favicon met Globe, Gradient en SEO Optimalisatie
+# Plan: OG-Image Genereren met Globe Branding
 
 ## Wat gaan we doen
-Een modern favicon ontwerpen dat past bij de AI Website Generator branding, inclusief volledige SEO optimalisatie voor maximale zichtbaarheid in zoekresultaten.
+Een professionele Open Graph afbeelding (1200x630px) maken met dezelfde globe branding als de favicon, voor optimale weergave op social media platforms zoals Facebook, LinkedIn, Twitter en WhatsApp.
+
+## Design Specificaties
+
+| Element | Waarde |
+|---------|--------|
+| Afmetingen | 1200x630 pixels |
+| Achtergrond | Donkere gradient (past bij moderne tech uitstraling) |
+| Hoofdelement | Globe icoon met blauw-cyaan gradient (#3B82F6 → #06B6D4) |
+| Tekst | "AI Website Generator" + tagline |
+| Stijl | Modern, minimalistisch, professioneel |
 
 ## Stappen
 
-### Stap 1: Favicon Genereren met AI
-Met Lovable's AI image generatie maken we een favicon met deze kenmerken:
-- **Vorm**: Gestileerde globe/wereldbol
-- **Kleuren**: Gradient van blauw (#3B82F6) naar cyaan (#06B6D4)
-- **Stijl**: Modern, minimalistisch, geschikt voor kleine weergave
-- **Formaat**: 512x512 PNG (wordt geschaald naar alle favicon formaten)
+### Stap 1: OG-Image Genereren met AI
+Met Lovable's AI image generatie maken we een banner met:
+- Dezelfde globe met gradient als de favicon (prominenter geplaatst)
+- Site naam "AIWebsitesGenereren.nl" 
+- Tagline "Professionele websites in minuten"
+- Donkere achtergrond voor contrast
+- Moderne, tech-georiënteerde uitstraling
 
-### Stap 2: Favicon Bestand Toevoegen
-- Het gegenereerde icoon opslaan als `public/favicon.png`
-- De oude favicon vervangen
+### Stap 2: Bestand Opslaan
+- Het gegenereerde beeld opslaan als `public/og-image.png`
+- PNG formaat voor beste kwaliteit
 
-### Stap 3: SEO Optimalisatie in index.html
+### Stap 3: index.html Updaten
+De OG en Twitter image referenties aanpassen:
 
-**Favicon meta tags met beschrijvende attributen:**
 ```html
-<link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+<meta property="og:image" content="https://aiwebsitesgenereren.nl/og-image.png" />
+<meta name="twitter:image" content="https://aiwebsitesgenereren.nl/og-image.png" />
 ```
 
-**Open Graph image update (voor social sharing):**
-```html
-<meta property="og:image:alt" content="AI Website Generator - Maak professionele websites in minuten met kunstmatige intelligentie" />
-```
+## Social Media Voordelen
 
-### Stap 4: Schema.org Logo Optimalisatie
-
-Update de Organization structured data met beschrijvende logo informatie:
-```json
-{
-  "@type": "Organization",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://aiwebsitesgenereren.nl/favicon.png",
-    "width": 512,
-    "height": 512,
-    "caption": "AI Website Generator Nederland - Logo voor professionele website creatie met kunstmatige intelligentie"
-  }
-}
-```
-
-### Stap 5: WebSite Schema Update
-
-Voeg het logo ook toe aan de WebSite structured data voor betere herkenning door zoekmachines.
-
-## SEO Voordelen
-
-| Element | SEO Impact |
-|---------|------------|
-| Beschrijvende logo caption | Helpt Google de merkidentiteit te begrijpen |
-| ImageObject schema | Geeft zoekmachines context over het logo |
-| Consistente branding | Verhoogt merkherkenning in zoekresultaten |
-| Apple-touch-icon | Verbetert mobiele gebruikerservaring |
+| Platform | Voordeel |
+|----------|----------|
+| Facebook | Professionele preview bij delen |
+| LinkedIn | Herkenbare branding voor B2B |
+| Twitter | Opvallende large image card |
+| WhatsApp | Duidelijke link preview |
 
 ## Resultaat
-- Professionele favicon die past bij de blauw-cyaan branding
-- Volledig SEO-geoptimaliseerd met structured data
-- Beschrijvende captions voor AI-zoekmachines en Google Image Search
-- Werkt in alle browsers en als app-icoon op mobiel
-- Herkenbaar als AI/tech/website gerelateerd door de globe vorm
+- Consistente branding tussen favicon en social previews
+- Professionele uitstraling bij het delen van links
+- Betere click-through rates door herkenbare visuele identiteit
+- Optimaal formaat voor alle grote social platforms
