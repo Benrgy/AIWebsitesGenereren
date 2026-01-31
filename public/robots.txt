@@ -186,3 +186,11 @@ Disallow: /_internal/
 Sitemap: https://websitesgenereren.nl/sitemap.xml
 
 Host: https://websitesgenereren.nl
+
+# =====================================================
+# LLM CONTEXT FILE
+# For AI systems to better understand this website
+# =====================================================
+
+# llms.txt provides structured information for LLMs
+# See: https://websitesgenereren.nl/llms.txt
