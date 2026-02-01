@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import { generateWebPageSchema, generateBreadcrumbSchema, getFullUrl } from "@/lib/seoConfig";
+import { generateWebPageSchema, generateBreadcrumbSchema, generateOrganizationSchema, getFullUrl } from "@/lib/seoConfig";
 
 const Privacy = () => {
   // Schema.org: WebPage
@@ -22,6 +22,9 @@ const Privacy = () => {
     { name: "Privacy", url: getFullUrl("/privacy") }
   ]);
 
+  // Schema.org: Organization for E-E-A-T
+  const organizationSchema = generateOrganizationSchema();
+
   return (
     <>
       <SEOHead
@@ -31,7 +34,7 @@ const Privacy = () => {
         canonical="/privacy"
         aiSummary="WebsitesGenereren.nl verzamelt geen persoonlijke gegevens. Geen cookies, geen tracking, geen IP-logging. De site is een affiliate voor een AI website generator tool."
         aiTopic="Privacy, Gegevensbescherming, Affiliate Disclosure"
-        schemas={[webPageSchema, breadcrumbSchema]}
+        schemas={[webPageSchema, breadcrumbSchema, organizationSchema]}
       />
 
       <div className="min-h-screen bg-background">
