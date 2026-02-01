@@ -5,8 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Use VITE_BASE_PATH env var for GitHub Pages, default to '/' for Cloudways
-  base: process.env.VITE_BASE_PATH || '/',
+  // Default to '/' for Cloudways - GitHub Actions sets VITE_BASE_PATH env var during build
+  base: '/',
   server: {
     host: "::",
     port: 8080,
