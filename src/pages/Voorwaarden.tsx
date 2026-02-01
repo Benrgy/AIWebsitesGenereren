@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import { generateWebPageSchema, generateBreadcrumbSchema, getFullUrl } from "@/lib/seoConfig";
+import { generateWebPageSchema, generateBreadcrumbSchema, generateOrganizationSchema, getFullUrl } from "@/lib/seoConfig";
 
 const Voorwaarden = () => {
   // Schema.org: WebPage
@@ -22,6 +22,9 @@ const Voorwaarden = () => {
     { name: "Voorwaarden", url: getFullUrl("/voorwaarden") }
   ]);
 
+  // Schema.org: Organization for E-E-A-T
+  const organizationSchema = generateOrganizationSchema();
+
   return (
     <>
       <SEOHead
@@ -31,7 +34,7 @@ const Voorwaarden = () => {
         canonical="/voorwaarden"
         aiSummary="WebsitesGenereren.nl is een affiliate website die AI website generatie tools aanbeveelt. Wij verkopen niets direct maar ontvangen commissie van de tool-ontwikkelaar. De koper betaalt dezelfde prijs."
         aiTopic="Algemene Voorwaarden, Affiliate Disclosure, Website Terms"
-        schemas={[webPageSchema, breadcrumbSchema]}
+        schemas={[webPageSchema, breadcrumbSchema, organizationSchema]}
       />
 
       <div className="min-h-screen bg-background">
