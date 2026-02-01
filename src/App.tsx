@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +9,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 import ScrollRestoration from "@/components/ScrollRestoration";
 import CookieConsent from "@/components/CookieConsent";
 import SkipLink from "@/components/SkipLink";
+import AppErrorBoundary from "@/components/AppErrorBoundary";
+import { toast } from "sonner";
 
 // Lazy loaded pages for better performance (code splitting)
 const Index = lazy(() => import("./pages/Index"));
@@ -39,37 +41,62 @@ const PageLoader = () => (
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <HashRouter>
-          <ScrollRestoration />
-          <SkipLink />
-          <Suspense fallback={<PageLoader />}>
-            <main id="main-content">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/auth" element={<AffiliateRedirect />} />
-                <Route path="/dashboard" element={<AffiliateRedirect />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogArticle />} />
-                <Route path="/vergelijking" element={<Vergelijking />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/voorwaarden" element={<Voorwaarden />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-          </Suspense>
-          <ScrollToTop />
-          <CookieConsent />
-        </HashRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
-);
+const App = () => {
+  useEffect(() => {
+    // Safety net: surface errors that would otherwise look like a "blank screen".
+    const onUnhandledRejection = (event: PromiseRejectionEvent) => {
+      console.error("[unhandledrejection]", event.reason);
+      toast.error("Er ging iets mis. Probeer het opnieuw.");
+      event.preventDefault();
+    };
+
+    const onError = (event: ErrorEvent) => {
+      console.error("[window.onerror]", event.error || event.message);
+      toast.error("Er ging iets mis. Probeer het opnieuw.");
+    };
+
+    window.addEventListener("unhandledrejection", onUnhandledRejection);
+    window.addEventListener("error", onError);
+    return () => {
+      window.removeEventListener("unhandledrejection", onUnhandledRejection);
+      window.removeEventListener("error", onError);
+    };
+  }, []);
+
+  return (
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <HashRouter>
+            <ScrollRestoration />
+            <SkipLink />
+            <AppErrorBoundary>
+              <Suspense fallback={<PageLoader />}>
+                <main id="main-content">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/auth" element={<AffiliateRedirect />} />
+                    <Route path="/dashboard" element={<AffiliateRedirect />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:slug" element={<BlogArticle />} />
+                    <Route path="/vergelijking" element={<Vergelijking />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/voorwaarden" element={<Voorwaarden />} />
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+              </Suspense>
+            </AppErrorBoundary>
+            <ScrollToTop />
+            <CookieConsent />
+          </HashRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+};
 
 export default App;
