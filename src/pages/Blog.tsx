@@ -12,6 +12,8 @@ import {
   generateItemListSchema, 
   generateFAQSchema,
   generateBreadcrumbSchema,
+  generateWebPageSchema,
+  generateOrganizationSchema,
   getFullUrl 
 } from "@/lib/seoConfig";
 
@@ -90,6 +92,21 @@ const Blog = () => {
     { name: "Blog", url: getFullUrl("/blog") }
   ]);
 
+  // Schema.org: WebPage for page identification
+  const webPageSchema = generateWebPageSchema({
+    title: "SEO Blog & Tutorials | Gratis Website Tips",
+    description: "Leer hoe je gratis of goedkoop een professionele website maakt. Tips voor SEO, statische HTML, en website generatie met AI.",
+    url: getFullUrl("/blog"),
+    breadcrumbs: [
+      { name: "Home", url: getFullUrl("/") },
+      { name: "Blog", url: getFullUrl("/blog") }
+    ],
+    speakable: ["h1", ".quick-answer"]
+  });
+
+  // Schema.org: Organization for E-E-A-T
+  const organizationSchema = generateOrganizationSchema();
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
@@ -99,7 +116,7 @@ const Blog = () => {
         canonical="/blog"
         aiSummary="Deze blog biedt 20 gratis artikelen over website bouwen met AI. Leer hoe je zonder code een professionele website maakt, SEO optimaliseert, en gratis kunt hosten op GitHub Pages."
         aiTopic="AI Website Generatie, SEO, Website Bouwen"
-        schemas={[collectionPageSchema, itemListSchema, faqSchema, breadcrumbSchema]}
+        schemas={[collectionPageSchema, itemListSchema, faqSchema, breadcrumbSchema, webPageSchema, organizationSchema]}
       />
 
       <Header />
