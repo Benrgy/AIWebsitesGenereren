@@ -3,6 +3,14 @@ import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { 
+  SEO_CONFIG, 
+  generateOrganizationSchema, 
+  generateWebSiteSchema, 
+  generateFAQSchema,
+  generateBreadcrumbSchema,
+  getFullUrl 
+} from "@/lib/seoConfig";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
 import { 
@@ -70,17 +78,10 @@ const Index = () => {
     }
   ];
 
-  // Schema.org structured data for SEO and LLM optimization
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "WebsitesGenereren.nl",
-    "url": "https://websitesgenereren.nl",
-    "logo": "https://websitesgenereren.nl/favicon.ico",
-    "description": "De #1 AI Website Generator voor Nederland & België. Maak professionele websites zonder code.",
-    "sameAs": []
-  };
-
+  // Schema.org structured data using centralized SEO config
+  const organizationSchema = generateOrganizationSchema();
+  const websiteSchema = generateWebSiteSchema();
+  
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -100,60 +101,35 @@ const Index = () => {
     }
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Hoe maak ik een website zonder technische kennis?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Met de nieuwste AI website generators typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig, direct online in 5 minuten."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Hoeveel kost een website maken?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Met onze aanbevolen AI tool betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Waarom is statische HTML beter voor SEO?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Statische HTML websites laden 10x sneller dan WordPress of Wix. Zoekmachines kunnen de content direct indexeren zonder JavaScript uit te voeren, wat resulteert in betere rankings."
-        }
-      }
-    ]
-  };
+  const faqSchema = generateFAQSchema([
+    {
+      question: "Hoe maak ik een website zonder technische kennis?",
+      answer: "Met de nieuwste AI website generators typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig, direct online in 5 minuten."
+    },
+    {
+      question: "Hoeveel kost een website maken?",
+      answer: "Met onze aanbevolen AI tool betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
+    },
+    {
+      question: "Waarom is statische HTML beter voor SEO?",
+      answer: "Statische HTML websites laden 10x sneller dan WordPress of Wix. Zoekmachines kunnen de content direct indexeren zonder JavaScript uit te voeren, wat resulteert in betere rankings."
+    }
+  ]);
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://websitesgenereren.nl"
-      }
-    ]
-  };
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: getFullUrl("/") }
+  ]);
 
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="AI Website Generator Nederland | Gratis Website Maken Zonder Code | WebsitesGenereren.nl"
-        description="Maak in 5 minuten een professionele website met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd. De #1 AI website builder voor Nederland & België."
-        keywords="website maken, ai website generator, gratis website, website bouwen, seo website, statische html, website zonder code, nederland, belgie"
+        title="AI Website Generator Nederland | Website Maken met AI in 5 Minuten"
+        description="Genereer professionele websites met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd. De #1 AI website builder voor Nederland & België. Éénmalige betaling."
+        keywords="ai website generator, website maken met ai, ai websites genereren, website bouwen zonder code, gratis website maken, seo website, statische html website, nederland, belgie, ai website builder"
         canonical="/"
-        aiSummary="WebsitesGenereren.nl is de #1 AI website generator voor Nederland en België. Maak binnen 5 minuten een professionele website met AI, zonder code te schrijven. Éénmalige betaling, geen abonnement, gratis hosting inbegrepen."
-        aiTopic="AI Website Generatie, Website Bouwen, No-Code Tools"
-        schemas={[organizationSchema, softwareSchema, faqSchema, breadcrumbSchema]}
+        aiSummary="AI Websites Genereren is de #1 AI website generator voor Nederland en België. Genereer binnen 5 minuten een professionele, SEO-geoptimaliseerde website met AI. Statische HTML output, éénmalige betaling, gratis GitHub Pages hosting."
+        aiTopic="AI Website Generator, Website Bouwen met AI, No-Code Website Builder Nederland"
+        schemas={[organizationSchema, websiteSchema, softwareSchema, faqSchema, breadcrumbSchema]}
       />
       <Header />
       

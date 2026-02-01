@@ -3,31 +3,47 @@
 
 export const SEO_CONFIG = {
   site: {
-    name: "WebsitesGenereren.nl",
-    domain: "https://websitesgenereren.nl",
-    logo: "https://websitesgenereren.nl/favicon.png",
+    name: "AI Websites Genereren",
+    domain: "https://aiwebsitesgenereren.nl",
+    logo: "https://aiwebsitesgenereren.nl/favicon.png",
     language: "nl",
     regions: ["NL", "BE"],
     locales: ["nl_NL", "nl_BE"],
     defaultLocale: "nl_NL",
+    // Primary keywords for SEO targeting
+    primaryKeyword: "AI website generator",
+    secondaryKeywords: [
+      "website bouwen met AI",
+      "AI websites maken",
+      "gratis website generator",
+      "website genereren",
+      "AI website builder Nederland",
+    ],
   },
   defaults: {
-    titleSuffix: " | WebsitesGenereren.nl",
-    ogImage: "https://websitesgenereren.nl/og-image.png",
-    twitterHandle: "@websitesgenereren",
+    titleSuffix: " | AI Websites Genereren",
+    ogImage: "https://aiwebsitesgenereren.nl/og-image.png",
+    twitterHandle: "@aiwebsitesgenereren",
   },
   organization: {
-    name: "WebsitesGenereren.nl",
-    alternateName: "AI Website Generator Nederland",
-    url: "https://websitesgenereren.nl",
-    logo: "https://websitesgenereren.nl/favicon.png",
-    description: "AI-gestuurde website generator voor professionele websites in minuten.",
+    name: "AI Websites Genereren",
+    alternateName: "AI Website Generator Nederland & België",
+    url: "https://aiwebsitesgenereren.nl",
+    logo: "https://aiwebsitesgenereren.nl/favicon.png",
+    description: "Genereer professionele websites met AI in minuten. De #1 AI website generator voor Nederland en België. Geen technische kennis nodig.",
     foundingDate: "2024",
     areaServed: ["NL", "BE"],
     availableLanguage: ["nl"],
+    // Enhanced for E-E-A-T signals
+    knowsAbout: [
+      "AI website development",
+      "Website generators",
+      "No-code website building",
+      "Dutch web design",
+    ],
   },
   social: {
-    twitter: "@websitesgenereren",
+    twitter: "@aiwebsitesgenereren",
   },
 } as const;
 
@@ -317,4 +333,54 @@ export const generateLLMMetaTags = (params: {
   "ai.summary": params.aiSummary,
   "ai.topic": params.aiTopic,
   ...(params.dateModified && { "ai.freshness": params.dateModified }),
+});
+
+// Generate WebSite Schema for homepage (critical for sitelinks)
+export const generateWebSiteSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": SEO_CONFIG.site.name,
+  "alternateName": SEO_CONFIG.organization.alternateName,
+  "url": SEO_CONFIG.site.domain,
+  "description": SEO_CONFIG.organization.description,
+  "inLanguage": "nl",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${SEO_CONFIG.site.domain}/blog?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": SEO_CONFIG.organization.name,
+    "logo": {
+      "@type": "ImageObject",
+      "url": SEO_CONFIG.organization.logo
+    }
+  }
+});
+
+// Generate LocalBusiness Schema for NL/BE targeting
+export const generateLocalBusinessSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": SEO_CONFIG.organization.name,
+  "alternateName": SEO_CONFIG.organization.alternateName,
+  "url": SEO_CONFIG.site.domain,
+  "logo": SEO_CONFIG.organization.logo,
+  "description": SEO_CONFIG.organization.description,
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Nederland"
+    },
+    {
+      "@type": "Country", 
+      "name": "België"
+    }
+  ],
+  "serviceType": "AI Website Generator",
+  "knowsLanguage": "nl"
 });
