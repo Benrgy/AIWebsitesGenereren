@@ -8,6 +8,8 @@ import {
   generateComparisonSchema, 
   generateFAQSchema, 
   generateBreadcrumbSchema,
+  generateWebPageSchema,
+  generateOrganizationSchema,
   getFullUrl 
 } from "@/lib/seoConfig";
 
@@ -86,6 +88,21 @@ const Vergelijking = () => {
     { name: "Vergelijking", url: getFullUrl("/vergelijking") }
   ]);
 
+  // Schema.org: WebPage for page identification
+  const webPageSchema = generateWebPageSchema({
+    title: "Website Builders Vergelijken 2025",
+    description: "Eerlijke vergelijking van Wix, Squarespace, WordPress en AI website generators.",
+    url: getFullUrl("/vergelijking"),
+    breadcrumbs: [
+      { name: "Home", url: getFullUrl("/") },
+      { name: "Vergelijking", url: getFullUrl("/vergelijking") }
+    ],
+    speakable: ["h1", ".comparison-table"]
+  });
+
+  // Schema.org: Organization for E-E-A-T
+  const organizationSchema = generateOrganizationSchema();
+
   return (
     <>
       <SEOHead
@@ -95,7 +112,7 @@ const Vergelijking = () => {
         canonical="/vergelijking"
         aiSummary="Deze vergelijking toont dat AI website generators superieur zijn aan WordPress, Wix en Squarespace: eenmalige betaling vs maandelijkse abonnementen, statische HTML voor snelheid en SEO, en geen beveiligingsrisico's."
         aiTopic="Website Builder Vergelijking, Wix Alternative, WordPress Alternative"
-        schemas={[comparisonSchema, faqSchema, breadcrumbSchema]}
+        schemas={[comparisonSchema, faqSchema, breadcrumbSchema, webPageSchema, organizationSchema]}
       />
 
       <div className="min-h-screen bg-background">
