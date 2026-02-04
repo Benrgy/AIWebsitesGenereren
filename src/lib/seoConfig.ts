@@ -1,4 +1,4 @@
-// Centralized SEO/GEO/LLM Configuration for WebsitesGenereren.nl
+// Centralized SEO/GEO/LLM Configuration for AIWebsitesGenereren.nl
 // Optimized for Traditional SEO, Generative Engine Optimization (GEO), and LLM Citability
 
 export const SEO_CONFIG = {

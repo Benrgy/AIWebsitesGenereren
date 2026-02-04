@@ -17,15 +17,15 @@ const NotFound = () => {
   // Schema.org: WebPage for error page
   const errorPageSchema = generateWebPageSchema({
     title: "Pagina Niet Gevonden",
-    description: "Deze pagina bestaat niet. Ga terug naar de homepage van WebsitesGenereren.nl.",
+    description: "Deze pagina bestaat niet. Ga terug naar de homepage van AIWebsitesGenereren.nl.",
     url: getFullUrl("/404"),
   });
 
   return (
     <>
       <SEOHead
-        title="Pagina Niet Gevonden | WebsitesGenereren.nl"
-        description="Deze pagina bestaat niet. Ga terug naar de homepage van WebsitesGenereren.nl voor tips over AI website generatie."
+        title="Pagina Niet Gevonden | AIWebsitesGenereren.nl"
+        description="Deze pagina bestaat niet. Ga terug naar de homepage van AIWebsitesGenereren.nl voor tips over AI website generatie."
         canonical="/404"
         noIndex={true}
         includeGeoTags={false}
