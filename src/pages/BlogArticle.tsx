@@ -105,7 +105,7 @@ const BlogArticle = () => {
   return (
     <>
       <SEOHead
-        title={`${article.title} | WebsitesGenereren.nl`}
+        title={`${article.title} | AI Websites Genereren`}
         description={article.metaDescription}
         keywords={article.keywords.join(", ")}
         canonical={`/blog/${article.slug}`}
