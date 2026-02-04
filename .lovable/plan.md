@@ -1,52 +1,47 @@
 
-# Plan: OG-Image Genereren met Globe Branding
 
-## Wat gaan we doen
-Een professionele Open Graph afbeelding (1200x630px) maken met dezelfde globe branding als de favicon, voor optimale weergave op social media platforms zoals Facebook, LinkedIn, Twitter en WhatsApp.
+# Fix Oude Domeinverwijzingen naar AIWebsitesGenereren.nl
 
-## Design Specificaties
+## Overzicht
 
-| Element | Waarde |
-|---------|--------|
-| Afmetingen | 1200x630 pixels |
-| Achtergrond | Donkere gradient (past bij moderne tech uitstraling) |
-| Hoofdelement | Globe icoon met blauw-cyaan gradient (#3B82F6 → #06B6D4) |
-| Tekst | "AI Website Generator" + tagline |
-| Stijl | Modern, minimalistisch, professioneel |
+Alle verwijzingen naar het oude domein `WebsitesGenereren.nl` worden vervangen door het correcte domein `AIWebsitesGenereren.nl` om Search Console fouten op te lossen en SEO-consistentie te garanderen.
 
-## Stappen
+## Wijzigingen
 
-### Stap 1: OG-Image Genereren met AI
-Met Lovable's AI image generatie maken we een banner met:
-- Dezelfde globe met gradient als de favicon (prominenter geplaatst)
-- Site naam "AIWebsitesGenereren.nl" 
-- Tagline "Professionele websites in minuten"
-- Donkere achtergrond voor contrast
-- Moderne, tech-georiënteerde uitstraling
+### 1. index.html
+**Locatie:** Regel 26 en 55
 
-### Stap 2: Bestand Opslaan
-- Het gegenereerde beeld opslaan als `public/og-image.png`
-- PNG formaat voor beste kwaliteit
+| Huidige waarde | Nieuwe waarde |
+|----------------|---------------|
+| `<meta name="author" content="aiWebsitesGenereren.nl" />` | `<meta name="author" content="AIWebsitesGenereren.nl" />` |
+| `<meta name="DC.creator" content="aiWebsitesGenereren.nl" />` | `<meta name="DC.creator" content="AIWebsitesGenereren.nl" />` |
 
-### Stap 3: index.html Updaten
-De OG en Twitter image referenties aanpassen:
+### 2. src/pages/BlogArticle.tsx
+**Locatie:** Regel 108 - title suffix
 
-```html
-<meta property="og:image" content="https://aiwebsitesgenereren.nl/og-image.png" />
-<meta name="twitter:image" content="https://aiwebsitesgenereren.nl/og-image.png" />
-```
+| Huidige waarde | Nieuwe waarde |
+|----------------|---------------|
+| `WebsitesGenereren.nl` | `AI Websites Genereren` |
 
-## Social Media Voordelen
+### 3. src/pages/NotFound.tsx
+**Locatie:** Regels 20, 27, 28
 
-| Platform | Voordeel |
-|----------|----------|
-| Facebook | Professionele preview bij delen |
-| LinkedIn | Herkenbare branding voor B2B |
-| Twitter | Opvallende large image card |
-| WhatsApp | Duidelijke link preview |
+Alle verwijzingen naar `WebsitesGenereren.nl` worden vervangen door `AIWebsitesGenereren.nl`.
+
+### 4. src/lib/seoConfig.ts
+**Locatie:** Regel 1 - comment
+
+| Huidige waarde | Nieuwe waarde |
+|----------------|---------------|
+| `// Centralized SEO/GEO/LLM Configuration for WebsitesGenereren.nl` | `// Centralized SEO/GEO/LLM Configuration for AIWebsitesGenereren.nl` |
+
+### 5. public/sitemap.xml
+Update alle `lastmod` datums naar `2025-02-04` zodat zoekmachines weten dat de content recent is bijgewerkt.
 
 ## Resultaat
-- Consistente branding tussen favicon en social previews
-- Professionele uitstraling bij het delen van links
-- Betere click-through rates door herkenbare visuele identiteit
-- Optimaal formaat voor alle grote social platforms
+
+- Search Console toont geen domein-mismatch fouten meer
+- Consistente branding op alle pagina's
+- Correcte indexering door Google en Bing
+- LLM/AI crawlers zien uniforme domeinverwijzingen
+
