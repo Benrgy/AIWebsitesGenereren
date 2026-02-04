@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
-const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
+const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,8 +10,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link to="/" className="font-bold text-lg text-foreground" aria-label="WebsitesGenereren - Naar homepagina">
-              Websites<span className="text-primary">Genereren</span>
+            <Link to="/" className="font-bold text-lg text-foreground" aria-label="AI Websites Genereren - Naar homepagina">
+              AI<span className="text-primary">WebsitesGenereren</span>
             </Link>
             <p className="text-sm text-muted-foreground mt-2">
               De #1 AI Website Generator voor Nederland & België. Professionele websites zonder code.

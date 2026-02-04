@@ -1,6 +1,6 @@
 import { Search, Globe, Rocket, Zap, Target, HelpCircle, Code, Palette, FileText, DollarSign, Users, Building, Camera, Briefcase, Store, Heart, Utensils, Wrench, GraduationCap, Lightbulb } from "lucide-react";
 
-export const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
+export const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
 
 export interface BlogArticle {
   id: string;

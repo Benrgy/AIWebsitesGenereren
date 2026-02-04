@@ -110,7 +110,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="SEO Blog & Tutorials | Gratis Website Tips | WebsitesGenereren.nl"
+        title="SEO Blog & Tutorials | Gratis Website Tips | AI Websites Genereren"
         description="Leer hoe je gratis of goedkoop een professionele website maakt. Tips voor SEO, statische HTML, en website generatie met AI. Perfect voor beginners in Nederland en België."
         keywords="website maken tips, gratis website, seo tips, statische html, website bouwen, ai website generator, website zonder code"
         canonical="/blog"

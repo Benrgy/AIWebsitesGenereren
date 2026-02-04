@@ -28,11 +28,11 @@ const Privacy = () => {
   return (
     <>
       <SEOHead
-        title="Privacybeleid | WebsitesGenereren.nl"
-        description="Privacybeleid van WebsitesGenereren.nl - Wij verzamelen geen persoonlijke gegevens van bezoekers. Transparant over affiliate relaties."
-        keywords="privacybeleid, privacy, websitesgenereren, geen cookies, geen tracking"
+        title="Privacybeleid | AI Websites Genereren"
+        description="Privacybeleid van AIWebsitesGenereren.nl - Wij verzamelen geen persoonlijke gegevens van bezoekers. Transparant over affiliate relaties."
+        keywords="privacybeleid, privacy, aiwebsitesgenereren, geen cookies, geen tracking"
         canonical="/privacy"
-        aiSummary="WebsitesGenereren.nl verzamelt geen persoonlijke gegevens. Geen cookies, geen tracking, geen IP-logging. De site is een affiliate voor een AI website generator tool."
+        aiSummary="AIWebsitesGenereren.nl verzamelt geen persoonlijke gegevens. Geen cookies, geen tracking, geen IP-logging. De site is een affiliate voor een AI website generator tool."
         aiTopic="Privacy, Gegevensbescherming, Affiliate Disclosure"
         schemas={[webPageSchema, breadcrumbSchema, organizationSchema]}
       />

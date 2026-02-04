@@ -13,7 +13,7 @@ import {
   getFullUrl 
 } from "@/lib/seoConfig";
 
-const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
+const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
 const SKOOL_LINK = "https://www.skool.com/online-ninja-5346/about?ref=132dd3be98ee4b1a89e39f454fface79";
 
 const Vergelijking = () => {

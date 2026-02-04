@@ -21,7 +21,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Voorwaarden = lazy(() => import("./pages/Voorwaarden"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
+const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
 
 // Redirect component that sends users to external affiliate link
 const AffiliateRedirect = () => {
