@@ -1,10 +1,10 @@
-# AIWebsitesGenereren.nl
+# aiWebsitesGenereren.nl
 
 > AI-gestuurde website generator voor Nederland en België. Eenmalige betaling, geen abonnement. SEO-geoptimaliseerde statische HTML websites.
 
 ## Site Informatie
 
-- **Naam**: AIWebsitesGenereren.nl
+- **Naam**: aiWebsitesGenereren.nl
 - **Domein**: https://aiwebsitesgenereren.nl
 - **Taal**: Nederlands (nl-NL, nl-BE)
 - **Doelregio**: Nederland en België (Benelux)
@@ -12,7 +12,7 @@
 
 ## Kernboodschap
 
-AIWebsitesGenereren.nl helpt ondernemers zonder technische kennis om professionele websites te maken met AI. De aanbevolen tool biedt:
+aiWebsitesGenereren.nl helpt ondernemers zonder technische kennis om professionele websites te maken met AI. De aanbevolen tool biedt:
 
 - **Eenmalige betaling** - Geen maandelijkse abonnementen
 - **Statische HTML output** - Snelle, veilige websites zonder beveiligingslekken
