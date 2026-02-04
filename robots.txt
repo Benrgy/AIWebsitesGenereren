@@ -1,4 +1,4 @@
-# AIWebsitesGenereren.nl - AI Website Generator
+# aiWebsitesGenereren.nl - AI Website Generator
 # Optimized for search engines, AI crawlers, and LLMs
 # Last updated: 2025-01-31
 
