@@ -12,7 +12,7 @@ import {
   getFullUrl 
 } from "@/lib/seoConfig";
 
-const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
+const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
 import { 
   Accordion,
   AccordionContent,

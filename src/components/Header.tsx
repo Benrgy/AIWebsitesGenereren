@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ExternalLink, ArrowLeft, Menu, Home, BarChart3, BookOpen, Rocket } from "lucide-react";
-const AFFILIATE_LINK = "https://gitpage.site/?ref=WebsitesGenereren";
+const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
 interface HeaderProps {
   variant?: "default" | "minimal";
   backLink?: {
@@ -48,7 +48,8 @@ const Header = ({
   }
   return <header className="border-b border-border/40 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50" role="banner">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link to="/" className="font-bold text-lg text-foreground" aria-label="WebsitesGenereren - Naar homepagina">AIWebsitesGenereren<span className="text-primary">Genereren</span>
+        <Link to="/" className="font-bold text-lg text-foreground" aria-label="AI Websites Genereren - Naar homepagina">
+          AI<span className="text-primary">WebsitesGenereren</span>
         </Link>
         
         <div className="flex items-center gap-4 sm:gap-6">
@@ -78,8 +79,8 @@ const Header = ({
               <div className="flex flex-col h-full" id="mobile-navigation">
                 {/* Mobile Logo */}
                 <div className="py-4 border-b border-border">
-                  <Link to="/" className="font-bold text-lg text-foreground" onClick={() => setIsOpen(false)} aria-label="WebsitesGenereren - Naar homepagina">
-                    Websites<span className="text-primary">Genereren</span>
+                  <Link to="/" className="font-bold text-lg text-foreground" onClick={() => setIsOpen(false)} aria-label="AI Websites Genereren - Naar homepagina">
+                    AI<span className="text-primary">WebsitesGenereren</span>
                   </Link>
                 </div>
                 

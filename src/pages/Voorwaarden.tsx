@@ -28,11 +28,11 @@ const Voorwaarden = () => {
   return (
     <>
       <SEOHead
-        title="Algemene Voorwaarden | WebsitesGenereren.nl"
-        description="Algemene voorwaarden van WebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools. Transparant over onze werkwijze."
-        keywords="algemene voorwaarden, voorwaarden, websitesgenereren, affiliate, ai website generator"
+        title="Algemene Voorwaarden | AI Websites Genereren"
+        description="Algemene voorwaarden van AIWebsitesGenereren.nl - Informatieve affiliate website over AI website generatie tools. Transparant over onze werkwijze."
+        keywords="algemene voorwaarden, voorwaarden, aiwebsitesgenereren, affiliate, ai website generator"
         canonical="/voorwaarden"
-        aiSummary="WebsitesGenereren.nl is een affiliate website die AI website generatie tools aanbeveelt. Wij verkopen niets direct maar ontvangen commissie van de tool-ontwikkelaar. De koper betaalt dezelfde prijs."
+        aiSummary="AIWebsitesGenereren.nl is een affiliate website die AI website generatie tools aanbeveelt. Wij verkopen niets direct maar ontvangen commissie van de tool-ontwikkelaar. De koper betaalt dezelfde prijs."
         aiTopic="Algemene Voorwaarden, Affiliate Disclosure, Website Terms"
         schemas={[webPageSchema, breadcrumbSchema, organizationSchema]}
       />
