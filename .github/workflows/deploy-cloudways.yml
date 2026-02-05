@@ -1,0 +1,45 @@
+ name: Build for Cloudways
+ 
+ # This workflow builds the project with the correct base path for Cloudways
+ # After the build completes, download the artifact and upload to your server
+ 
+ on:
+   workflow_dispatch:  # Manual trigger only
+ 
+ jobs:
+   build:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v4
+       
+       - name: Setup Node.js
+         uses: actions/setup-node@v4
+         with:
+           node-version: '20'
+           cache: 'npm'
+       
+       - name: Install dependencies
+         run: npm ci
+       
+       - name: Build for Cloudways (root deployment)
+         run: npm run build
+         env:
+           VITE_BASE_PATH: "/"
+       
+       - name: List build output
+         run: |
+           echo "=== dist/ contents ==="
+           ls -la dist/
+           echo ""
+           echo "=== dist/assets/ contents ==="
+           ls -la dist/assets/
+           echo ""
+           echo "=== Script tag in index.html ==="
+           grep -E 'index-[a-zA-Z0-9._-]+\.js' dist/index.html || true
+       
+       - name: Upload build artifact
+         uses: actions/upload-artifact@v4
+         with:
+           name: cloudways-build
+           path: dist/
+           retention-days: 7
