@@ -7,9 +7,12 @@ import {
   SEO_CONFIG, 
   generateOrganizationSchema, 
   generateWebSiteSchema, 
+  generateLocalBusinessSchema,
   generateFAQSchema,
   generateBreadcrumbSchema,
-  getFullUrl 
+  getFullUrl,
+  NL_PROVINCES,
+  BE_PROVINCES,
 } from "@/lib/seoConfig";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
