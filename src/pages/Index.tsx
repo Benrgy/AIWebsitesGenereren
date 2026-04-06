@@ -84,6 +84,7 @@ const Index = () => {
   // Schema.org structured data using centralized SEO config
   const organizationSchema = generateOrganizationSchema();
   const websiteSchema = generateWebSiteSchema();
+  const localBusinessSchema = generateLocalBusinessSchema();
   
   const softwareSchema = {
     "@context": "https://schema.org",
