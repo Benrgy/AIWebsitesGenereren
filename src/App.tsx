@@ -69,7 +69,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <HashRouter>
+          <BrowserRouter>
             <ScrollRestoration />
             <SkipLink />
             <AppErrorBoundary>
