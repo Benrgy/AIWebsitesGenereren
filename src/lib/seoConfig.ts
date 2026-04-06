@@ -353,8 +353,12 @@ export const getHreflangTags = (path: string) => [
 export const GEO_META_TAGS = {
   "geo.region": "NL",
   "geo.placename": "Nederland",
+  "geo.region.secondary": "BE",
+  "geo.placename.secondary": "België",
   "content-language": "nl",
-  "audience": "Nederland, België, Nederlandstalig",
+  "audience": "Nederland, België, Vlaanderen, Nederlandstalig",
+  "distribution": "global",
+  "coverage": "Nederland, België",
 } as const;
 
 // LLM-specific meta tag generator
@@ -395,7 +399,7 @@ export const generateWebSiteSchema = () => ({
   }
 });
 
-// Generate LocalBusiness Schema for NL/BE targeting
+// Generate LocalBusiness/ProfessionalService Schema with full NL+BE coverage
 export const generateLocalBusinessSchema = () => ({
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -407,13 +411,53 @@ export const generateLocalBusinessSchema = () => ({
   "areaServed": [
     {
       "@type": "Country",
-      "name": "Nederland"
+      "name": "Nederland",
+      "identifier": "NL"
     },
     {
-      "@type": "Country", 
-      "name": "België"
-    }
+      "@type": "Country",
+      "name": "België",
+      "identifier": "BE"
+    },
+    // Major NL cities as AdministrativeArea
+    ...["Amsterdam", "Rotterdam", "Den Haag", "Utrecht", "Eindhoven", "Groningen", "Tilburg", "Almere", "Breda", "Nijmegen", "Arnhem", "Maastricht", "Haarlem", "Zwolle", "Leiden", "Amersfoort", "Apeldoorn", "Enschede", "Dordrecht", "Delft"].map(city => ({
+      "@type": "City",
+      "name": city,
+      "containedInPlace": { "@type": "Country", "name": "Nederland" }
+    })),
+    // Major BE cities
+    ...["Antwerpen", "Gent", "Brugge", "Leuven", "Brussel", "Mechelen", "Hasselt", "Kortrijk", "Oostende", "Aalst"].map(city => ({
+      "@type": "City",
+      "name": city,
+      "containedInPlace": { "@type": "Country", "name": "België" }
+    })),
   ],
-  "serviceType": "AI Website Generator",
-  "knowsLanguage": "nl"
+  "serviceType": [
+    "AI Website Generator",
+    "Website Bouwen",
+    "SEO Optimalisatie",
+    "Landingspagina Maken",
+    "Portfolio Website",
+  ],
+  "knowsLanguage": ["nl", "nl-NL", "nl-BE"],
+  "slogan": "Professionele website in 5 minuten met AI",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Website Generator Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Website Generatie",
+          "description": "Professionele website laten genereren door AI. Inclusief SEO, hosting en design."
+        },
+        "areaServed": ["NL", "BE"],
+        "availableAtOrFrom": {
+          "@type": "VirtualLocation",
+          "url": SEO_CONFIG.site.domain
+        }
+      }
+    ]
+  }
 });
