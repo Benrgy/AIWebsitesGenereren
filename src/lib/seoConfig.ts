@@ -1,6 +1,34 @@
 // Centralized SEO/GEO/LLM Configuration for AIWebsitesGenereren.nl
 // Optimized for Traditional SEO, Generative Engine Optimization (GEO), and LLM Citability
 
+// Complete NL & BE city/province data for local SEO targeting
+export const NL_PROVINCES = [
+  { name: "Noord-Holland", cities: ["Amsterdam", "Haarlem", "Zaandam", "Hilversum", "Amstelveen", "Purmerend", "Hoofddorp"] },
+  { name: "Zuid-Holland", cities: ["Rotterdam", "Den Haag", "Leiden", "Dordrecht", "Delft", "Zoetermeer", "Gouda"] },
+  { name: "Utrecht", cities: ["Utrecht", "Amersfoort", "Veenendaal", "Nieuwegein", "Zeist", "IJsselstein"] },
+  { name: "Noord-Brabant", cities: ["Eindhoven", "Tilburg", "Breda", "'s-Hertogenbosch", "Helmond", "Oss", "Roosendaal"] },
+  { name: "Gelderland", cities: ["Arnhem", "Nijmegen", "Apeldoorn", "Ede", "Doetinchem", "Harderwijk", "Zutphen"] },
+  { name: "Overijssel", cities: ["Zwolle", "Enschede", "Deventer", "Hengelo", "Almelo", "Kampen"] },
+  { name: "Limburg", cities: ["Maastricht", "Venlo", "Heerlen", "Sittard", "Roermond", "Weert"] },
+  { name: "Friesland", cities: ["Leeuwarden", "Drachten", "Sneek", "Heerenveen"] },
+  { name: "Groningen", cities: ["Groningen", "Veendam", "Stadskanaal"] },
+  { name: "Drenthe", cities: ["Assen", "Emmen", "Hoogeveen", "Meppel"] },
+  { name: "Flevoland", cities: ["Almere", "Lelystad"] },
+  { name: "Zeeland", cities: ["Middelburg", "Vlissingen", "Goes", "Terneuzen"] },
+] as const;
+
+export const BE_PROVINCES = [
+  { name: "Antwerpen", cities: ["Antwerpen", "Mechelen", "Turnhout", "Lier", "Herentals"] },
+  { name: "Oost-Vlaanderen", cities: ["Gent", "Aalst", "Sint-Niklaas", "Dendermonde", "Lokeren"] },
+  { name: "West-Vlaanderen", cities: ["Brugge", "Kortrijk", "Oostende", "Roeselare", "Ieper"] },
+  { name: "Vlaams-Brabant", cities: ["Leuven", "Vilvoorde", "Halle", "Tienen", "Aarschot"] },
+  { name: "Limburg (BE)", cities: ["Hasselt", "Genk", "Tongeren", "Sint-Truiden", "Beringen"] },
+  { name: "Brussels Hoofdstedelijk Gewest", cities: ["Brussel"] },
+] as const;
+
+export const ALL_NL_CITIES = NL_PROVINCES.flatMap(p => p.cities);
+export const ALL_BE_CITIES = BE_PROVINCES.flatMap(p => p.cities);
+
 export const SEO_CONFIG = {
   site: {
     name: "AI Websites Genereren",
@@ -10,7 +38,6 @@ export const SEO_CONFIG = {
     regions: ["NL", "BE"],
     locales: ["nl_NL", "nl_BE"],
     defaultLocale: "nl_NL",
-    // Primary keywords for SEO targeting
     primaryKeyword: "AI website generator",
     secondaryKeywords: [
       "website bouwen met AI",
@@ -18,6 +45,11 @@ export const SEO_CONFIG = {
       "gratis website generator",
       "website genereren",
       "AI website builder Nederland",
+      "website maken België",
+      "AI website generator België",
+      "website laten maken Nederland",
+      "goedkope website Nederland",
+      "website bouwen zonder code",
     ],
   },
   defaults: {
@@ -34,12 +66,13 @@ export const SEO_CONFIG = {
     foundingDate: "2024",
     areaServed: ["NL", "BE"],
     availableLanguage: ["nl"],
-    // Enhanced for E-E-A-T signals
     knowsAbout: [
       "AI website development",
       "Website generators",
       "No-code website building",
       "Dutch web design",
+      "SEO optimalisatie Nederland",
+      "Lokale SEO België",
     ],
   },
   social: {
