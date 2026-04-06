@@ -7,9 +7,12 @@ import {
   SEO_CONFIG, 
   generateOrganizationSchema, 
   generateWebSiteSchema, 
+  generateLocalBusinessSchema,
   generateFAQSchema,
   generateBreadcrumbSchema,
-  getFullUrl 
+  getFullUrl,
+  NL_PROVINCES,
+  BE_PROVINCES,
 } from "@/lib/seoConfig";
 
 const AFFILIATE_LINK = "https://gitpage.site/?ref=AIWebsitesGenereren";
@@ -81,6 +84,7 @@ const Index = () => {
   // Schema.org structured data using centralized SEO config
   const organizationSchema = generateOrganizationSchema();
   const websiteSchema = generateWebSiteSchema();
+  const localBusinessSchema = generateLocalBusinessSchema();
   
   const softwareSchema = {
     "@context": "https://schema.org",
@@ -129,7 +133,7 @@ const Index = () => {
         canonical="/"
         aiSummary="AI Websites Genereren is de #1 AI website generator voor Nederland en België. Genereer binnen 5 minuten een professionele, SEO-geoptimaliseerde website met AI. Statische HTML output, éénmalige betaling, gratis GitHub Pages hosting."
         aiTopic="AI Website Generator, Website Bouwen met AI, No-Code Website Builder Nederland"
-        schemas={[organizationSchema, websiteSchema, softwareSchema, faqSchema, breadcrumbSchema]}
+        schemas={[organizationSchema, websiteSchema, localBusinessSchema, softwareSchema, faqSchema, breadcrumbSchema]}
       />
       <Header />
       
@@ -715,6 +719,75 @@ const Index = () => {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Local SEO Section — NL & BE Cities */}
+      <section className="py-20 bg-muted/30 border-t border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <Globe className="h-5 w-5 text-primary" />
+              <span className="text-primary text-sm font-medium">Beschikbaar in heel Nederland & België</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold">
+              AI Website Generator bij Jou in de Buurt
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
+              Of je nu in Amsterdam, Rotterdam, Antwerpen of Brussel zit — onze AI website generator 
+              is beschikbaar voor ondernemers, ZZP'ers en bedrijven in <strong>alle steden en provincies</strong> van Nederland en België.
+            </p>
+          </div>
+
+          {/* Nederland */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <span className="text-2xl">🇳🇱</span> Website Maken in Nederland
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {NL_PROVINCES.map(province => (
+                <div key={province.name} className="p-4 rounded-lg border bg-card">
+                  <h4 className="font-semibold text-foreground mb-2">{province.name}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {province.cities.join(" · ")}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* België */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <span className="text-2xl">🇧🇪</span> Website Maken in België
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {BE_PROVINCES.map(province => (
+                <div key={province.name} className="p-4 rounded-lg border bg-card">
+                  <h4 className="font-semibold text-foreground mb-2">{province.name}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {province.cities.join(" · ")}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-muted-foreground mb-4">
+              Onze AI website generator werkt volledig online — geen fysiek bezoek nodig. 
+              Maak vandaag nog een professionele website voor jouw bedrijf, waar je ook zit.
+            </p>
+            <Button
+              asChild
+              className="bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-xl hover:scale-105 transition-all duration-300"
+            >
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer">
+                <Rocket className="mr-2 h-4 w-4" />
+                Start Nu — Beschikbaar in Heel Nederland & België
+              </a>
+            </Button>
           </div>
         </div>
       </section>

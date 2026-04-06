@@ -71,13 +71,17 @@ const SEOHead = ({
         <link key={hrefLang} rel="alternate" hrefLang={hrefLang} href={href} />
       ))}
       
-      {/* GEO Meta Tags */}
+      {/* GEO Meta Tags — Full NL + BE coverage */}
       {includeGeoTags && (
         <>
           <meta name="geo.region" content={GEO_META_TAGS["geo.region"]} />
           <meta name="geo.placename" content={GEO_META_TAGS["geo.placename"]} />
+          <meta name="geo.region" content={GEO_META_TAGS["geo.region.secondary"]} />
+          <meta name="geo.placename" content={GEO_META_TAGS["geo.placename.secondary"]} />
           <meta httpEquiv="content-language" content={GEO_META_TAGS["content-language"]} />
           <meta name="audience" content={GEO_META_TAGS["audience"]} />
+          <meta name="distribution" content={GEO_META_TAGS["distribution"]} />
+          <meta name="coverage" content={GEO_META_TAGS["coverage"]} />
         </>
       )}
       
