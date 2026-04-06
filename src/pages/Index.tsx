@@ -133,7 +133,7 @@ const Index = () => {
         canonical="/"
         aiSummary="AI Websites Genereren is de #1 AI website generator voor Nederland en België. Genereer binnen 5 minuten een professionele, SEO-geoptimaliseerde website met AI. Statische HTML output, éénmalige betaling, gratis GitHub Pages hosting."
         aiTopic="AI Website Generator, Website Bouwen met AI, No-Code Website Builder Nederland"
-        schemas={[organizationSchema, websiteSchema, softwareSchema, faqSchema, breadcrumbSchema]}
+        schemas={[organizationSchema, websiteSchema, localBusinessSchema, softwareSchema, faqSchema, breadcrumbSchema]}
       />
       <Header />
       
