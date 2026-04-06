@@ -73,16 +73,16 @@ const Blog = () => {
   // Schema.org: FAQ for AI Overviews
   const faqSchema = generateFAQSchema([
     {
-      question: "Hoe maak ik een website zonder technische kennis?",
-      answer: "Met de nieuwste AI website generators typ je gewoon wat je wilt en krijg je automatisch een professionele website. Geen code kennis nodig."
+      question: "Welke onderwerpen komen aan bod in deze blog?",
+      answer: "Onze blog behandelt alles over website bouwen met AI, SEO optimalisatie, gratis hosting, en online marketing tips speciaal voor Nederlandse en Belgische ondernemers."
     },
     {
-      question: "Waarom laadt mijn website zo traag?",
-      answer: "WordPress en andere CMS systemen zijn traag door plugins en databases. Statische HTML websites laden 10x sneller."
+      question: "Hoe vaak worden nieuwe artikelen gepubliceerd?",
+      answer: "We publiceren regelmatig nieuwe artikelen met praktische tips en tutorials. Momenteel bevat de blog 20 gratis artikelen die continu worden bijgewerkt."
     },
     {
-      question: "Hoeveel kost een website maken?",
-      answer: "Met onze aanbevolen AI tool betaal je geen maandelijks abonnement. Eenmalig een kleine vergoeding per website, veel goedkoper dan traditionele website bouwers."
+      question: "Voor wie zijn deze artikelen geschreven?",
+      answer: "Deze artikelen zijn geschreven voor beginners, ZZP'ers, freelancers en kleine ondernemers die zonder technische kennis een professionele website willen maken."
     }
   ]);
 
