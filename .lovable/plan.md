@@ -1,47 +1,45 @@
 
 
-# Fix Oude Domeinverwijzingen naar AIWebsitesGenereren.nl
+# Fix Google Search Console Problemen
 
-## Overzicht
+## Diagnose
 
-Alle verwijzingen naar het oude domein `WebsitesGenereren.nl` worden vervangen door het correcte domein `AIWebsitesGenereren.nl` om Search Console fouten op te lossen en SEO-consistentie te garanderen.
+Er zijn 3 problemen gevonden:
+
+### Probleem 1: "Niet gevonden (404)" — 8 pagina's
+**Hoofdoorzaak**: De site gebruikt `HashRouter`, waardoor alle URL's in de browser er zo uitzien: `aiwebsitesgenereren.nl/#/blog`. Maar de `sitemap.xml` verwijst naar `aiwebsitesgenereren.nl/blog` (zonder `#`). Google crawlt die URLs, vindt geen content (de server kent alleen `/index.html`), en meldt 404.
+
+**Oplossing**: Overschakelen van `HashRouter` naar `BrowserRouter` in `src/App.tsx`. De Cloudways `.htaccess` handelt al SPA-routing af (alle niet-bestaande paden → `index.html`), dus dit werkt direct op productie. Hierdoor matchen de sitemap-URLs met de werkelijke pagina's.
+
+### Probleem 2: "Dubbel veld 'FAQPage'" — 2 items
+**Hoofdoorzaak**: De Index-pagina en Blog-pagina gebruiken identieke FAQ-vragen (bijv. "Hoe maak ik een website zonder technische kennis?" en "Hoeveel kost een website maken?" staan op beide pagina's). Google ziet dit als dubbele FAQPage structured data.
+
+**Oplossing**: Unieke FAQ-vragen per pagina. De Blog-pagina krijgt blog-specifieke vragen, zodat er geen overlap is met de Index-pagina.
+
+### Probleem 3: "Gecrawld - momenteel niet geïndexeerd" — 1 pagina
+Dit lost zich vanzelf op zodra probleem 1 is opgelost en Google de pagina's correct kan crawlen.
+
+---
 
 ## Wijzigingen
 
-### 1. index.html
-**Locatie:** Regel 26 en 55
+### 1. `src/App.tsx` — HashRouter → BrowserRouter
+- Vervang `import { HashRouter }` door `import { BrowserRouter }`
+- Vervang `<HashRouter>` door `<BrowserRouter>`
 
-| Huidige waarde | Nieuwe waarde |
-|----------------|---------------|
-| `<meta name="author" content="aiWebsitesGenereren.nl" />` | `<meta name="author" content="AIWebsitesGenereren.nl" />` |
-| `<meta name="DC.creator" content="aiWebsitesGenereren.nl" />` | `<meta name="DC.creator" content="AIWebsitesGenereren.nl" />` |
+### 2. `src/pages/Blog.tsx` — Unieke FAQ-vragen
+Vervang de 3 FAQ-vragen door blog-specifieke vragen die niet overlappen met Index.tsx:
+- "Welke onderwerpen komen aan bod in deze blog?" 
+- "Hoe vaak worden nieuwe artikelen gepubliceerd?"
+- "Voor wie zijn deze artikelen geschreven?"
 
-### 2. src/pages/BlogArticle.tsx
-**Locatie:** Regel 108 - title suffix
+### 3. `public/sitemap.xml` — Datums bijwerken
+Alle `<lastmod>` datums updaten naar `2026-04-06` (vandaag) zodat Google weet dat de content recent is bijgewerkt.
 
-| Huidige waarde | Nieuwe waarde |
-|----------------|---------------|
-| `WebsitesGenereren.nl` | `AI Websites Genereren` |
+---
 
-### 3. src/pages/NotFound.tsx
-**Locatie:** Regels 20, 27, 28
-
-Alle verwijzingen naar `WebsitesGenereren.nl` worden vervangen door `AIWebsitesGenereren.nl`.
-
-### 4. src/lib/seoConfig.ts
-**Locatie:** Regel 1 - comment
-
-| Huidige waarde | Nieuwe waarde |
-|----------------|---------------|
-| `// Centralized SEO/GEO/LLM Configuration for WebsitesGenereren.nl` | `// Centralized SEO/GEO/LLM Configuration for AIWebsitesGenereren.nl` |
-
-### 5. public/sitemap.xml
-Update alle `lastmod` datums naar `2025-02-04` zodat zoekmachines weten dat de content recent is bijgewerkt.
-
-## Resultaat
-
-- Search Console toont geen domein-mismatch fouten meer
-- Consistente branding op alle pagina's
-- Correcte indexering door Google en Bing
-- LLM/AI crawlers zien uniforme domeinverwijzingen
+## Belangrijk
+- De site ziet er visueel identiek uit — er verandert niets aan het design of de content
+- BrowserRouter produceert schonere URLs (`/blog` i.p.v. `/#/blog`), wat beter is voor SEO
+- De `.htaccess` op Cloudways handelt de SPA-routing al correct af
 
