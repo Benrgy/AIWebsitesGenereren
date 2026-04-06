@@ -92,7 +92,7 @@ const App = () => {
             </AppErrorBoundary>
             <ScrollToTop />
             <CookieConsent />
-          </HashRouter>
+          </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
     </HelmetProvider>
