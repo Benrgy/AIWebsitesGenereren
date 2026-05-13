@@ -127,8 +127,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="AI Website Generator Nederland | Website Maken met AI in 5 Minuten"
-        description="Genereer professionele websites met AI. Geen code nodig, gratis hosting, SEO geoptimaliseerd. De #1 AI website builder voor Nederland & België. Éénmalige betaling."
+        title="AI Website Generator NL/BE | Website in 5 Minuten"
+        description="Genereer professionele websites met AI. Geen code, gratis hosting, SEO-geoptimaliseerd. De #1 AI website builder voor NL & BE."
         keywords="ai website generator, website maken met ai, ai websites genereren, website bouwen zonder code, gratis website maken, seo website, statische html website, nederland, belgie, ai website builder"
         canonical="/"
         aiSummary="AI Websites Genereren is de #1 AI website generator voor Nederland en België. Genereer binnen 5 minuten een professionele, SEO-geoptimaliseerde website met AI. Statische HTML output, éénmalige betaling, gratis GitHub Pages hosting."
