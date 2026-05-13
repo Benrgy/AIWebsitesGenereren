@@ -2,6 +2,22 @@
 
 > AI-gestuurde website generator voor Nederland en België. Eenmalige betaling, geen abonnement. SEO-geoptimaliseerde statische HTML websites.
 
+## Pages
+
+- [Homepage](/): Overzicht van AI website generators voor NL & BE.
+- [Vergelijking](/vergelijking): Wix, Squarespace, WordPress vs AI generators.
+- [Blog](/blog): 20+ Nederlandstalige artikelen over websites en SEO.
+- [Privacy](/privacy): Privacybeleid van aiWebsitesGenereren.nl.
+- [Voorwaarden](/voorwaarden): Algemene voorwaarden.
+
+## Blog
+
+- [Bedrijfswebsite voor ZZP](/blog/bedrijfswebsite-zzp-zelfstandige): Website voor zelfstandigen.
+- [Statische HTML met AI](/blog/statische-html-website-ai-genereren): Snelle SEO-websites genereren.
+- [AI Website Generator NL](/blog/ai-website-generator-nederlands): Nederlandstalige AI tools.
+- [Portfolio fotograaf](/blog/portfolio-website-fotograaf-gratis): Gratis portfolio websites.
+- [Wix/WordPress alternatief](/blog/wix-wordpress-alternatief-zonder-abonnement): Zonder abonnement online.
+
 ## Site Informatie
 
 - **Naam**: aiWebsitesGenereren.nl
