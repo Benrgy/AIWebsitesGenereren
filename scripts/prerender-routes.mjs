@@ -29,6 +29,7 @@ const xml = readFileSync(SITEMAP, "utf8");
 const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
 let written = 0;
+let skipped = 0;
 for (const loc of locs) {
   let pathname;
   try {
@@ -42,9 +43,19 @@ for (const loc of locs) {
 
   const cleaned = pathname.replace(/^\/+|\/+$/g, "");
   const target = join(DIST, cleaned, "index.html");
-  mkdirSync(dirname(target), { recursive: true });
-  writeFileSync(target, html);
-  written++;
+  try {
+    mkdirSync(dirname(target), { recursive: true });
+    writeFileSync(target, html);
+    written++;
+  } catch (err) {
+    if (err && (err.code === "EEXIST" || err.code === "ENOTDIR")) {
+      console.warn(`[prerender] overgeslagen (${err.code}): ${cleaned}`);
+      skipped++;
+      continue;
+    }
+    console.warn(`[prerender] fout bij ${cleaned}: ${err?.message || err}`);
+    skipped++;
+  }
 }
 
-console.log(`[prerender] ${written} statische routes gegenereerd voor GitHub Pages.`);
+console.log(`[prerender] ${written} routes gegenereerd, ${skipped} overgeslagen.`);
