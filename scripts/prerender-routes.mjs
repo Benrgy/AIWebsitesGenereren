@@ -8,7 +8,7 @@
  * pagina niet. Door per route een index.html te leggen krijgt elke URL
  * een 200-status én blijft client-side routing werken.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
 
 const DIST = resolve("dist");
@@ -27,6 +27,28 @@ if (!existsSync(SITEMAP)) {
 const html = readFileSync(INDEX, "utf8");
 const xml = readFileSync(SITEMAP, "utf8");
 const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+
+// Opschoonactie: verwijder restbestanden die op een route-pad staan en
+// botsen met de map die we gaan aanmaken (bv. dist/llms.txt als bestand
+// terwijl een sitemap-route een map met die naam zou willen).
+function cleanupConflicts(routePaths) {
+  for (const p of routePaths) {
+    let cur = DIST;
+    for (const seg of p.split("/").filter(Boolean)) {
+      cur = join(cur, seg);
+      try {
+        const st = statSync(cur);
+        if (st.isFile()) {
+          rmSync(cur, { force: true });
+          console.warn(`[prerender] conflict opgeruimd: ${cur}`);
+          break;
+        }
+      } catch {
+        break;
+      }
+    }
+  }
+}
 
 let written = 0;
 let skipped = 0;
