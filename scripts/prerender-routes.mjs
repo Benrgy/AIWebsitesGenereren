@@ -52,6 +52,16 @@ function cleanupConflicts(routePaths) {
 
 let written = 0;
 let skipped = 0;
+const routePaths = [];
+for (const loc of locs) {
+  let pathname;
+  try { pathname = new URL(loc).pathname; } catch { continue; }
+  const noSlash = pathname.replace(/\/+$/, "");
+  if (pathname === "/" || /\.[a-z0-9]+$/i.test(noSlash)) continue;
+  routePaths.push(pathname.replace(/^\/+|\/+$/g, ""));
+}
+cleanupConflicts(routePaths);
+
 for (const loc of locs) {
   let pathname;
   try {
