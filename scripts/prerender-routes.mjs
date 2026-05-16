@@ -36,8 +36,9 @@ for (const loc of locs) {
   } catch {
     continue;
   }
-  // Skip root en bestanden (.txt, .xml, etc.)
-  if (pathname === "/" || /\.[a-z0-9]+$/i.test(pathname)) continue;
+  // Skip root en bestanden (.txt, .xml, etc.) — ook met trailing slash
+  const noSlash = pathname.replace(/\/+$/, "");
+  if (pathname === "/" || /\.[a-z0-9]+$/i.test(noSlash)) continue;
 
   const cleaned = pathname.replace(/^\/+|\/+$/g, "");
   const target = join(DIST, cleaned, "index.html");
